@@ -20,23 +20,23 @@ const PlayerForm = ({ addOrUpdatePlayer }) => {
     <form onSubmit={handleSubmit}>
       <input
         type="text"
-        placeholder="Nombre del jugador"
+        placeholder="Name Player"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
       <input
         type="number"
-        placeholder="Apariciones al bate"
+        placeholder="Bat appearances"
         value={atBats}
         onChange={(e) => setAtBats(parseInt(e.target.value))}
       />
       <input
         type="number"
-        placeholder="Hits conectados"
+        placeholder="Connected Hits"
         value={hits}
         onChange={(e) => setHits(parseInt(e.target.value))}
       />
-      <button type="submit">Agregar/Actualizar Jugador</button>
+      <button type="submit">Add/Update Player</button>
     </form>
   );
 };

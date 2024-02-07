@@ -1,16 +1,19 @@
 // PlayerList.js
-
-const PlayersList = ({ players }) => {
+import styles from "./PlayersList.module.css"
+import PlayerForm from "../addPlayer/PlayerForm"
+const PlayersList = ({ players, addOrUpdatePlayer }) => {
+  
   return (
-    <div className="player-list">
-      <h2>Jugadores</h2>
-      <ul>
-        {players.map((player, index) => (
+    <div className={styles.playerList}>
+      <h2>Players List</h2>
+      <PlayerForm addOrUpdatePlayer={addOrUpdatePlayer} />
+      <ol>
+        {players ? players.map((player, index) => (
           <li key={index}>
             {player.name} - Average: {Math.round(player.average)}
           </li>
-        ))}     
-      </ul>
+        )):'Not players'}     
+      </ol>
     </div>
   );
 };
