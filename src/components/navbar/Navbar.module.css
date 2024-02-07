@@ -1,0 +1,35 @@
+.navBarGrid {
+    display: flex;
+    justify-content: center; 
+    overflow: hidden;
+    background-color: rgba(2, 4, 74, 0.8);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 115px;
+    z-index: 1;
+  }
+
+  .navBarGrid a {
+    text-align: center;
+  }
+
+  .gridItemMenu{
+    width: 70%;
+    text-align: center;
+    margin: auto;
+  }
+
+  .gridItemMenu a {
+    margin: 15px;
+  }
+
+  .img{
+    width: 17%;
+    border-radius: 50px;
+  } 
+
+  
+
+
+

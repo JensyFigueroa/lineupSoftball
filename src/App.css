@@ -1,0 +1,32 @@
+.App{
+  background-image: url(/src/assets/fondo.jpg);
+  background-size: 100%;
+  background-position: 10% 50%;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100%;
+}
+
+.lineup-section {
+  display: flex;
+  justify-content: center;
+}
+
+.player-list,
+.lineup {
+  flex: 1;
+  margin: 0 10px;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+input {
+  margin-right: 10px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
