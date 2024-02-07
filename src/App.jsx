@@ -2,12 +2,13 @@
 
 import "./App.css";
 // import PlayerForm from "./components/PlayerForm";
-// import Lineup from "./components/Lineup";
+ import Lineup from "./components/lineup/Lineup";
 import LandingPage from "./components/LandingPage/LandingPage"
 import Navbar from "./components/navbar/Navbar"
 import { useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import PlayersList from "./components/playersList/PlayersList";
+import Home from "./components/home/Home";
 
 // const players = [{
 //   firstName: 'Jensy',
@@ -43,9 +44,10 @@ function App() {
       
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
+        <Route exact path="/home" element={<Home />} />
         <Route exact path="/players" element={<PlayersList players={players} addOrUpdatePlayer={addOrUpdatePlayer} />} />
-        {/*<Route exact path="/about" element={<About />} />
-        <Route exact path="/detail/:id" element={<Details />} />
+        <Route exact path="/lineup" element={<Lineup players={players} />} />
+        {/*<Route exact path="/detail/:id" element={<Details />} />
         <Route exact path="/createGame" element={<CreateGame />} /> */}
       </Routes>
 

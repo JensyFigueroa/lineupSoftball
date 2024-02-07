@@ -1,4 +1,4 @@
-.players{
+.home{
     width: 100%;
     position: absolute;
     flex: 1;
@@ -6,7 +6,7 @@
     text-align: center; 
 }   
 
-.playersList{
+.home img{
     margin: auto ;
     width: 30%;
 }
