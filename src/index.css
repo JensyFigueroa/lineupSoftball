@@ -57,7 +57,63 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
+/************ NavBar ************/
+.active {
+  margin-right: 20px;
+  margin-left: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: #FDFDD5;
+  background-color: rgba(1,88,172);
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px #FDFDD5;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-style: italic;
+}
+
+.link{
+  border-radius: 5px;
+  margin-right: 20px;
+  margin-left: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: rgb(16, 0, 192);;
+  color: white;
+  font-style: italic;
+  font-size: 20px;
+  text-decoration:none ; 
+}
+
+.link:hover{
+  /* color: #FDFDD5;; */
+  background-color: #FDFDD5;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px #3633ff;
+}
+
+   
+@media (min-width: 320px) and (max-width: 768px) {
+  .active {
+    margin-right: 10px;
+    margin-left: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  .link{
+    border-radius: 5px;
+    margin-right: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+   
+  }
+}
+
+/************ End NavBar ************/
+/* @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
@@ -68,4 +124,4 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-}
+} */
