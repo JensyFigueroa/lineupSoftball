@@ -59,8 +59,8 @@ button:focus-visible {
 
 /************ NavBar ************/
 .active {
-  margin-right: 20px;
-  margin-left: 20px;
+  margin-right: 5px;
+  margin-left: 5px;
   padding-left: 20px;
   padding-right: 20px;
   color: #FDFDD5;
@@ -76,8 +76,8 @@ button:focus-visible {
 
 .link{
   border-radius: 5px;
-  margin-right: 20px;
-  margin-left: 20px;
+  margin-right: 5px;
+  margin-left: 5px;
   padding-left: 20px;
   padding-right: 20px;
   background-color: rgb(16, 0, 192);;
@@ -97,17 +97,17 @@ button:focus-visible {
    
 @media (min-width: 320px) and (max-width: 768px) {
   .active {
-    margin-right: 10px;
-    margin-left: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
+    margin-right: auto;
+    margin-left: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
   }
   
   .link{
     border-radius: 5px;
-    margin-right: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
+    margin-right: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
    
   }
 }

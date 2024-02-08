@@ -11,6 +11,7 @@
   }
 
   .navBarGrid a {
+    width: 30%;
     text-align: center;
   }
 
@@ -25,7 +26,7 @@
   }
 
   .img{
-    width: 17%;
+    width: 35%;
     border-radius: 50px;
   } 
 
@@ -34,14 +35,21 @@
     .navBarGrid {
       flex-direction: column;
       justify-content: center; 
-      position: fixed;
       height: 18%;
-      z-index: 1;
     }
     .img{
-      width: 15%;
+      width: 25%;
       border-radius: 50px;
     } 
+
+    .gridItemMenu{
+      width: 100%;
+      margin: 0;
+    }
+
+    .navBarGrid a {
+      width: 100%;
+    }
   
   }
 
