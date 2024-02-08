@@ -7,7 +7,7 @@ export default function LandingPage() {
     <div className={styles.boxLanding}>
       <div className={styles.main}>
 
-        <img src={logo} alt="" style={{width:400, height:400}}/>
+        <img src={logo} alt="" />
         <h1>Welcome to the official page of Bebedores</h1>
         {/* <h4>Where you can create your Cards with your favorite video game</h4> */}
         <Link to="/home" className={styles.btn}>

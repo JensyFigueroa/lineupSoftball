@@ -59,14 +59,3 @@ ul {
     text-align: center;
 }
 }
-
-@media (min-width: 1201px) and (display-mode: fullscreen) {
-  .App{
-  background-image: url(/src/assets/fondo.jpg);
-  background-size:cover;
-  background-position: 10% 50%;
-  height: 100vh;
-  width: 100%;
-}
- 
-}
