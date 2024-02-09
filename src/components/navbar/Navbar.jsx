@@ -11,8 +11,9 @@ export default function Navbar() {
       <div className={styles.gridItemMenu}>
         <NavLink to='/home' className={({ isActive }) => (isActive ? 'active' : 'link')}>Home</NavLink>
         <NavLink to='/players' className={({ isActive }) => (isActive ? 'active' : 'link')}>Players</NavLink>
+        <NavLink to='/addplayers' className={({ isActive }) => (isActive ? 'active' : 'link')}>New Players</NavLink>
         <NavLink to='/lineup' className={({ isActive }) => (isActive ? 'active' : 'link')}>Lineup</NavLink>
-        <NavLink to='/about' className={({ isActive }) => (isActive ? 'active' : 'link')}>About</NavLink>
+        {/* <NavLink to='/about' className={({ isActive }) => (isActive ? 'active' : 'link')}>About</NavLink> */}
       </div>
     </div>
   )

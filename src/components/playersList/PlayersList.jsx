@@ -1,11 +1,9 @@
 // PlayerList.js
 import styles from "./PlayersList.module.css";
-import PlayerForm from "../addPlayer/PlayerForm";
 const PlayersList = ({ players, addOrUpdatePlayer }) => {
   return (
     <div className={styles.players}>
       <h2>Players List</h2>
-      <PlayerForm addOrUpdatePlayer={addOrUpdatePlayer} />
       <div className={styles.playersList}>
 
         {Object.values(players).length > 0 ? (
