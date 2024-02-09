@@ -15,7 +15,7 @@ const AddPlayerForm = ({ addOrUpdatePlayer }) => {
   const [hits, setHits] = useState(0);
 
   const handleInputChange = (e) => {
-    console.log("handleInputChange ", e.target.value);
+    // console.log("handleInputChange ", e.target.value);
     const { name, value } = e.target;
 
     if (
@@ -38,7 +38,8 @@ const AddPlayerForm = ({ addOrUpdatePlayer }) => {
     // setAtBats(0);
     // setHits(0);
 
-    axios.post('http://localhost:3001/addplayers', form)
+    // axios.post('http://localhost:3001/addplayers', form)
+    axios.post('https://lineupsoftball-backend-dev-htre.4.us-1.fl0.io/addplayers', form)
 
     console.log(form)
   };
