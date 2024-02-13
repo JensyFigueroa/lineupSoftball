@@ -1,6 +1,20 @@
 // PlayerList.js
+import { useEffect } from "react";
 import styles from "./PlayersList.module.css";
+import { useDispatch, useSelector } from 'react-redux'
+import { getPlayers } from "../../redux/actions";
+
 const PlayersList = ({ players, addOrUpdatePlayer }) => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getPlayers());
+  }, [dispatch])
+
+  const allplayers = useSelector(state => state.players)
+
+  console.log(allplayers)
+
+  
   return (
     <div className={styles.players}>
       <h2>Players List</h2>

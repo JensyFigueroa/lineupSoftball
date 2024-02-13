@@ -39,7 +39,7 @@ const AddPlayerForm = ({ addOrUpdatePlayer }) => {
     // setHits(0);
 
     // axios.post('http://localhost:3001/addplayers', form)
-    axios.post('https://lineupsoftball-backend-dev-htre.4.us-1.fl0.io/addplayers', form)
+    axios.post('https://lineupsoftball-backend-dev-htre.4.us-1.fl0.io:8080/addplayers', form)
 
     console.log(form)
   };
