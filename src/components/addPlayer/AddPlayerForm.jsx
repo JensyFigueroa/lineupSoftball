@@ -25,7 +25,7 @@ const AddPlayerForm = () => {
   const handleInputChange = (e) => {
     const { name, value, type } = e.target;
 
-    console.log(name, value, type )
+    // console.log(name, value, type )
 
     const newValue = type === "number" ? parseInt(value) : value;
 
