@@ -45,6 +45,7 @@ const AddPlayerForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    axios.post("https://lineupsoftball-backend-dev-htre.4.us-1.fl0.io/addplayers", form)
     console.log(form);
   };
 
