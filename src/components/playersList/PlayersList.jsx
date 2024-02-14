@@ -12,15 +12,13 @@ const PlayersList = ({ players, addOrUpdatePlayer }) => {
 
   const allplayers = useSelector(state => state.players)
 
-  console.log(allplayers)
-
   
   return (
     <div className={styles.players}>
       <h2>Players List</h2>
       <div className={styles.playersList}>
 
-        {Object.values(players).length > 0 ? (
+        {Object.values(allplayers).length > 0 ? (
           <table className="table">
             <thead className="table table-info">
               <tr>
@@ -30,12 +28,12 @@ const PlayersList = ({ players, addOrUpdatePlayer }) => {
               </tr>
             </thead>
             <tbody className="table-primary">
-              {players &&
-                players.map((player, index) => (
+              {allplayers &&
+                allplayers.map((player, index) => (
                   <tr key={index}>
-                    <th scope="row" className="table-info">{index+1}</th>
-                    <td>{player.name}</td>
-                    <td>{player.average}</td>
+                    <th scope="row" className="table-info">{player.number}</th>
+                    <td>{player.firstName}</td>
+                    <td>{player.avg}</td>
                   </tr>
                 ))}
             </tbody>

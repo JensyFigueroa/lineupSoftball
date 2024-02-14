@@ -3,60 +3,54 @@
 import { useState } from "react";
 import styles from "./AddPlayerForm.module.css";
 import axios from "axios";
+import {useSelector} from 'react-redux'
 
 const AddPlayerForm = ({ addOrUpdatePlayer }) => {
   /* const [atBats, setAtBats] = useState(0);
   const [hits, setHits] = useState(0); */
 
-  const [num, setNum] = useState(0);
-  const [atBats, setAtBats] = useState(1);
-  const [hits, setHits] = useState(0);
-  const [dobles, setDobles] = useState(0);
-  const [triples, setTriple] = useState(0);
-  const [homeRuns, setHomeRun] = useState(0);
-  const [bb, setBb] = useState(0);
-  const [strikeOut, setStrikeOut] = useState(0);
+  const players = useSelector(state => state.players)
 
   const [form, setForm] = useState({
-    num: num,
+    number: "",
     firstName: "",
     lastName: "",
     birthDate: "",
     position: "",
-    vb: 0 + atBats,
-    h: 0 + hits,
-    b2: 0 + dobles,
-    b3: 0 + triples,
-    hr: 0 + homeRuns,
-    bb: 0 + bb,
-    k: 0 + strikeOut,
-    avg: 0,
+    vb: "",
+    h: "",
+    b2: "",
+    b3: "",
+    hr: "",
+    bb: "",
+    k: "",
+    avg: "",
   });
 
   const handleInputChange = (e) => {
     // console.log("handleInputChange ", e.target.value);
     const { name, value } = e.target;
+    // console.log(name, value)
 
     if (
-      (name === "num",
+      (name === "number" ||
       name === "firstName" ||
         name === "lastName" ||
         name === "birthDate" ||
         name === "position" ||
         name === "vb" ||
-        name === "ca" ||
         name === "h" ||
         name === "b2" ||
         name === "b3" ||
         name === "hr" ||
         name === "bb" ||
-        name === "k" ||
-        name === "avg")
+        name === "k")
     ) {
-      let hitsNumb = hits || dobles || triples || homeRuns
-      const average = form.vb + atBats > 0 ? (hitsNumb / atBats) * 1000 : 0; // Calcula el average si hay al menos una aparición al bate
+      const hits = form.h + form.b2 + form.b3 + form.hr
+      const average = form.vb > 0 ? (hits / form.vb) * 1000 : 0; // Calcula el average si hay al menos una aparición al bate
       addOrUpdatePlayer({ name, average });
       setForm({ ...form, [name]: value });
+      setForm(form.avg = average);
     }
   };
 
@@ -70,12 +64,9 @@ const AddPlayerForm = ({ addOrUpdatePlayer }) => {
     e.preventDefault();
 
     // axios.post('http://localhost:3001/addplayers', form)
-    axios.post(
-      "https://lineupsoftball-backend-dev-htre.4.us-1.fl0.io/addplayers",
-      form
-    );
+    axios.post("https://lineupsoftball-backend-dev-htre.4.us-1.fl0.io/addplayers", form);
 
-    console.log(form);
+     console.log(form);
   };
 
   return (
@@ -84,13 +75,13 @@ const AddPlayerForm = ({ addOrUpdatePlayer }) => {
         <h3 style={{ textAlign: "center" }}>Create new player</h3>
         <form onSubmit={handleSubmit}>
           <div className={styles.field} style={{ gap: "8px" }}>
-            <label id="label" className={styles.label}>
-              number
+          <label id="label" className={styles.label}>
+              At bat
               <input
                 id="input"
-                name="num"
+                name="number"
                 type="number"
-                value={num}
+                min={0} max={99}
                 onChange={handleInputChange}
                 /*onBlur={handleBlur}*/ required
               />
@@ -154,9 +145,9 @@ const AddPlayerForm = ({ addOrUpdatePlayer }) => {
               At bat
               <input
                 id="input"
-                name="atBat"
+                name="vb"
                 type="number"
-                value={form.vb}
+                min={0} max={1}
                 onChange={handleInputChange}
                 /*onBlur={handleBlur}*/ required
               />
@@ -170,9 +161,9 @@ const AddPlayerForm = ({ addOrUpdatePlayer }) => {
                 Hits
                 <input
                   id="input"
-                  name="hits"
+                  name="h"
                   type="number"
-                  value={hits}
+                  min={0} max={1}
                   onChange={handleInputChange}
                   /*onBlur={handleBlur}*/ required
                 />
@@ -182,9 +173,9 @@ const AddPlayerForm = ({ addOrUpdatePlayer }) => {
                 Dobles
                 <input
                   id="input"
-                  name="dobles"
+                  name="b2"
                   type="number"
-                  value={dobles}
+                  min={0} max={1}
                   onChange={handleInputChange}
                   /*onBlur={handleBlur}*/ required
                 />
@@ -194,9 +185,9 @@ const AddPlayerForm = ({ addOrUpdatePlayer }) => {
                 Triples
                 <input
                   id="input"
-                  name="triples"
+                  name="b3"
                   type="number"
-                  value={triples}
+                  min={0} max={1}
                   onChange={handleInputChange}
                   /*onBlur={handleBlur}*/ required
                 />
@@ -208,9 +199,9 @@ const AddPlayerForm = ({ addOrUpdatePlayer }) => {
                 Home Run
                 <input
                   id="input"
-                  name="homenRun"
+                  name="hr"
                   type="number"
-                  value={homeRuns}
+                  min={0} max={1}
                   onChange={handleInputChange}
                   /*onBlur={handleBlur}*/ required
                 />
@@ -222,7 +213,7 @@ const AddPlayerForm = ({ addOrUpdatePlayer }) => {
                   id="input"
                   name="bb"
                   type="number"
-                  value={bb}
+                  min={0} max={1}
                   onChange={handleInputChange}
                   /*onBlur={handleBlur}*/ required
                 />
@@ -232,9 +223,9 @@ const AddPlayerForm = ({ addOrUpdatePlayer }) => {
                 Strike Out
                 <input
                   id="input"
-                  name="strikeOut"
+                  name="k"
                   type="number"
-                  value={strikeOut}
+                  min={0} max={1}
                   onChange={handleInputChange}
                   /*onBlur={handleBlur}*/ required
                 />

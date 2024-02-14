@@ -7,7 +7,7 @@ export const getPlayers = () => {
   return async function (dispatch) {
     // const apiData = await axios.get('http://localhost:3001/players')
     const apiData = await axios.get('https://lineupsoftball-backend-dev-htre.4.us-1.fl0.io/players')
-    console.log(apiData,'actions')
+    console.log(apiData.data,'actions')
     const players = apiData.data;
     // console.log(players);
     dispatch({ type: GET_PLAYERS, payload: players })
