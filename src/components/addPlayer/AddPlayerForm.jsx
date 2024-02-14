@@ -3,28 +3,17 @@
 import { useState } from "react";
 import styles from "./AddPlayerForm.module.css";
 import axios from "axios";
-import {useSelector} from 'react-redux'
+// import {useSelector} from 'react-redux'
 
 const AddPlayerForm = ({ addOrUpdatePlayer }) => {
   /* const [atBats, setAtBats] = useState(0);
   const [hits, setHits] = useState(0); */
 
-  const players = useSelector(state => state.players)
+  // const players = useSelector(state => state.players)
 
   const [form, setForm] = useState({
-    number: "",
-    firstName: "",
-    lastName: "",
-    birthDate: "",
-    position: "",
-    vb: "",
-    h: "",
-    b2: "",
-    b3: "",
-    hr: "",
-    bb: "",
-    k: "",
-    avg: "",
+    number: "", firstName: "", lastName: "", birthDate: "", position: "",
+    vb: "", h: "", b2: "", b3: "", hr: "", bb: "", k: "", avg: "",
   });
 
   const handleInputChange = (e) => {
@@ -33,22 +22,13 @@ const AddPlayerForm = ({ addOrUpdatePlayer }) => {
     // console.log(name, value)
 
     if (
-      (name === "number" ||
-      name === "firstName" ||
-        name === "lastName" ||
-        name === "birthDate" ||
-        name === "position" ||
-        name === "vb" ||
-        name === "h" ||
-        name === "b2" ||
-        name === "b3" ||
-        name === "hr" ||
-        name === "bb" ||
-        name === "k")
+      (name === "number" || name === "firstName" || name === "lastName" || name === "birthDate" ||
+        name === "position" || name === "vb" || name === "h" || name === "b2" || name === "b3" ||
+        name === "hr" || name === "bb" || name === "k")
     ) {
       const hits = form.h + form.b2 + form.b3 + form.hr
       const average = form.vb > 0 ? (hits / form.vb) * 1000 : 0; // Calcula el average si hay al menos una aparición al bate
-      addOrUpdatePlayer({ name, average });
+      // addOrUpdatePlayer({ name, average });
       setForm({ ...form, [name]: value });
       setForm(form.avg = average);
     }
@@ -76,7 +56,7 @@ const AddPlayerForm = ({ addOrUpdatePlayer }) => {
         <form onSubmit={handleSubmit}>
           <div className={styles.field} style={{ gap: "8px" }}>
           <label id="label" className={styles.label}>
-              At bat
+              Number
               <input
                 id="input"
                 name="number"
