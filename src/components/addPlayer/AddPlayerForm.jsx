@@ -5,99 +5,89 @@ import styles from "./AddPlayerForm.module.css";
 import axios from "axios";
 // import {useSelector} from 'react-redux'
 
-const AddPlayerForm = ({ addOrUpdatePlayer }) => {
-  /* const [atBats, setAtBats] = useState(0);
-  const [hits, setHits] = useState(0); */
-
-  // const players = useSelector(state => state.players)
-
+const AddPlayerForm = () => {
   const [form, setForm] = useState({
-    number: "", firstName: "", lastName: "", birthDate: "", position: "",
-    vb: "", h: "", b2: "", b3: "", hr: "", bb: "", k: "", avg: "",
+    number: 0,
+    firstName: "",
+    lastName: "",
+    birthDate: "",
+    position: "",
+    vb: 0,
+    h: 0,
+    b2: 0,
+    b3: 0,
+    hr: 0,
+    bb: 0,
+    k: 0,
+    avg: 0,
   });
 
   const handleInputChange = (e) => {
-    // console.log("handleInputChange ", e.target.value);
-    const { name, value } = e.target;
-    // console.log(name, value)
+    const { name, value, type } = e.target;
 
-    if (
-      (name === "number" || name === "firstName" || name === "lastName" || name === "birthDate" ||
-        name === "position" || name === "vb" || name === "h" || name === "b2" || name === "b3" ||
-        name === "hr" || name === "bb" || name === "k")
-    ) {
-      const hits = form.h + form.b2 + form.b3 + form.hr
-      const average = form.vb > 0 ? (hits / form.vb) * 1000 : 0; // Calcula el average si hay al menos una aparición al bate
-      // addOrUpdatePlayer({ name, average });
-      setForm({ ...form, [name]: value });
-      setForm(form.avg = average);
+    console.log(name, value, type )
+
+    const newValue = type === "number" ? parseInt(value) : value;
+
+    setForm({
+      ...form,
+      [name]: newValue
+    });
+
+    if (["vb", "h", "b2", "b3", "hr"].includes(name)) {
+      const hits = ["h", "b2", "b3", "hr"].includes(name) ? parseInt(value) : form.h;
+      const totalHits = hits + form.h + form.b2 + form.b3 + form.hr;
+      const totalVb = name === "vb" ? parseInt(value) + form.vb : form.vb;
+      const average = totalVb > 0 ? (totalHits / totalVb) * 1000 : 0;
+      setForm(prevForm => ({ ...prevForm, avg: average }));
     }
   };
 
-  /* const average = atBats > 0 ? (hits / atBats) * 1000 : 0; // Calcula el average si hay al menos una aparición al bate
-    addOrUpdatePlayer({ name, average });
-    setName("");
-    setAtBats(0);
-    setHits(0); */
-
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // axios.post('http://localhost:3001/addplayers', form)
-    axios.post("https://lineupsoftball-backend-dev-htre.4.us-1.fl0.io/addplayers", form);
-
-     console.log(form);
+    console.log(form);
   };
 
   return (
     <div className={styles.playersBox}>
-      <div className={styles.containerForm} /* onClick={showCheckboxes} */>
+      <div className={styles.containerForm}>
         <h3 style={{ textAlign: "center" }}>Create new player</h3>
         <form onSubmit={handleSubmit}>
           <div className={styles.field} style={{ gap: "8px" }}>
-          <label id="label" className={styles.label}>
+            <label className={styles.label}>
               Number
               <input
-                id="input"
                 name="number"
                 type="number"
-                min={0} max={99}
+                min={1}
+                max={99}
+                value={form.number}
                 onChange={handleInputChange}
-                /*onBlur={handleBlur}*/ required
               />
-              {/* {errors.name && <p style={{ color: 'red', fontStyle: 'italic', fontSize: '18px' }}>{errors.name}</p>} */}
             </label>
-            <label id="label" className={styles.label}>
+            <label className={styles.label}>
               FirstName
               <input
-                id="input"
                 name="firstName"
                 type="text"
                 value={form.firstName}
                 onChange={handleInputChange}
-                /*onBlur={handleBlur} */ required
               />
-              {/* {errors.name && <p style={{ color: 'red', fontStyle: 'italic', fontSize: '18px' }}>{errors.name}</p>} */}
             </label>
-            <label id="label" className={styles.label}>
+            <label className={styles.label}>
               LastName
               <input
-                id="input"
                 name="lastName"
                 type="text"
                 value={form.lastName}
                 onChange={handleInputChange}
-                /*onBlur={handleBlur}*/ required
               />
-              {/* {errors.name && <p style={{ color: 'red', fontStyle: 'italic', fontSize: '18px' }}>{errors.name}</p>} */}
             </label>
           </div>
-
           <div className={styles.field} style={{ gap: "8px" }}>
-            <label id="label" className={styles.label}>
+            <label className={styles.label}>
               Birthdate
               <input
-                id="input"
                 name="birthDate"
                 type="date"
                 value={form.birthDate}
@@ -106,7 +96,7 @@ const AddPlayerForm = ({ addOrUpdatePlayer }) => {
               />
               {/* {errors.name && <p style={{ color: 'red', fontStyle: 'italic', fontSize: '18px' }}>{errors.name}</p>} */}
             </label>
-            <label id="label" className={styles.label}>
+            <label className={styles.label}>
               Position
               <select
                 id="platforms"
@@ -121,14 +111,14 @@ const AddPlayerForm = ({ addOrUpdatePlayer }) => {
               </select>
             </label>
 
-            <label id="label" className={styles.label}>
+            <label className={styles.label}>
               At bat
               <input
-                id="input"
                 name="vb"
                 type="number"
                 min={0} max={1}
                 onChange={handleInputChange}
+                value={form.vb}
                 /*onBlur={handleBlur}*/ required
               />
               {/* {errors.name && <p style={{ color: 'red', fontStyle: 'italic', fontSize: '18px' }}>{errors.name}</p>} */}
@@ -145,74 +135,74 @@ const AddPlayerForm = ({ addOrUpdatePlayer }) => {
                   type="number"
                   min={0} max={1}
                   onChange={handleInputChange}
+                  value={form.h}
                   /*onBlur={handleBlur}*/ required
                 />
                 {/* {errors.name && <p style={{ color: 'red', fontStyle: 'italic', fontSize: '18px' }}>{errors.name}</p>} */}
               </label>
-              <label id="label" className={styles.label}>
+              <label className={styles.label}>
                 Dobles
                 <input
-                  id="input"
                   name="b2"
                   type="number"
                   min={0} max={1}
                   onChange={handleInputChange}
+                  value={form.b2}
                   /*onBlur={handleBlur}*/ required
                 />
                 {/* {errors.name && <p style={{ color: 'red', fontStyle: 'italic', fontSize: '18px' }}>{errors.name}</p>} */}
               </label>
-              <label id="label" className={styles.label}>
+              <label className={styles.label}>
                 Triples
                 <input
-                  id="input"
                   name="b3"
                   type="number"
                   min={0} max={1}
                   onChange={handleInputChange}
+                  value={form.b3}
                   /*onBlur={handleBlur}*/ required
                 />
                 {/* {errors.name && <p style={{ color: 'red', fontStyle: 'italic', fontSize: '18px' }}>{errors.name}</p>} */}
               </label>
             </div>
           <div className={styles.field} style={{ gap: "8px" }}>
-              <label id="label" className={styles.label}>
+              <label className={styles.label}>
                 Home Run
                 <input
-                  id="input"
                   name="hr"
                   type="number"
                   min={0} max={1}
                   onChange={handleInputChange}
+                  value={form.hr}
                   /*onBlur={handleBlur}*/ required
                 />
                 {/* {errors.name && <p style={{ color: 'red', fontStyle: 'italic', fontSize: '18px' }}>{errors.name}</p>} */}
               </label>
-              <label id="label" className={styles.label}>
+              <label className={styles.label}>
                 Base per balls
                 <input
-                  id="input"
                   name="bb"
                   type="number"
                   min={0} max={1}
                   onChange={handleInputChange}
+                  value={form.bb}
                   /*onBlur={handleBlur}*/ required
                 />
                 {/* {errors.name && <p style={{ color: 'red', fontStyle: 'italic', fontSize: '18px' }}>{errors.name}</p>} */}
               </label>
-              <label id="label" className={styles.label}>
+              <label className={styles.label}>
                 Strike Out
                 <input
-                  id="input"
                   name="k"
                   type="number"
                   min={0} max={1}
                   onChange={handleInputChange}
+                  value={form.k}
                   /*onBlur={handleBlur}*/ required
                 />
                 {/* {errors.name && <p style={{ color: 'red', fontStyle: 'italic', fontSize: '18px' }}>{errors.name}</p>} */}
               </label>
             </div>
-
           <button className={styles.btn} type="submit">
             Add player
           </button>
@@ -223,3 +213,5 @@ const AddPlayerForm = ({ addOrUpdatePlayer }) => {
 };
 
 export default AddPlayerForm;
+
+
