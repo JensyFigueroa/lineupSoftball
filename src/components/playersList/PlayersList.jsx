@@ -33,7 +33,7 @@ const PlayersList = ({ players, addOrUpdatePlayer }) => {
                   <tr key={index}>
                     <th scope="row" className="table-info">{player.number}</th>
                     <td>{player.firstName}</td>
-                    <td>{player.avg}</td>
+                    <td>{Math.round(player.avg)}</td>
                   </tr>
                 ))}
             </tbody>

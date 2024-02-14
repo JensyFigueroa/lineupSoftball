@@ -6,7 +6,7 @@ import axios from "axios";
 // import {useSelector} from 'react-redux'
 
 const AddPlayerForm = () => {
-  const [form, setForm] = useState({
+  const objForm = {
     number: 0,
     firstName: "",
     lastName: "",
@@ -20,7 +20,8 @@ const AddPlayerForm = () => {
     bb: 0,
     k: 0,
     avg: 0,
-  });
+  }
+  const [form, setForm] = useState(objForm);
 
   const handleInputChange = (e) => {
     const { name, value, type } = e.target;
@@ -35,7 +36,7 @@ const AddPlayerForm = () => {
     });
 
     if (["vb", "h", "b2", "b3", "hr"].includes(name)) {
-      const hits = ["h", "b2", "b3", "hr"].includes(name) ? parseInt(value) : form.h;
+      const hits = ["h", "b2", "b3", "hr"].includes(name) && parseInt(value);
       const totalHits = hits + form.h + form.b2 + form.b3 + form.hr;
       const totalVb = name === "vb" ? parseInt(value) + form.vb : form.vb;
       const average = totalVb > 0 ? (totalHits / totalVb) * 1000 : 0;
@@ -46,6 +47,7 @@ const AddPlayerForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios.post("https://lineupsoftball-backend-dev-htre.4.us-1.fl0.io/addplayers", form)
+    // form.reset()
     console.log(form);
   };
 
@@ -109,6 +111,7 @@ const AddPlayerForm = () => {
                 <option>Select options</option>
                 <option>Infield</option>
                 <option>Outfield</option>
+                <option>Both</option>
               </select>
             </label>
 
@@ -117,7 +120,7 @@ const AddPlayerForm = () => {
               <input
                 name="vb"
                 type="number"
-                min={0} max={1}
+                min={0} max={5}
                 onChange={handleInputChange}
                 value={form.vb}
                 /*onBlur={handleBlur}*/ required
