@@ -17,5 +17,11 @@
     .players{
         font-size: 50%;
     }
+    .players{
+        width: 80%;
+    }
 
+    .playersList{
+        width: 80%;
+    }
 }
