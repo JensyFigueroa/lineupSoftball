@@ -19,7 +19,7 @@ const AddPlayerForm = () => {
     hr: 0,
     bb: 0,
     k: 0,
-    avg: 0,
+    avg: 0
   }
   const [form, setForm] = useState(objForm);
 
@@ -36,7 +36,8 @@ const AddPlayerForm = () => {
     });
 
     if (["vb", "h", "b2", "b3", "hr"].includes(name)) {
-      const hits = ["h", "b2", "b3", "hr"].includes(name) && parseInt(value);
+      
+      const hits = ["h", "b2", "b3", "hr"].includes(name) && parseInt(value) ;
       const totalHits = hits + form.h + form.b2 + form.b3 + form.hr;
       const totalVb = name === "vb" ? parseInt(value) + form.vb : form.vb;
       const average = totalVb > 0 ? (totalHits / totalVb) * 1000 : 0;
@@ -44,10 +45,23 @@ const AddPlayerForm = () => {
     }
   };
 
+
+
+  // const getAvg = () => {
+  //   console.log(form, 'get')
+  //   // const totalVb = form.vb
+  //   // const  totalHits = form.h + form.b2 + form.b3 + form.hr
+  //   // console.log(totalHits)
+  //   // const average = totalVb > 0 ? (totalHits / totalVb) * 1000 : 0;
+  //   // setForm(prevForm => ({ ...prevForm, avg: average }));
+  // }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     axios.post("https://lineupsoftball-backend-dev-htre.4.us-1.fl0.io/addplayers", form)
-    // form.reset()
+    console.log(form);
+    setForm(objForm)
+    
     console.log(form);
   };
 
@@ -62,7 +76,7 @@ const AddPlayerForm = () => {
               <input
                 name="number"
                 type="number"
-                min={1}
+                min={0}
                 max={99}
                 value={form.number}
                 onChange={handleInputChange}

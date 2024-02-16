@@ -24,16 +24,19 @@ const PlayersList = ({ players, addOrUpdatePlayer }) => {
               <tr>
                 <th scope="col" className="table-info">#</th>
                 <th scope="col">FullName</th>
-                <th scope="col">Avg</th>
+                <th scope="col">Birthday</th>
+                {/* <th scope="col">Avg</th> */}
               </tr>
             </thead>
             <tbody className="table-primary">
               {allplayers &&
                 allplayers.map((player, index) => (
                   <tr key={index}>
-                    <th scope="row" className="table-info">{player.number}</th>
-                    <td>{player.firstName}</td>
-                    <td>{Math.round(player.avg)}</td>
+                    <th scope="row" className="table-info">{index + 1}</th>
+                    {/* <th scope="row" className="table-info">{player.number}</th> */}
+                    <td>{player.firstName +" "+ player.lastName}</td>
+                    <td>{player.birthDate}</td>
+                    {/* <td>{Math.round(player.avg)}</td> */}
                   </tr>
                 ))}
             </tbody>

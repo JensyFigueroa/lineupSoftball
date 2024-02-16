@@ -1,33 +1,52 @@
 // Lineup.js
 import styles from "./Lineup.module.css";
+import { useDispatch, useSelector } from 'react-redux'
 
 const Lineup = ({ players }) => {
-  const sortedPlayers = players.sort((a, b) => b.average - a.average);
+  
+  const allplayers = useSelector(state => state.players)
+  const sortedPlayers = allplayers.sort((a, b) => b.avg - a.avg);
 
   return (
     <div className={styles.lineup}>
       <h2>Lineup</h2>
-      <div className={styles.playersList}>
-        {Object.values(players).length > 0 ? (
+      <div className={`${styles.playersList}`}>
+        {Object.values(allplayers).length > 0 ? (
           <table className="table">
             <thead className="table table-info">
               <tr>
                 <th scope="col" className="table-info">
-                  #
+                  Items
                 </th>
-                <th scope="col">FullName</th>
+                <th scope="col">#</th>
+                <th scope="col" colSpan={2}>FullName</th>
+                <th scope="col">VB</th>
+                <th scope="col">H</th>
+                <th scope="col">2B</th>
+                <th scope="col">3B</th>
+                <th scope="col">HR</th>
+                <th scope="col">BB</th>
+                <th scope="col">K</th>
                 <th scope="col">Avg</th>
               </tr>
             </thead>
             <tbody className="table-primary">
-              {players &&
+              {allplayers &&
                 sortedPlayers.map((player, index) => (
                   <tr key={index}>
                     <th scope="row" className="table-info">
                       {index + 1}
                     </th>
-                    <td>{player.name}</td>
-                    <td>{Math.round(player.average)}</td>
+                    <td>{player.number}</td>
+                    <td colSpan={2}>{player.firstName +" "+ player.lastName}</td>
+                    <td>{player.vb}</td>
+                    <td>{player.h}</td>
+                    <td>{player.b2}</td>
+                    <td>{player.b3}</td>
+                    <td>{player.hr}</td>
+                    <td>{player.bb}</td>
+                    <td>{player.k}</td>
+                    <td>{Math.round(player.avg)}</td>
                   </tr>
                 ))}
             </tbody>
