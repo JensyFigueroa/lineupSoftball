@@ -10,7 +10,7 @@ const Lineup = ({ players }) => {
   return (
     <div className={styles.lineup}>
       <h2>Lineup</h2>
-      <div className={`${styles.playersList}`}>
+      <div className={`${styles.playersList} table-responsive`}>
         {Object.values(allplayers).length > 0 ? (
           <table className="table">
             <thead className="table table-info">
