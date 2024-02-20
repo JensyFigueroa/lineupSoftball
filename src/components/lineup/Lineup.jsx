@@ -1,11 +1,24 @@
 // Lineup.js
+import { Link } from "react-router-dom";
+import RegisterDataPlayer from "../registerDataPlayer/RegisterDataPlayer";
 import styles from "./Lineup.module.css";
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { getPlayers } from "../../redux/actions";
 
-const Lineup = ({ players }) => {
-  
-  const allplayers = useSelector(state => state.players)
+const Lineup = () => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getPlayers());
+  }, [dispatch])
+
+  const allplayers = useSelector((state) => state.players);
   const sortedPlayers = allplayers.sort((a, b) => b.avg - a.avg);
+
+  const [showModal, setShowModal] = useState(false);
+
+  const handleClose = () => setShowModal(false);
+  const handleShow = () => setShowModal(true);
 
   return (
     <div className={styles.lineup}>
@@ -19,7 +32,9 @@ const Lineup = ({ players }) => {
                   Items
                 </th>
                 <th scope="col">#</th>
-                <th scope="col" colSpan={2}>FullName</th>
+                <th scope="col" colSpan={2}>
+                  FullName
+                </th>
                 <th scope="col">VB</th>
                 <th scope="col">H</th>
                 <th scope="col">2B</th>
@@ -38,7 +53,16 @@ const Lineup = ({ players }) => {
                       {index + 1}
                     </th>
                     <td>{player.number}</td>
-                    <td colSpan={2}>{player.firstName +" "+ player.lastName}</td>
+
+                    <td colSpan={2}>
+                    {player &&  <RegisterDataPlayer
+                        show={showModal}
+                        handleClose={handleClose}
+                         player={player}
+                      />}
+                     
+                    </td>
+                    {/* <td colSpan={2}>{player.firstName +" "+ player.lastName}</td> */}
                     <td>{player.vb}</td>
                     <td>{player.h}</td>
                     <td>{player.b2}</td>

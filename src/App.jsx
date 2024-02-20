@@ -9,7 +9,6 @@ import { useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import PlayersList from "./components/playersList/PlayersList";
 import Home from "./components/home/Home";
-import AddPlayerForm from "./components/addPlayer/AddPlayerForm";
 
 // const players = [{
 //   firstName: 'Jensy',
@@ -47,7 +46,7 @@ function App() {
         <Route exact path="/" element={<LandingPage />} />
         <Route exact path="/home" element={<Home />} />
         <Route exact path="/players" element={<PlayersList players={players} addOrUpdatePlayer={addOrUpdatePlayer} />} />
-        <Route exact path="/addplayers" element={<AddPlayerForm />} />
+        {/* <Route exact path="/addplayers" element={<AddPlayerForm />} /> */}
         <Route exact path="/lineup" element={<Lineup players={players} />} />
         {/*<Route exact path="/detail/:id" element={<Details />} />
         <Route exact path="/createGame" element={<CreateGame />} /> */}

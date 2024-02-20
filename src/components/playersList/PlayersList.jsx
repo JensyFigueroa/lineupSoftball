@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import styles from "./PlayersList.module.css";
 import { useDispatch, useSelector } from 'react-redux'
 import { getPlayers } from "../../redux/actions";
+import AddPlayerForm from "../addPlayer/AddPlayerForm";
 
 const PlayersList = ({ players, addOrUpdatePlayer }) => {
   const dispatch = useDispatch()
@@ -12,10 +13,11 @@ const PlayersList = ({ players, addOrUpdatePlayer }) => {
 
   const allplayers = useSelector(state => state.players)
 
-  
+ 
   return (
     <div className={styles.players}>
       <h2>Players List</h2>
+      <AddPlayerForm/>
       <div className={styles.playersList}>
 
         {Object.values(allplayers).length > 0 ? (
