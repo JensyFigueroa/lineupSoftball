@@ -16,17 +16,6 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
   const [enabledInput, setEnabledInput] = useState(false);
   const userName = useSelector((state) => state.currentUserNameLoggedIn);
 
-  const [formUser, setFormUser] = useState({
-    firstName: "",
-    lastName: "",
-    phoneNumber: "",
-    country: "Your country",
-    city: "Your city",
-    emailUser: "",
-    emailConfirm: "",
-    passwordUser: "",
-    passwordConfirm: "",
-  });
   const [errors, setErrors] = useState({});
 
   const [currentForm, setCurrentForm] = useState("");
@@ -64,22 +53,62 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
   //   setSshowPasswordConfirm(!showPasswordConfirm);
   // };
 
-  const data = [
-    { id: 1, name: 'Item 1' },
-    { id: 2, name: 'Item 2' },
-    { id: 3, name: 'Item 3' },
-    { id: 4, name: 'Item 4' },
-    { id: 5, name: 'Item 5' }
-  ];
+  /* Radio Button */
+  const [dataGamePlayer, setDataGamePlayer] = useState({
+    _id: "",
+    h: 0,
+    b2: 0,
+    b3: 0,
+    hr: 0,
+    bb: 0,
+    kk: 0,
+    out: 0,
+  });
 
+  const handleDataGamePlayer = (e) => {
+    const { id, name, checked } = e.currentTarget;
+    console.log(id, name, checked);
+    
+    if (name === "_id") {
+      setDataGamePlayer({...dataGamePlayer, [name]: id})
+    }else{
+      // setDataGamePlayer({...dataGamePlayer, [name]:checked ? 1 : 0})
+
+      const updatedDataGamePlayer = {
+        ...dataGamePlayer,
+        h: 0,
+        b2: 0,
+        b3: 0,
+        hr: 0,
+        bb: 0,
+        kk: 0,
+        out: 0
+      };
+    
+      // Establece el valor del radio button seleccionado
+      updatedDataGamePlayer[name] = checked ? 1 : 0;
+    
+      // Actualiza el estado
+      setDataGamePlayer(updatedDataGamePlayer);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(dataGamePlayer);
+
+    setShowModalUser(false);
+  };
   return (
     <>
       <Link
+        id={player._id}
+        name="_id"
         className="dropdown-item"
         to="#"
         style={{ color: "blue" }}
-        onClick={() => {
-          setShowModalUser(true), handleFormChange("formUser");
+        onClick={(e) => {handleDataGamePlayer(e);
+          setShowModalUser(true);
         }}
       >
         {player.firstName + " " + player.lastName}
@@ -93,7 +122,7 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
       >
         <Modal.Header className={styles.headerLogin}>
           <Modal.Title className={styles.titleLogin}>
-            🥎 TURN AT BAT 🥎
+            🥎 TURN AT BAT {player.firstName + " " + player.lastName}🥎
           </Modal.Title>
           <Link
             className={styles.customCloseButton}
@@ -104,77 +133,83 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
         </Modal.Header>
 
         <Modal.Body>
-          <form onSubmit={handleSubmitUser}>
-            <table>
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Nombre</th>
-                  <th>Opciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.map((item) => (
-                  <tr key={item.id}>
-                    <td>{item.id}</td>
-                    <td>{item.name}</td>
-                    <td>
-                      <div className="radio-buttons">
-                        <label>
-                          <input
-                            type="radio"
-                            name={`option-${item.id}`}
-                            value="opcion1"
-                          />
-                          Opción 1
-                        </label>
-                        <label>
-                          <input
-                            type="radio"
-                            name={`option-${item.id}`}
-                            value="opcion2"
-                          />
-                          Opción 2
-                        </label>
-                        <label>
-                          <input
-                            type="radio"
-                            name={`option-${item.id}`}
-                            value="opcion3"
-                          />
-                          Opción 3
-                        </label>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <div className={styles.field}>
-              <label htmlFor="">Hits </label>
-              <input
-                type="radio"
-                name="hit"
-                onChange={handleInputChangeUser}
-                onBlur={handleBlur}
-                value={formUser.firstName}
-                required
-              />
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label className={styles.field}>
+                Hit:
+                <input
+                  type="radio"
+                  name="h"
+                  value={dataGamePlayer.h}
+                  checked={dataGamePlayer.h === 1}
+                  onChange={handleDataGamePlayer}
+                />
+              </label>
+              <label className={styles.field}>
+                2B:
+                <input
+                  type="radio"
+                  name="b2"
+                  value={dataGamePlayer.b2}
+                  checked={dataGamePlayer.b2 === 1}
+                  onChange={handleDataGamePlayer}
+                />
+              </label>
+              <label className={styles.field}>
+                3B:
+                <input
+                  type="radio"
+                  name="b3"
+                  value={dataGamePlayer.b3}
+                  checked={dataGamePlayer.b3 === 1}
+                  onChange={handleDataGamePlayer}
+                />
+              </label>
+              <label className={styles.field}>
+                HR:
+                <input
+                  type="radio"
+                  name="hr"
+                  value={dataGamePlayer.hr}
+                  checked={dataGamePlayer.hr === 1}
+                  onChange={handleDataGamePlayer}
+                />
+              </label>
+              <label className={styles.field}>
+                BB:
+                <input
+                  type="radio"
+                  name="bb"
+                  value={dataGamePlayer.bb}
+                  checked={dataGamePlayer.bb === 1}
+                  onChange={handleDataGamePlayer}
+                />
+              </label>
+              <label className={styles.field}>
+                K:
+                <input
+                  type="radio"
+                  name="kk"
+                  value={dataGamePlayer.kk}
+                  checked={dataGamePlayer.kk === 1}
+                  onChange={handleDataGamePlayer}
+                />
+              </label>
+              <label className={styles.field}>
+                Out:
+                <input
+                  type="radio"
+                  name="out"
+                  value={dataGamePlayer.out}
+                  checked={dataGamePlayer.out === 1}
+                  onChange={handleDataGamePlayer}
+                />
+              </label>
             </div>
-            <div className={styles.field}>
-              <label htmlFor="">Hits </label>
-              <input
-                type="radio"
-                name="hit"
-                onChange={handleInputChangeUser}
-                onBlur={handleBlur}
-                value={formUser.firstName}
-                required
-              />
-            </div>
-
-            {/* <Toaster position="bottom-right" reverseOrder={false} /> */}
+            <button type="submit">Add</button>
           </form>
+
+          {/* <Toaster position="bottom-right" reverseOrder={false} /> */}
         </Modal.Body>
       </Modal>
     </>

@@ -1,5 +1,4 @@
 // Lineup.js
-import { Link } from "react-router-dom";
 import RegisterDataPlayer from "../registerDataPlayer/RegisterDataPlayer";
 import styles from "./Lineup.module.css";
 import { useDispatch, useSelector } from "react-redux";
