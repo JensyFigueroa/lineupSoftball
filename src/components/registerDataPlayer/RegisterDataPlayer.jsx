@@ -1,39 +1,17 @@
 import { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
-import styles from "./Login.module.css";
+import styles from "./RegisterDataPlayer.module.css";
 import { Link } from "react-router-dom";
 
-// import validate from "./validate";
-// import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+
 // import { loginUser } from "../../redux/actions/index.js";
 // import toast, { Toaster } from "react-hot-toast";
 
 const RegisterDataPlayer = ({ show, handleClose, player }) => {
-  const [showModalLogin, setShowModalLogin] = useState(false);
   const [showModalUser, setShowModalUser] = useState(false);
-  const dispatch = useDispatch();
-  const [enabledInput, setEnabledInput] = useState(false);
-  const userName = useSelector((state) => state.currentUserNameLoggedIn);
-
-  const [errors, setErrors] = useState({});
-
-  const [currentForm, setCurrentForm] = useState("");
-
-  const handleFormChange = (formName) => {
-    setCurrentForm(formName);
-  };
-
-  const handleInputChangeUser = (e) => {
-    const { name, value } = e.target;
-    setFormUser({ ...formUser, [name]: value });
-  };
-
-  const handleBlur = (e) => {
-    // handleInputChangeUser(e);
-    // if (currentForm === "formUser") setErrors(validate(formUser));
-    // // console.log('estoy en el blur')
-  };
+  // const dispatch = useDispatch();
+  // const userName = useSelector((state) => state.currentUserNameLoggedIn);
 
   const handleSubmitUser = async (e) => {
     e.preventDefault();
@@ -41,62 +19,79 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
 
   const hideFormUser = (bool) => {};
 
-  const [showPassword, setShowPassword] = useState(false);
-  const togglePasswordVisibility = (e) => {
-    console.log(e.targe);
-    setShowPassword(!showPassword);
-  };
-
-  const [showPasswordConfirm, setSshowPasswordConfirm] = useState(false);
-  // const togglePasswordConfirmVisibility = (e) => {
-  //   console.log(e.targe)
-  //   setSshowPasswordConfirm(!showPasswordConfirm);
-  // };
-
-  /* Radio Button */
+  // const [currentData, setCurrentData] = useState();
   const [dataGamePlayer, setDataGamePlayer] = useState({
-    _id: "",
+    vb: 0,
     h: 0,
     b2: 0,
     b3: 0,
     hr: 0,
     bb: 0,
-    kk: 0,
-    out: 0,
+    k: 0,
+    avg: 0,
   });
+
+  const updateData = {
+    number: player.number,
+      firstName: player.firstName,
+      lastName: player.lastName,
+      birthDate: player.birthDate,
+      position: player.position,
+      vb: player.vb + dataGamePlayer.vb,
+      h: player.h + dataGamePlayer.h,
+      b2: player.b2 + dataGamePlayer.b2,
+      b3: player.b3 + dataGamePlayer.b3,
+      hr: player.hr + dataGamePlayer.hr,
+      bb: player.bb + dataGamePlayer.bb,
+      k: player.k + dataGamePlayer.k,
+      avg: player.vb + dataGamePlayer.vb > 0 ? ((player.h + dataGamePlayer.h + player.b2 + dataGamePlayer.b2 + player.b3 + dataGamePlayer.b3 + player.hr + dataGamePlayer.hr) / (player.vb + dataGamePlayer.vb) - (player.bb + dataGamePlayer.bb)) * 1000 : 0
+  };
 
   const handleDataGamePlayer = (e) => {
     const { id, name, checked } = e.currentTarget;
-    console.log(id, name, checked);
-    
-    if (name === "_id") {
-      setDataGamePlayer({...dataGamePlayer, [name]: id})
-    }else{
-      // setDataGamePlayer({...dataGamePlayer, [name]:checked ? 1 : 0})
 
+    // console.log(id, name, checked)
+
+    if (name === "_id") {
+      setDataGamePlayer({ ...dataGamePlayer, [name]: id });
+    } else {
       const updatedDataGamePlayer = {
         ...dataGamePlayer,
+        vb: 0,
         h: 0,
         b2: 0,
         b3: 0,
         hr: 0,
         bb: 0,
         kk: 0,
-        out: 0
       };
-    
+
       // Establece el valor del radio button seleccionado
       updatedDataGamePlayer[name] = checked ? 1 : 0;
-    
+
       // Actualiza el estado
       setDataGamePlayer(updatedDataGamePlayer);
+      setDataGamePlayer({...updatedDataGamePlayer, vb:1})
     }
+
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(dataGamePlayer);
-
+    // console.log(dataGamePlayer);
+    axios.post(`https://lineupsoftball-backend-dev-htre.4.us-1.fl0.io/lineup/${player._id}`, updateData)
+    console.log(updateData)
+    setDataGamePlayer({
+      _id: "",
+      vb: 0,
+      h: 0,
+      b2: 0,
+      b3: 0,
+      hr: 0,
+      bb: 0,
+      k: 0,
+      avg: 0,
+    })
     setShowModalUser(false);
   };
   return (
@@ -107,8 +102,10 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
         className="dropdown-item"
         to="#"
         style={{ color: "blue" }}
-        onClick={(e) => {handleDataGamePlayer(e);
+        onClick={(e) => {
+          handleDataGamePlayer(e);
           setShowModalUser(true);
+          // setUpdateData(player)
         }}
       >
         {player.firstName + " " + player.lastName}
@@ -122,7 +119,7 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
       >
         <Modal.Header className={styles.headerLogin}>
           <Modal.Title className={styles.titleLogin}>
-            🥎 TURN AT BAT {player.firstName + " " + player.lastName}🥎
+            🥎 TURN AT BAT 🥎
           </Modal.Title>
           <Link
             className={styles.customCloseButton}
@@ -133,9 +130,10 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
         </Modal.Header>
 
         <Modal.Body>
+          <h2>{player.firstName + " " + player.lastName}</h2>
           <form onSubmit={handleSubmit}>
-            <div>
-              <label className={styles.field}>
+            <div className={styles.field}>
+              <label>
                 Hit:
                 <input
                   type="radio"
@@ -145,7 +143,7 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
                   onChange={handleDataGamePlayer}
                 />
               </label>
-              <label className={styles.field}>
+              <label>
                 2B:
                 <input
                   type="radio"
@@ -155,7 +153,7 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
                   onChange={handleDataGamePlayer}
                 />
               </label>
-              <label className={styles.field}>
+              <label>
                 3B:
                 <input
                   type="radio"
@@ -165,7 +163,7 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
                   onChange={handleDataGamePlayer}
                 />
               </label>
-              <label className={styles.field}>
+              <label>
                 HR:
                 <input
                   type="radio"
@@ -175,7 +173,7 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
                   onChange={handleDataGamePlayer}
                 />
               </label>
-              <label className={styles.field}>
+              <label>
                 BB:
                 <input
                   type="radio"
@@ -185,17 +183,17 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
                   onChange={handleDataGamePlayer}
                 />
               </label>
-              <label className={styles.field}>
+              <label>
                 K:
                 <input
                   type="radio"
-                  name="kk"
-                  value={dataGamePlayer.kk}
-                  checked={dataGamePlayer.kk === 1}
+                  name="k"
+                  value={dataGamePlayer.k}
+                  checked={dataGamePlayer.k === 1}
                   onChange={handleDataGamePlayer}
                 />
               </label>
-              <label className={styles.field}>
+              <label>
                 Out:
                 <input
                   type="radio"
@@ -206,7 +204,9 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
                 />
               </label>
             </div>
-            <button type="submit">Add</button>
+            <Button className={styles.btnLogin} variant="primary" type="submit">
+              Add
+            </Button>
           </form>
 
           {/* <Toaster position="bottom-right" reverseOrder={false} /> */}
