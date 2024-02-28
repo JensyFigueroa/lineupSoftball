@@ -74,7 +74,7 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(dataGamePlayer);
-    axios.put(`https://lineupsoftball-backend-dev-htre.4.us-1.fl0.io/player/${player._id}`, updateData)
+    axios.put(`https://lineupsoftball-backend-dev-htre.4.us-1.fl0.io/players/${player._id}`, updateData)
     console.log(updateData)
     setDataGamePlayer({
       _id: "",
