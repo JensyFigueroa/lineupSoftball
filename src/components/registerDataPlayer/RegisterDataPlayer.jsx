@@ -32,11 +32,6 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
   });
 
   const updateData = {
-    number: player.number,
-      firstName: player.firstName,
-      lastName: player.lastName,
-      birthDate: player.birthDate,
-      position: player.position,
       vb: player.vb + dataGamePlayer.vb,
       h: player.h + dataGamePlayer.h,
       b2: player.b2 + dataGamePlayer.b2,
@@ -44,7 +39,7 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
       hr: player.hr + dataGamePlayer.hr,
       bb: player.bb + dataGamePlayer.bb,
       k: player.k + dataGamePlayer.k,
-      avg: player.vb + dataGamePlayer.vb > 0 ? ((player.h + dataGamePlayer.h + player.b2 + dataGamePlayer.b2 + player.b3 + dataGamePlayer.b3 + player.hr + dataGamePlayer.hr) / (player.vb + dataGamePlayer.vb) - (player.bb + dataGamePlayer.bb)) * 1000 : 0
+      avg: dataGamePlayer.bb === 1 ? player.avg : player.vb + dataGamePlayer.vb > 0 ? ((player.h + dataGamePlayer.h + player.b2 + dataGamePlayer.b2 + player.b3 + dataGamePlayer.b3 + player.hr + dataGamePlayer.hr) / (player.vb + dataGamePlayer.vb) /* - (player.bb + dataGamePlayer.bb) */) * 1000 : 0
   };
 
   const handleDataGamePlayer = (e) => {
@@ -79,7 +74,7 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(dataGamePlayer);
-    axios.post(`https://lineupsoftball-backend-dev-htre.4.us-1.fl0.io/lineup/${player._id}`, updateData)
+    axios.put(`https://lineupsoftball-backend-dev-htre.4.us-1.fl0.io/lineup/${player._id}`, updateData)
     console.log(updateData)
     setDataGamePlayer({
       _id: "",
