@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Modal, Button, Form } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 import styles from "./RegisterDataPlayer.module.css";
 import { Link } from "react-router-dom";
 
@@ -13,12 +13,7 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
   // const dispatch = useDispatch();
   // const userName = useSelector((state) => state.currentUserNameLoggedIn);
 
-  const handleSubmitUser = async (e) => {
-    e.preventDefault();
-  };
-
   const hideFormUser = (bool) => {};
-
   // const [currentData, setCurrentData] = useState();
   const [dataGamePlayer, setDataGamePlayer] = useState({
     vb: 0,
@@ -75,7 +70,8 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
     e.preventDefault();
     // console.log(dataGamePlayer);
     axios.put(`https://lineupsoftball-backend-dev-htre.4.us-1.fl0.io/players/${player._id}`, updateData)
-    console.log(updateData)
+    // axios.put(`http://localhost:3001/players/${player._id}`, updateData)
+    // console.log(updateData)
     setDataGamePlayer({
       _id: "",
       vb: 0,

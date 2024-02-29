@@ -1,27 +1,29 @@
 // Lineup.js
 import RegisterDataPlayer from "../registerDataPlayer/RegisterDataPlayer";
-import styles from "./Lineup.module.css";
+import styles from "./Statistics.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getPlayers } from "../../redux/actions";
 
-const Lineup = () => {
+const Statistics = () => {
   const dispatch = useDispatch()
+  const allplayers = useSelector((state) => state.players);
+
   useEffect(() => {
     dispatch(getPlayers());
   }, [dispatch])
 
-  const allplayers = useSelector((state) => state.players);
   const sortedPlayers = allplayers.sort((a, b) => b.avg - a.avg);
 
   const [showModal, setShowModal] = useState(false);
 
   const handleClose = () => setShowModal(false);
+
   const handleShow = () => setShowModal(true);
 
   return (
     <div className={styles.lineup}>
-      <h2>Lineup</h2>
+      <h2>Statistics</h2>
       <div className={`${styles.playersList} table-responsive`}>
         {Object.values(allplayers).length > 0 ? (
           <table className="table">
@@ -82,4 +84,4 @@ const Lineup = () => {
   );
 };
 
-export default Lineup;
+export default Statistics;

@@ -44,6 +44,17 @@
     margin-left: 15px;
 }
 
+.birthDate input{
+    width: 0%;
+    height: 100%;
+    outline: none;
+    font-size: 17px;
+    padding-left: 20px;
+    border: 1px solid lightgray;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
 .field input {
     border-radius: 10px;
     border-style: solid;

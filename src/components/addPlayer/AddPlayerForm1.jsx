@@ -46,16 +46,6 @@ const AddPlayerForm = () => {
   };
 
 
-
-  // const getAvg = () => {
-  //   console.log(form, 'get')
-  //   // const totalVb = form.vb
-  //   // const  totalHits = form.h + form.b2 + form.b3 + form.hr
-  //   // console.log(totalHits)
-  //   // const average = totalVb > 0 ? (totalHits / totalVb) * 1000 : 0;
-  //   // setForm(prevForm => ({ ...prevForm, avg: average }));
-  // }
-
   const handleSubmit = (e) => {
     e.preventDefault();
     axios.post("https://lineupsoftball-backend-dev-htre.4.us-1.fl0.io/addplayers", form)

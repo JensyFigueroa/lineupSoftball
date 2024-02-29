@@ -4,37 +4,18 @@ import styles from "./Login.module.css";
 import { Link } from "react-router-dom";
 
 // import validate from "./validate";
-// import axios from "axios";
+import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom';
 // import { loginUser } from "../../redux/actions/index.js";
 // import toast, { Toaster } from "react-hot-toast";
 
 const AddPlayerForm = () => {
+  const navigate = useNavigate();
   const [showModalLogin, setShowModalLogin] = useState(false);
   const [showModalUser, setShowModalUser] = useState(false);
-  const dispatch = useDispatch();
-  const [enabledInput, setEnabledInput] = useState(false);
-  const userName = useSelector((state) => state.currentUserNameLoggedIn);
 
-  const [formUser, setFormUser] = useState({
-    number: 0,
-    firstName: "",
-    lastName: "",
-    birthDate: "",
-    position: "",
-    vb: 0,
-    h: 0,
-    b2: 0,
-    b3: 0,
-    hr: 0,
-    bb: 0,
-    k: 0,
-    avg: 0,
-  });
   const [errors, setErrors] = useState({});
-
-  const [countries, setCountries] = useState([]);
-  const [cities, setCities] = useState([]);
 
   const [currentForm, setCurrentForm] = useState("");
 
@@ -42,10 +23,6 @@ const AddPlayerForm = () => {
     setCurrentForm(formName);
   };
 
-  const handleInputChangeUser = (e) => {
-    const { name, value } = e.target;
-    setFormUser({ ...formUser, [name]: value });
-  };
 
   const handleBlur = (e) => {
     // handleInputChangeUser(e);
@@ -53,125 +30,6 @@ const AddPlayerForm = () => {
     // // console.log('estoy en el blur')
   };
 
-  //<---SE MONTAN LOS PAISES-->
-  // useEffect(() => {
-  //   const fetchCountries = async () => {
-  //     try {
-  //       const response = await axios.get("/location/country", {
-  //         params: {
-  //           username: "joaquinsgro",
-  //           type: "json",
-  //         },
-  //       });
-  //       setCountries(response.data);
-  //     } catch (error) {
-  //       console.error("Error al obtener la lista de países", error);
-  //     }
-  //   };
-
-  //   fetchCountries();
-  // }, []);
-
-  //<---FUNCIÓN PARA TRAER LAS CIUDADES--->
-  // const searchCities = async (countryCode) => {
-  //   try {
-  //     const response = await axios.get('/location/city', {
-  //       params: {
-  //         q: countryCode,
-  //         username: "joaquinsgro",
-  //         type: "json",
-  //       },
-  //     });
-
-  //     console.log(response.data);
-  //     setCities(response.data);
-  //   } catch (error) {
-  //     console.error("Error al obtener la lista de estados", error);
-  //   }
-  // };
-
-  //<-- FUNCIÓN PARA ASIGNAR EL PAIS A LAS CIUDADES-->
-  // const handleCountryClick = (countryName) => {
-  //   searchCities(countryName);
-  // };
-
-  const handleSubmitUser = async (e) => {
-    e.preventDefault();
-
-    console.log(formUser);
-    // if (Object.keys(errors).length === 0 && currentForm === "formUser") {
-    //   try {
-    //     const res = await createUserWithEmailAndPassword(
-    //       auth,
-    //       formUser.emailUser,
-    //       formUser.passwordUser
-    //     );
-
-    //     await updateProfile(auth.currentUser, {
-    //       displayName: formUser.firstName + " " + formUser.lastName,
-    //     });
-
-    //     if (res && res.user) {
-    //       const uid = res.user.uid;
-    //       // setUID(uid);
-    //       // console.log("entro al if");
-    //       const name = formUser.firstName + " " + formUser.lastName;
-
-    //       const inputs = {
-    //         id: res.user.uid,
-    //         name: formUser.firstName + " " + formUser.lastName,
-    //         email: formUser.emailUser,
-    //         country: formUser.country,
-    //         city: formUser.city,
-    //         phone: formUser.phoneNumber,
-    //         credential: [""],
-    //         imagePublicId: "",
-    //         imageUrl: "",
-    //         adminStatus: false,
-    //         description: "",
-    //         google: false,
-    //       };
-    //       await axios.post("/login/", inputs);
-    //       toast.success("User Created!!");
-    //       const userPhoneRegister = await (
-    //         await axios.get(`/user/${uid}`)
-    //       ).data.phone;
-    //       const userEmail = await (await axios.get(`/user/${uid}`)).data.email;
-    //       const userImg = await (await axios.get(`/user/${uid}`)).data.imageUrl;
-    //       //console.log(userImg, "imagen de usarui");
-    //       dispatch(loginUser(uid, name, userPhoneRegister, userEmail, userImg));
-    //       //console.log(res.user, "user en el signin with email and password")
-    //       UpdateCartOnLogin(uid);
-    //       window.location.reload();
-    //     }
-    //   } catch (error) {
-    //     if (error.code === "auth/email-already-in-use") {
-    //       // Handle the specific error when email is already in use
-    //       toast.error("Email already in use");
-    //       // Display an error message to the user
-    //     }
-  };
-
-  //     console.log("Enviando el form User", formUser);
-  //     setFormUser({
-  //       firstName: "",
-  //       lastName: "",
-  //       phoneNumber: "",
-  //       country: "Your country",
-  //       city: "Your city",
-  //       emailUser: "",
-  //       emailConfirm: "",
-  //       passwordUser: "",
-  //       passwordConfirm: "",
-  //     });
-  //     setShowModalUser(false);
-  //   }
-  // };
-
-  //<--MANEJADOR DE CLICK EN COUNTRY PARA HABILITAR CITY-->
-  const handleArrowClick = () => {
-    // setEnabledInput(true);
-  };
 
   const hideFormUser = (bool) => {
     // setShowModalUser(bool);
@@ -200,6 +58,57 @@ const AddPlayerForm = () => {
   //   console.log(e.targe)
   //   setSshowPasswordConfirm(!showPasswordConfirm);
   // };
+
+  const numberUsed = useSelector(state => state.numberUsed)
+
+  const objForm = {
+    number: '',
+    firstName: "",
+    lastName: "",
+    birthDate: "",
+    position: "",
+    vb: 0,
+    h: 0,
+    b2: 0,
+    b3: 0,
+    hr: 0,
+    bb: 0,
+    k: 0,
+    avg: 0
+  }
+  const [form, setForm] = useState(objForm);
+
+  const handleInputChange = (e) => {
+    const { name, value, type } = e.target;
+
+    // console.log(name, value, type )
+    let newValue;
+
+    if (name === 'number' && numberUsed.includes(parseInt(value))) {
+      setErrors({error:'This number already exists, select another'})
+    }else{
+      setErrors({})
+      newValue = type === "number" ? parseInt(value) : value;
+    }
+
+    newValue = type === "number" ? parseInt(value) : value;
+
+    setForm({
+      ...form,
+      [name]: newValue
+    });
+
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(form);
+    axios.post("https://lineupsoftball-backend-dev-htre.4.us-1.fl0.io/addplayers", form)
+    setShowModalUser(false)
+    setForm(objForm)
+    navigate('/players')
+    // console.log(form);
+  };
 
   return (
     <>
@@ -230,123 +139,113 @@ const AddPlayerForm = () => {
           </Link>
         </Modal.Header>
 
-        <Modal.Body>
-          <form onSubmit={handleSubmitUser}>
+        <Modal.Body style={{ background: "rgba(59, 59, 59,.2)" }}>
+          <form onSubmit={handleSubmit}>
             <div className={styles.field}>
               <input
-                type="text"
                 name="number"
-                onChange={handleInputChangeUser}
-                onBlur={handleBlur}
-                value={formUser.firstName}
+                type="number"
+                min={0}
+                max={99}
+                value={form.number}
+                onChange={handleInputChange}
                 required
               />
               <label htmlFor="">No. Shirt</label>
             </div>
-            {errors.firstName && (
+            {errors.error && (
               <p
                 style={{ color: "red", fontStyle: "italic", fontSize: "18px" }}
               >
-                {errors.firstName}
-              </p>
-            )}
-            <div className={styles.field}>
-              <input
-                type="text"
-                name="firstName"
-                onChange={handleInputChangeUser}
-                onBlur={handleBlur}
-                value={formUser.firstName}
-                required
-              />
-              <label htmlFor="">Firstname </label>
-            </div>
-            {errors.firstName && (
-              <p
-                style={{ color: "red", fontStyle: "italic", fontSize: "18px" }}
-              >
-                {errors.firstName}
-              </p>
-            )}
-            <div className={styles.field}>
-              <input
-                type="text"
-                name="lastName"
-                onChange={handleInputChangeUser}
-                onBlur={handleBlur}
-                value={formUser.lastName}
-                required
-              />
-              <label htmlFor="">Lastname</label>
-            </div>
-            {errors.lastName && (
-              <p
-                style={{ color: "red", fontStyle: "italic", fontSize: "18px" }}
-              >
-                {errors.lastName}
-              </p>
-            )}
-            <div className={styles.field}>
-              <label htmlFor="">Birthday</label>
-              <input
-                type="date"
-                name="birthDate"
-                onChange={handleInputChangeUser}
-                onBlur={handleBlur}
-                value={formUser.lastName}
-                required
-              />
-            </div>
-            {errors.lastName && (
-              <p
-                style={{ color: "red", fontStyle: "italic", fontSize: "18px" }}
-              >
-                {errors.lastName}
+                {errors.error}
               </p>
             )}
 
             <div className={styles.field}>
               <input
+                name="firstName"
                 type="text"
-                name="phoneNumber"
-                onChange={handleInputChangeUser}
-                onBlur={handleBlur}
+                value={form.firstName}
+                onChange={handleInputChange}
                 required
-                value={formUser.phoneNumber}
               />
-              <label htmlFor="">Phone number</label>
+              <label htmlFor="">Firstname </label>
             </div>
-            {errors.phoneNumber && (
+            {/* {errors.firstName && (
               <p
                 style={{ color: "red", fontStyle: "italic", fontSize: "18px" }}
               >
-                {errors.phoneNumber}
+                {errors.firstName}
               </p>
-            )}
+            )} */}
+
             <div className={styles.field}>
-              {/* <input
+              <input
+                name="lastName"
                 type="text"
-                name="phoneNumber"
-                onChange={handleInputChangeUser}
-                onBlur={handleBlur}
+                value={form.lastName}
+                onChange={handleInputChange}
                 required
-                value={formUser.phoneNumber}
-              /> */}
-              <select name="position" value={formUser.position}>
-                <option>Select options</option>
-                <option>Infield</option>
-                <option>Outfield</option>
-                <option>Both</option>
-              </select>
-              <label htmlFor="">Position</label>
+              />
+              <label htmlFor="">Lastname</label>
             </div>
-            {errors.phoneNumber && (
+            {/* {errors.lastName && (
               <p
                 style={{ color: "red", fontStyle: "italic", fontSize: "18px" }}
               >
-                {errors.phoneNumber}
+                {errors.lastName}
               </p>
-            )}
+            )} */}
+
+            <div className={styles.miniFieldGroup}>
+              <div className={styles.miniField}>
+                <label htmlFor="birthDate">Birthday</label>
+                <input
+                  name="birthDate"
+                  type="date"
+                  value={form.birthDate}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              {/* {errors.lastName && (
+                <p
+                  style={{
+                    color: "red",
+                    fontStyle: "italic",
+                    fontSize: "18px",
+                  }}
+                >
+                  {errors.lastName}
+                </p>
+              )} */}
+
+              <div className={styles.miniField}>
+                <label htmlFor="">Position</label>
+                <select
+                  className={styles.select}
+                  name="position"
+                  value={form.position}
+                  onChange={handleInputChange}
+                >
+                  <option>Select options</option>
+                  <option>Infield</option>
+                  <option>Outfield</option>
+                  <option>Both</option>
+                </select>
+              </div>
+              {/* {errors.phoneNumber && (
+                <p
+                  style={{
+                    color: "red",
+                    fontStyle: "italic",
+                    fontSize: "18px",
+                  }}
+                >
+                  {errors.phoneNumber}
+                </p>
+              )} */}
+            </div>
 
             <div className={styles.field}>
               <Button
