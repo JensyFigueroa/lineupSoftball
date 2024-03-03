@@ -113,9 +113,8 @@ const AddPlayerForm = () => {
   return (
     <>
       <Link
-        className="dropdown-item"
+        className={`dropdown-item ${styles.link}`}
         to="#"
-        style={{ color: "blue" }}
         onClick={() => {
           setShowModalUser(true), handleFormChange("formUser");
         }}

@@ -1,23 +1,29 @@
 // PlayerList.js
 import { useEffect } from "react";
 import styles from "./PlayersList.module.css";
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
 import { getPlayers } from "../../redux/actions";
 import AddPlayerForm from "../addPlayer/AddPlayerForm";
+import avatar from '../../assets/avatar.jpg'
+import Cards from "../cards/Cards";
 
-const PlayersList = ({ players, addOrUpdatePlayer }) => {
-  const dispatch = useDispatch()
+const PlayersList = () => {
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getPlayers());
-  }, [dispatch])
+  }, [dispatch]);
 
-  const allplayers = useSelector(state => state.players)
+  const allplayers = useSelector((state) => state.players);
 
- 
   return (
     <div className={styles.players}>
-      <h2>Players List</h2>
-      <AddPlayerForm/>
+      <div className={styles.container}>
+        <h2>Players List</h2>
+        <AddPlayerForm/>
+        <Cards allplayers={allplayers} avatar={avatar}/>
+      </div>
+
+      {/* 
       <div className={styles.playersList}>
 
         {Object.values(allplayers).length > 0 ? (
@@ -27,7 +33,7 @@ const PlayersList = ({ players, addOrUpdatePlayer }) => {
                 <th scope="col" className="table-info">#</th>
                 <th scope="col">FullName</th>
                 <th scope="col">Birthday</th>
-                {/* <th scope="col">Avg</th> */}
+             
               </tr>
             </thead>
             <tbody className="table-primary">
@@ -35,10 +41,10 @@ const PlayersList = ({ players, addOrUpdatePlayer }) => {
                 allplayers.map((player, index) => (
                   <tr key={index}>
                     <th scope="row" className="table-info">{index + 1}</th>
-                    {/* <th scope="row" className="table-info">{player.number}</th> */}
+                   
                     <td>{player.firstName +" "+ player.lastName}</td>
                     <td>{player.birthDate}</td>
-                    {/* <td>{Math.round(player.avg)}</td> */}
+                    
                   </tr>
                 ))}
             </tbody>
@@ -46,7 +52,7 @@ const PlayersList = ({ players, addOrUpdatePlayer }) => {
         ) : (
           <h2>No players</h2>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };

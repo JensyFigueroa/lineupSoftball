@@ -13,6 +13,8 @@ const Home = () => {
     <div className={styles.home}>
         <h1>🏆We are the champions🏆</h1>
       <img src={photoChampions} alt=""  />
+
+      
     </div>
   )
 }

@@ -14,6 +14,7 @@ export default function LandingPage() {
           Visit now
         </Link>
       </div>
+      
     </div>
   );
 }
