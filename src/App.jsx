@@ -9,7 +9,7 @@ import { useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import PlayersList from "./components/playersList/PlayersList";
 import Home from "./components/home/Home";
-import Roster from "./components/roster/Roster";
+import Lineup from "./components/lineup/Lineup";
 
 // const players = [{
 //   firstName: 'Jensy',
@@ -42,24 +42,26 @@ function App() {
   return (
     <div className="App">
       {location.pathname !== '/' && <Navbar/>}
-      
-      <Routes>
-        <Route exact path="/" element={<LandingPage />} />
-        <Route exact path="/home" element={<Home />} />
-        <Route exact path="/players" element={<PlayersList players={players} addOrUpdatePlayer={addOrUpdatePlayer} />} />
-        {/* <Route exact path="/addplayers" element={<AddPlayerForm />} /> */}
-        <Route exact path="/statistics" element={<Statistics players={players} />} />
-        <Route exact path="/roster" element={<Roster />} />
-        {/*<Route exact path="/detail/:id" element={<Details />} />
-        <Route exact path="/createGame" element={<CreateGame />} /> */}
-      </Routes>
+      <div className="container">
+        <Routes>
+          <Route exact path="/" element={<LandingPage />} />
+          <Route exact path="/home" element={<Home />} />
+          <Route exact path="/players" element={<PlayersList players={players} addOrUpdatePlayer={addOrUpdatePlayer} />} />
+          {/* <Route exact path="/addplayers" element={<AddPlayerForm />} /> */}
+          <Route exact path="/statistics" element={<Statistics players={players} />} />
+          <Route exact path="/lineup" element={<Lineup />} />
+          {/*<Route exact path="/detail/:id" element={<Details />} />
+          <Route exact path="/createGame" element={<CreateGame />} /> */}
+        </Routes>
 
-      {/* <h1>Armar Lineup de Béisbol</h1>
-      <PlayerForm  />
-      <div className="lineup-section">
-        <PlayerList players={players} />
-        <Lineup players={players} />
-      </div> */}
+        {/* <h1>Armar Lineup de Béisbol</h1>
+        <PlayerForm  />
+        <div className="lineup-section">
+          <PlayerList players={players} />
+          <Lineup players={players} />
+        </div> */}
+      </div>
+      
     </div>
   );
 }

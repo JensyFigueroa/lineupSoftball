@@ -7,6 +7,10 @@
  
 }
 
+.container{
+  padding-top: 70px;
+}
+
 .lineup-section {
   display: flex;
   justify-content: center;

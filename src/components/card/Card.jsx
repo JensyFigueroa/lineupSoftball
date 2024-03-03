@@ -13,6 +13,6 @@ const Card = ({avatar, player}) => {
       </div>
     </>
   );
-};
+}; 
 
 export default Card;
