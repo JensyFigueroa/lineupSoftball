@@ -1,0 +1,23 @@
+.score tbody tr{
+    width: 100%;
+    text-align: center;
+}
+.score tbody tr th{
+    width: 10%;
+    text-align: center;
+}
+.score tbody tr td{
+    width: 5%;
+    text-align: center;
+}
+.score tbody tr td input{
+    width: 100%;
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    color: black;
+    font-size: 20px;
+    font-weight: 700;
+
+}
+

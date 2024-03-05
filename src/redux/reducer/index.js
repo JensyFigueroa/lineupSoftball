@@ -1,9 +1,10 @@
-import { GET_PLAYERS } from "../actions";
+import { ADD_SUBTITUTES, GET_PLAYERS } from "../actions";
 
 const inicialState = {
   players: [],
   numberUsed: [],
-  // allGames: [],
+  substitutes: [],
+  lineup:[]
   // tempGames: [],
   // genres: [],
   // loading: true,
@@ -21,6 +22,12 @@ const rootReducer = (state = inicialState, action) => {
         // allGames: [...action.payload],
         // loading: false
       };
+
+    case ADD_SUBTITUTES:
+        return {
+            ...state,
+            substitutes: action.payload
+        }
 
     // case GET_DETAIL:
     //     return {

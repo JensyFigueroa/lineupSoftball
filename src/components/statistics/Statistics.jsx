@@ -9,6 +9,8 @@ const Statistics = () => {
   const dispatch = useDispatch()
   const allplayers = useSelector((state) => state.players);
 
+  console.log(allplayers)
+
   useEffect(() => {
     dispatch(getPlayers());
   }, [dispatch])

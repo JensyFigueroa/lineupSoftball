@@ -1,18 +1,27 @@
 import axios from 'axios'
 
 export const GET_PLAYERS = 'GET_PLAYERS'
+export const ADD_SUBTITUTES = 'ADD_SUBTITUTES'
 
 
 export const getPlayers = () => {
   return async function (dispatch) {
     // const apiData = await axios.get('http://localhost:3001/players')
     const apiData = await axios.get('https://lineupsoftball-backend-dev-htre.4.us-1.fl0.io/players')
-    console.log(apiData.data,'actions')
+    // console.log(apiData.data,'actions')
     const players = apiData.data;
     // console.log(players);
     dispatch({ type: GET_PLAYERS, payload: players })
   }
 }
+
+export const addSubstitutes = (substitutes) => {
+  // console.log(substitutes,'actions')
+  return async function (dispatch) {
+    dispatch({ type: ADD_SUBTITUTES, payload: substitutes })
+  }
+}
+
 /* 
 export const getGameName = (name) => {
   console.log(name,'action')
