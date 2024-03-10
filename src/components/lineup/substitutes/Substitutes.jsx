@@ -10,7 +10,7 @@ const Substitutes = () => {
 
   const dispatch = useDispatch()
 
-  const [playersLineup, setPlayersLineup] = useState([])
+  const [playersLineup, setPlayersLineup] = useState([])  
 
   const handleOnClickSubstitutes = (player) => {
     // console.log(player)

@@ -57,15 +57,15 @@ const Statistics = () => {
                     </th>
                     <td>{player.number}</td>
 
-                    <td colSpan={2}>
+                    {/* <td colSpan={2}>
                     {player &&  <RegisterDataPlayer
                         show={showModal}
                         handleClose={handleClose}
                          player={player}
                       />}
                      
-                    </td>
-                    {/* <td colSpan={2}>{player.firstName +" "+ player.lastName}</td> */}
+                    </td> */}
+                    <td colSpan={2}>{player.firstName +" "+ player.lastName}</td>
                     <td>{player.vb}</td>
                     <td>{player.h}</td>
                     <td>{player.b2}</td>

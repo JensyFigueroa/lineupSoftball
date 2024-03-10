@@ -2,37 +2,54 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { addPlayerLineup } from "../../../redux/actions";
+import RegisterDataPlayer from "../../registerDataPlayer/RegisterDataPlayer";
 
 const PlayersLineup = () => {
   const players = useSelector((state) => state.players);
   const playersLineup = useSelector((state) => state.playersLineup);
 
-  const [positions, setPositions] = useState(["P","1B", "2B", "SS", "SF", "3B", "RF", "CF", "LF", "BA"]);
+  const [showModal, setShowModal] = useState(false);
 
-  const dispatch = useDispatch()
+  const handleClose = () => setShowModal(false);
 
-  const  handleAssignPositonChange = (e) => {
-    const {value, id} =  e.target
+  // const [positions, setPositions] = useState([
+  //   "P",
+  //   "1B",
+  //   "2B",
+  //   "SS",
+  //   "SF",
+  //   "3B",
+  //   "RF",
+  //   "CF",
+  //   "LF",
+  //   "BA",
+  // ]);
+  const positions = ["P", "1B", "2B", "SS", "SF", "3B", "RF", "CF", "LF", "BA"];
+
+  const dispatch = useDispatch();
+
+  const handleAssignPositonChange = (e) => {
+    const { value, id } = e.target;
     // console.log(id, value)
-    if (value !== 'Select Position') {
-      const updatePlayerPositon =  playersLineup.map(player => {
 
+    if (value !== "Select Position") {
+      const updatePlayerPositon = playersLineup.map((player) => {
         if (player._id === id) {
-          return{...player, position:value}
+          return { ...player, position: value };
+        }
+        return player;
+      });
 
-        } 
-        return player
-       })
+      dispatch(addPlayerLineup(updatePlayerPositon));
 
-      dispatch(addPlayerLineup(updatePlayerPositon))
-      
-      const updatePosition = positions.filter((position)=> position !== value) 
+      positions.filter((position) => position !== value);
+      // const updatePosition = positions.filter((position) => position !== value);
       // console.log(updatePosition)
-      setPositions(updatePosition)
+      // setPositions(updatePosition);
     }
-  }
+  };
 
-  console.log(playersLineup)
+  console.log(playersLineup);
 
   return (
     <>
@@ -60,18 +77,40 @@ const PlayersLineup = () => {
                 <tr key={player._id}>
                   <th scope="row">{i + 1}</th>
                   <td>{player.number}</td>
+                
                   <td>
-                    <Link>
-                      {player.firstName} {player.lastName}
-                    </Link>
-                  </td>
+                    {player &&  <RegisterDataPlayer
+                        show={showModal}
+                        handleClose={handleClose}
+                         player={player}
+                      />}
+                     
+                    </td>
+
                   <td>
-                    <select id={player._id} onChange={handleAssignPositonChange} value={player.position}>
-                      <option>{player.position === "Infield"  && 'Select Position'}</option>
-                      {positions.map(position => (
-                        <option key={position}>{position}</option>
+                    <select
+                      id={player._id}
+                      value={player.position} // Asigna el valor del select al valor actual de la posición del jugador
+                      onChange={handleAssignPositonChange}
+                    >
+                      <option key="default" value="">
+                        Select Position
+                      </option>
+                      {positions.map((position, i) => (
+                        <option
+                          key={i}
+                          // value={position}
+                        >
+                          {position}
+                        </option>
                       ))}
                     </select>
+                    {/* <select id={player._id} onChange={handleAssignPositonChange}>
+                    <option key={i}>Select Position</option>
+                      {positions.map((position,i) => (  
+                      <option key={i} value={position} disabled={player.position === position}>{position} {player.position }{ position}</option>
+                      ))}
+                    </select> */}
                   </td>
                 </tr>
               ))}
