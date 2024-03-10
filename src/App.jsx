@@ -53,13 +53,6 @@ function App() {
           {/*<Route exact path="/detail/:id" element={<Details />} />
           <Route exact path="/createGame" element={<CreateGame />} /> */}
         </Routes>
-
-        {/* <h1>Armar Lineup de Béisbol</h1>
-        <PlayerForm  />
-        <div className="lineup-section">
-          <PlayerList players={players} />
-          <Lineup players={players} />
-        </div> */}
       </div>
       
     </div>

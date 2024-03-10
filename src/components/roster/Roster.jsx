@@ -3,13 +3,11 @@ import { Modal } from "react-bootstrap";
 import styles from "../roster/Roster.module.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { addSubstitutes } from "../../redux/actions";
+import { addSubstitutes, updateAssistance } from "../../redux/actions";
 // import { loginUser } from "../../redux/actions/index.js";
 // import toast, { Toaster } from "react-hot-toast";
 
 const Roster = () => {
-  const navigate = useNavigate();
   const [showModalLogin, setShowModalLogin] = useState(false);
   const [showModalUser, setShowModalUser] = useState(false);
 
@@ -37,32 +35,42 @@ const Roster = () => {
 
   const [arrSubstitutes, setArrSubstitutes] = useState([]);
   
-  const players = useSelector((state) => state.players)
+  const assistancePlayers = useSelector((state) => state.assistancePlayers)
   const substitutes = useSelector((state) => state.substitutes)
 
   const handleChangeAssistance = (e) => {
-    const { name, checked } = e.target;
-    const player = JSON.parse(e.target.getAttribute('data-player')); // Recuperar el objeto player desde el atributo data
+    const { checked } = e.target;
+    const player = JSON.parse(e.target.getAttribute("data-player")); // Recuperar el objeto player desde el atributo data
+    const existPlayer = substitutes.some(
+      (substitute) => substitute._id === player._id
+    );
 
-    console.log(player)
-    const playerIndex = substitutes.some((substitute) => substitute._id === player._id);
-  
-    if (playerIndex) {
-        //Verificamos si existe en el arreglo para poder modificar la propiedad
-        substitutes.map((substitute) => {
-            console.log(substitute._id === player._id)
-            // if (substitute._id === player._id) {
-            //     setArrSubstitutes(substitute.checked = checked)
-            // }
-        });
-      } else {
-        // Si el jugador no está en la lista, agregarlo con su estado de 'checked'
-        player.checked = checked; 
-        setArrSubstitutes([...arrSubstitutes, player]);
-       
-      }
+    if (existPlayer) {
+      setArrSubstitutes(arrSubstitutes.filter(substitute => substitute._id !== player._id));
 
+      const updateAssistace = assistancePlayers.map((assistancePlayer) => {
+        if (assistancePlayer._id === player._id) {
+          assistancePlayer.checked = checked;
+        }
+        return assistancePlayer;
+      });
+      dispatch(updateAssistance(updateAssistace));
+
+    } else {
+      setArrSubstitutes([...arrSubstitutes, player]);
+      
+      const updateAssistace = assistancePlayers.map((assistancePlayer) => {
+        if (assistancePlayer._id === player._id) {
+          assistancePlayer.checked = checked;
+        }
+        return assistancePlayer;
+      });
+    //   console.log(updateAssistace);
+
+      dispatch(updateAssistance(updateAssistace));
+    }
   };
+  
 
 const dispatch = useDispatch()
 
@@ -70,8 +78,6 @@ useEffect(() => {
   dispatch(addSubstitutes(arrSubstitutes))
 }, [dispatch,arrSubstitutes])
 
-
-// console.log(substitutes.some(substitute => substitute.checked === true),'roster')
   return (
     <>
       <Link
@@ -113,7 +119,7 @@ useEffect(() => {
                 </tr>
               </thead>
               <tbody>
-                {players.map((player, i) => (
+                {assistancePlayers.map((player, i) => (
                   <tr key={i}>
                     <td>{i + 1}</td>
                     <td key={player._id} style={{ height: "40px" }}>

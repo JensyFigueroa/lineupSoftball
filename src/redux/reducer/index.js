@@ -1,12 +1,11 @@
-import { ADD_SUBTITUTES, GET_PLAYERS } from "../actions";
+import { ADD_SUBTITUTES, GET_PLAYERS, UPDATE_ASSISTANCE, ADD_PLAYERLINEUP } from "../actions";
 
 const inicialState = {
   players: [],
+  assistancePlayers: [],
   numberUsed: [],
   substitutes: [],
-  lineup:[]
-  // tempGames: [],
-  // genres: [],
+  playersLineup:[],
   // loading: true,
   // detailId: []
 };
@@ -18,16 +17,30 @@ const rootReducer = (state = inicialState, action) => {
       return {
         ...state,
         players: [...action.payload],
+        assistancePlayers:[...action.payload],
         numberUsed: action.payload.map(player => player.number),
         // allGames: [...action.payload],
         // loading: false
       };
 
-    case ADD_SUBTITUTES:
-        return {
-            ...state,
-            substitutes: action.payload
-        }
+      case ADD_SUBTITUTES:
+          return {
+              ...state,
+              substitutes: action.payload
+          }
+    
+        case UPDATE_ASSISTANCE:
+          return {
+              ...state,
+              assistancePlayers: action.payload
+          }
+
+          case ADD_PLAYERLINEUP:
+            return {
+                ...state,
+                playersLineup: action.payload
+            }
+      
 
     // case GET_DETAIL:
     //     return {
