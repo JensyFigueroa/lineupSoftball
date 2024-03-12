@@ -17,9 +17,7 @@ const rootReducer = (state = inicialState, action) => {
       return {
         ...state,
         players: [...action.payload],
-        assistancePlayers:[...action.payload],
         numberUsed: action.payload.map(player => player.number),
-        // allGames: [...action.payload],
         // loading: false
       };
 
@@ -32,7 +30,7 @@ const rootReducer = (state = inicialState, action) => {
         case UPDATE_ASSISTANCE:
           return {
               ...state,
-              assistancePlayers: action.payload
+              assistancePlayers: [...action.payload]
           }
 
           case ADD_PLAYERLINEUP:

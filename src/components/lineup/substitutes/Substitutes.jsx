@@ -13,21 +13,17 @@ const Substitutes = () => {
   const [playersLineup, setPlayersLineup] = useState([])  
 
   const handleOnClickSubstitutes = (player) => {
-    // console.log(player)
+    console.log(player)
     setPlayersLineup([...playersLineup, player])
 
     const newSubstitute = substitutes.filter(substitute => substitute._id !== player._id )
-
     dispatch(addSubstitutes(newSubstitute))
-
-
   }
 
   useEffect(() => {
     dispatch(addPlayerLineup(playersLineup))
   }, [dispatch, playersLineup])
   
- 
   return (
     <>
       <table className="table">

@@ -33,10 +33,10 @@ const Roster = () => {
   //   setSshowPasswordConfirm(!showPasswordConfirm);
   // };
 
-  const [arrSubstitutes, setArrSubstitutes] = useState([]);
-  
-  const assistancePlayers = useSelector((state) => state.assistancePlayers)
-  const substitutes = useSelector((state) => state.substitutes)
+  const assistancePlayers = useSelector((state) => state.assistancePlayers);
+  const playersLineup = useSelector((state) => state.playersLineup);
+  const players = useSelector((state) => state.players);
+  const substitutes = useSelector((state) => state.substitutes);
 
   const handleChangeAssistance = (e) => {
     const { checked } = e.target;
@@ -46,37 +46,48 @@ const Roster = () => {
     );
 
     if (existPlayer) {
-      setArrSubstitutes(arrSubstitutes.filter(substitute => substitute._id !== player._id));
+      // Si existe en el en substitute lo saca y lo coloca en Roster(Assistance)
+      dispatch(
+        addSubstitutes(
+          substitutes.filter((substitute) => substitute._id !== player._id)
+        )
+      );
 
-      const updateAssistace = assistancePlayers.map((assistancePlayer) => {
+      const updateAssistace = assistancePlayers.filter((assistancePlayer) => {
         if (assistancePlayer._id === player._id) {
           assistancePlayer.checked = checked;
         }
         return assistancePlayer;
       });
       dispatch(updateAssistance(updateAssistace));
+    } else { //Si no existe lo coloca en arrSubstitutes y cuando se actualice se ejecuta el useEffect
+      const existOnlineup = playersLineup.some(
+        (playerOnLineup) => playerOnLineup._id === player._id
+      );
 
-    } else {
-      setArrSubstitutes([...arrSubstitutes, player]);
-      
-      const updateAssistace = assistancePlayers.map((assistancePlayer) => {
-        if (assistancePlayer._id === player._id) {
-          assistancePlayer.checked = checked;
-        }
-        return assistancePlayer;
-      });
-    //   console.log(updateAssistace);
+      if (!existOnlineup) {
+        const updateSubstitutes = [...substitutes, player];
+        dispatch(addSubstitutes(updateSubstitutes));
 
-      dispatch(updateAssistance(updateAssistace));
+        const updateAssistace = players.map((assistancePlayer) => {
+          if (assistancePlayer._id === player._id) {
+            assistancePlayer.checked = checked;
+          }
+          return assistancePlayer;
+        });
+
+        dispatch(updateAssistance(updateAssistace));
+      }
     }
   };
-  
 
-const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-useEffect(() => {
-  dispatch(addSubstitutes(arrSubstitutes))
-}, [dispatch,arrSubstitutes])
+  // useEffect(() => {
+  //   dispatch(addSubstitutes(arrSubstitutes))// cargamos el state substitutes
+  // }, [dispatch,arrSubstitutes])
+
+  console.log(substitutes, "state Subtitutes");
 
   return (
     <>
@@ -119,7 +130,7 @@ useEffect(() => {
                 </tr>
               </thead>
               <tbody>
-                {assistancePlayers.map((player, i) => (
+                {players.map((player, i) => (
                   <tr key={i}>
                     <td>{i + 1}</td>
                     <td key={player._id} style={{ height: "40px" }}>
@@ -129,7 +140,7 @@ useEffect(() => {
                       <input
                         type="checkbox"
                         name="player"
-                        checked= {player.checked}
+                        checked={player.checked}
                         onChange={handleChangeAssistance}
                         data-player={JSON.stringify(player)}
                       />

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { addPlayerLineup } from "../../../redux/actions";
 import RegisterDataPlayer from "../../registerDataPlayer/RegisterDataPlayer";
 
@@ -24,6 +23,7 @@ const PlayersLineup = () => {
   //   "LF",
   //   "BA",
   // ]);
+
   const positions = ["P", "1B", "2B", "SS", "SF", "3B", "RF", "CF", "LF", "BA"];
 
   const dispatch = useDispatch();
@@ -42,14 +42,13 @@ const PlayersLineup = () => {
 
       dispatch(addPlayerLineup(updatePlayerPositon));
 
-      positions.filter((position) => position !== value);
+      // positions.filter((position) => position !== value);
       // const updatePosition = positions.filter((position) => position !== value);
       // console.log(updatePosition)
       // setPositions(updatePosition);
     }
   };
-
-  console.log(playersLineup);
+  // console.log(playersLineup);
 
   return (
     <>
@@ -77,20 +76,21 @@ const PlayersLineup = () => {
                 <tr key={player._id}>
                   <th scope="row">{i + 1}</th>
                   <td>{player.number}</td>
-                
+
                   <td>
-                    {player &&  <RegisterDataPlayer
+                    {player && (
+                      <RegisterDataPlayer
                         show={showModal}
                         handleClose={handleClose}
-                         player={player}
-                      />}
-                     
-                    </td>
+                        player={player}
+                      />
+                    )}
+                  </td>
 
                   <td>
                     <select
                       id={player._id}
-                      value={player.position} // Asigna el valor del select al valor actual de la posición del jugador
+                      value={player.position}
                       onChange={handleAssignPositonChange}
                     >
                       <option key="default" value="">
@@ -99,7 +99,10 @@ const PlayersLineup = () => {
                       {positions.map((position, i) => (
                         <option
                           key={i}
-                          // value={position}
+                          disabled={playersLineup.some(
+                            (p) =>
+                              p.position === position && p._id !== player._id
+                          )}
                         >
                           {position}
                         </option>
