@@ -1,0 +1,4 @@
+.substitute{
+    display: grid;
+    grid-template-columns: 58px 180px;
+}

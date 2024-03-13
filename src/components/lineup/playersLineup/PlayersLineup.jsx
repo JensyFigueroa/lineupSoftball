@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addPlayerLineup } from "../../../redux/actions";
 import RegisterDataPlayer from "../../registerDataPlayer/RegisterDataPlayer";
+import { Link } from "react-router-dom";
+import styles from "./PlayersLineup.module.css"
 
 const PlayersLineup = () => {
   const players = useSelector((state) => state.players);
@@ -10,19 +12,6 @@ const PlayersLineup = () => {
   const [showModal, setShowModal] = useState(false);
 
   const handleClose = () => setShowModal(false);
-
-  // const [positions, setPositions] = useState([
-  //   "P",
-  //   "1B",
-  //   "2B",
-  //   "SS",
-  //   "SF",
-  //   "3B",
-  //   "RF",
-  //   "CF",
-  //   "LF",
-  //   "BA",
-  // ]);
 
   const positions = ["P", "1B", "2B", "SS", "SF", "3B", "RF", "CF", "LF", "BA"];
 
@@ -87,11 +76,12 @@ const PlayersLineup = () => {
                     )}
                   </td>
 
-                  <td>
+                  <td className={styles.playerLineup}>
                     <select
                       id={player._id}
                       value={player.position}
                       onChange={handleAssignPositonChange}
+                      style={{ textAlign: "center" }}
                     >
                       <option key="default" value="">
                         Select Position
@@ -108,12 +98,7 @@ const PlayersLineup = () => {
                         </option>
                       ))}
                     </select>
-                    {/* <select id={player._id} onChange={handleAssignPositonChange}>
-                    <option key={i}>Select Position</option>
-                      {positions.map((position,i) => (  
-                      <option key={i} value={position} disabled={player.position === position}>{position} {player.position }{ position}</option>
-                      ))}
-                    </select> */}
+                    <Link><i className="fa-solid fa-arrow-right" style={{ color: "#f50000" }} /></Link>
                   </td>
                 </tr>
               ))}

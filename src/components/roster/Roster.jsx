@@ -37,6 +37,7 @@ const Roster = () => {
   const playersLineup = useSelector((state) => state.playersLineup);
   const players = useSelector((state) => state.players);
   const substitutes = useSelector((state) => state.substitutes);
+  const dispatch = useDispatch();
 
   const handleChangeAssistance = (e) => {
     const { checked } = e.target;
@@ -81,13 +82,6 @@ const Roster = () => {
     }
   };
 
-  const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(addSubstitutes(arrSubstitutes))// cargamos el state substitutes
-  // }, [dispatch,arrSubstitutes])
-
-  console.log(substitutes, "state Subtitutes");
 
   return (
     <>

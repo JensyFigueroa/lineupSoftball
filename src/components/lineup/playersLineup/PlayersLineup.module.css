@@ -1,0 +1,5 @@
+.playerLineup{
+    display: grid;
+    grid-template-columns: 120px 50px;
+    justify-content: center;
+}
