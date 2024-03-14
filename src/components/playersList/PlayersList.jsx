@@ -22,37 +22,6 @@ const PlayersList = () => {
         <AddPlayerForm/>
         <Cards allplayers={allplayers} avatar={avatar}/>
       </div>
-
-      {/* 
-      <div className={styles.playersList}>
-
-        {Object.values(allplayers).length > 0 ? (
-          <table className="table">
-            <thead className="table table-info">
-              <tr>
-                <th scope="col" className="table-info">#</th>
-                <th scope="col">FullName</th>
-                <th scope="col">Birthday</th>
-             
-              </tr>
-            </thead>
-            <tbody className="table-primary">
-              {allplayers &&
-                allplayers.map((player, index) => (
-                  <tr key={index}>
-                    <th scope="row" className="table-info">{index + 1}</th>
-                   
-                    <td>{player.firstName +" "+ player.lastName}</td>
-                    <td>{player.birthDate}</td>
-                    
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        ) : (
-          <h2>No players</h2>
-        )}
-      </div> */}
     </div>
   );
 };

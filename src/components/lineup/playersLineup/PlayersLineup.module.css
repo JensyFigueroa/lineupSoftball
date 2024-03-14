@@ -1,5 +1,12 @@
 .playerLineup{
+    width: 100%;
     display: grid;
-    grid-template-columns: 120px 50px;
+    grid-template-columns: 130px 30px;
     justify-content: center;
+    gap:20px
 }
+
+.playerLineup a {
+    color: black;
+}
+    

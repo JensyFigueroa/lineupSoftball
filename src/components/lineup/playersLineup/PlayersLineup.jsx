@@ -17,10 +17,11 @@ const PlayersLineup = () => {
 
   const dispatch = useDispatch();
 
-  const handleAssignPositonChange = (e) => {
-    const { value, id } = e.target;
+  const handleChangePlayer = (e) => {
+    const {value, id } = e.target;
     // console.log(id, value)
 
+    //Position assignment
     if (value !== "Select Position") {
       const updatePlayerPositon = playersLineup.map((player) => {
         if (player._id === id) {
@@ -31,13 +32,21 @@ const PlayersLineup = () => {
 
       dispatch(addPlayerLineup(updatePlayerPositon));
 
-      // positions.filter((position) => position !== value);
-      // const updatePosition = positions.filter((position) => position !== value);
-      // console.log(updatePosition)
-      // setPositions(updatePosition);
     }
+
   };
-  // console.log(playersLineup);
+
+  const changePlayer = (player) =>{
+    
+    console.log( playersLineup.map((changePlayer) => {
+      if (changePlayer._id === player._id) {
+        changePlayer.stateChange = !player.stateChange ;
+      }
+      return changePlayer
+    })
+    )
+  }
+
 
   return (
     <>
@@ -47,7 +56,7 @@ const PlayersLineup = () => {
             <th scope="col">#</th>
             <th scope="col">No.</th>
             <th scope="col">Player</th>
-            <th scope="col">Position</th>
+            <th scope="col" style={{width:'30%'}}>Position</th>
           </tr>
         </thead>
         <tbody>
@@ -80,7 +89,7 @@ const PlayersLineup = () => {
                     <select
                       id={player._id}
                       value={player.position}
-                      onChange={handleAssignPositonChange}
+                      onChange={handleChangePlayer}
                       style={{ textAlign: "center" }}
                     >
                       <option key="default" value="">
@@ -98,7 +107,7 @@ const PlayersLineup = () => {
                         </option>
                       ))}
                     </select>
-                    <Link><i className="fa-solid fa-arrow-right" style={{ color: "#f50000" }} /></Link>
+                    <Link name='LinkChange' onClick={() => changePlayer(player)}><i className="fa-solid fa-arrow-right" style={{ color: player.stateChange && 'Red'}}/></Link>
                   </td>
                 </tr>
               ))}
