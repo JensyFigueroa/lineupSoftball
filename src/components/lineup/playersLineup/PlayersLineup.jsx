@@ -36,15 +36,19 @@ const PlayersLineup = () => {
 
   };
 
-  const changePlayer = (player) =>{
+  const changePlayer = (player,i) =>{
     
-    console.log( playersLineup.map((changePlayer) => {
+    const updatePlayersLineup =  playersLineup.map((changePlayer) => {
       if (changePlayer._id === player._id) {
         changePlayer.stateChange = !player.stateChange ;
+        changePlayer.index = i
       }
       return changePlayer
     })
-    )
+
+    const statechangePlayer = player.stateChange/*  !== undefined ? false : !player.stateChange */
+
+    dispatch(addPlayerLineup(updatePlayersLineup, statechangePlayer))
   }
 
 
@@ -107,7 +111,7 @@ const PlayersLineup = () => {
                         </option>
                       ))}
                     </select>
-                    <Link name='LinkChange' onClick={() => changePlayer(player)}><i className="fa-solid fa-arrow-right" style={{ color: player.stateChange && 'Red'}}/></Link>
+                    <Link name='LinkChange' onClick={() => changePlayer(player, i)}><i className="fa-solid fa-arrow-right" style={{ color: player.stateChange && 'Red'}}/></Link>
                   </td>
                 </tr>
               ))}

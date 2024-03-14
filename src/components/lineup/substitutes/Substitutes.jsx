@@ -9,10 +9,11 @@ const Substitutes = () => {
   const players = useSelector((state) => state.players);
   const substitutes = useSelector((state) => state.substitutes);
   const playersLineup = useSelector((state) => state.playersLineup);
+  const statechangePlayer = useSelector((state) => state.statechangePlayer);
 
   const dispatch = useDispatch();
 
-  const handleOnClickSubstitutes = (player) => {
+  const handleOnClickSubstitutes = (player, op) => {
     //Checking if there are change Player
     const checkedChangePlayer = playersLineup.filter(
       (player) => player.stateChange === true
@@ -20,41 +21,43 @@ const Substitutes = () => {
     //Checking if there are 10 players in the 10 positions
     const maxPlayers = playersLineup.length;
 
-    if (checkedChangePlayer.length) {
+    if (checkedChangePlayer.length && op === "changePlayer") {
       // Removing the player from the lineup and sending him to the substitutes
-      let newPlayersLineup = playersLineup.filter((player) => player.
-      _id !== checkedChangePlayer[0]._id)
-      console.log(newPlayersLineup,'new')
-      dispatch(addPlayerLineup(newPlayersLineup))
-      const newSubstitutes = [...substitutes, checkedChangePlayer[0]]
-      dispatch(addSubstitutes(newSubstitutes))
-      /* **************************************************************** */
+      let newPlayersLineup = playersLineup.filter(
+        (player) => player._id !== checkedChangePlayer[0]._id
+      );
+
+      dispatch(addPlayerLineup(newPlayersLineup));
+      //Adding the player from Lineup to the Substitutes on the same turn as the replacement player
+      const UpdateSubstitutes = [...substitutes, checkedChangePlayer[0]];
+      dispatch(addSubstitutes(UpdateSubstitutes));
 
       //Adding the substitute to the lineup on the same turn as the replacement player
-      //  newPlayersLineup = [...playersLineup]
-      //  newPlayersLineup.splice(checkedChangePlayer[0].orderAtBat - 1,0 player[orderAtBat])
-      // const newSubstitutes = [...substitutes, checkedChangePlayer[0]]
-      // dispatch(addSubstitutes(newSubstitutes))
+      checkedChangePlayer[0].stateChange = false;
+      newPlayersLineup.splice(checkedChangePlayer[0].index, 0, player);
+      dispatch(addPlayerLineup(newPlayersLineup));
 
-      console.log(newSubstitutes)
-    }else{
-      if (maxPlayers === 4) {
+      //Update again substitutes
+      const newUpdateSubstitutes = UpdateSubstitutes.filter(
+        (substitute) => substitute._id !== player._id
+      );
+      dispatch(addSubstitutes(newUpdateSubstitutes));
+    }
+
+    if (player && op === "addPlayer") {
+      if (maxPlayers === 10) {
         alert("Maximum of 10 players in the lineup");
       } else {
         player.stateChange = false;
         player.orderAtBat = playersLineup.length + 1;
         dispatch(addPlayerLineup([...playersLineup, player]));
 
-        const newSubstitute = substitutes.filter(
+        const newSubstitutes = substitutes.filter(
           (substitute) => substitute._id !== player._id
         );
-        dispatch(addSubstitutes(newSubstitute));
+        dispatch(addSubstitutes(newSubstitutes));
       }
     }
-  };
-
-  const handleChangePlayerLineup = (e) => {
-    console.log(e.target);
   };
 
   return (
@@ -78,16 +81,39 @@ const Substitutes = () => {
             : substitutes.length > 0 &&
               substitutes.map((substitute) => (
                 <tr key={substitute._id}>
-                  <td className={styles.substitute}>
-                    <Link onChange={handleChangePlayerLineup}>
-                      <i
-                        className="fa-solid fa-arrow-left"
-                        style={{ color: "#00faaf" }}
-                      />
-                    </Link>
-                    <Link onClick={() => handleOnClickSubstitutes(substitute)}>
+                  <td
+                    className={
+                      substitute.stateChange === undefined
+                        ? styles.substituteChange
+                        : styles.substitute
+                    }
+                  >
+                    <span>
+                      {statechangePlayer && (
+                          <Link
+                            onClick={() =>
+                              handleOnClickSubstitutes(
+                                substitute,
+                                "changePlayer"
+                              )
+                            }
+                          >
+                            <i
+                              className="fa-solid fa-arrow-left"
+                              style={{ color: "#00faaf" }}
+                            />
+                          </Link>
+                        )}
+                    </span>
+                    {!statechangePlayer ? <Link
+                      onClick={() =>
+                        handleOnClickSubstitutes(substitute, "addPlayer")
+                      }
+                    >
                       {substitute.firstName} {substitute.lastName}
                     </Link>
+                    : <span>{substitute.firstName} {substitute.lastName}</span>}
+                    
                     <span style={{ color: "black" }}>
                       AVG: {Math.round(substitute.avg)}
                     </span>

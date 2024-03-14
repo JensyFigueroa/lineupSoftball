@@ -20,16 +20,15 @@ export const getPlayers = () => {
 }
 
 export const addSubstitutes = (substitutes) => {
-  // console.log(substitutes,'actions')
   return async function (dispatch) {
     dispatch({ type: ADD_SUBTITUTES, payload: substitutes })
   }
 }
 
-export const addPlayerLineup = (playerLineup) => {
-  // console.log(playerLineup,'actions')
+export const addPlayerLineup = (playerLineup, changePlayer) => {
+  // console.log(changePlayer,'actions')
   return async function (dispatch) {
-    dispatch({ type: ADD_PLAYERLINEUP, payload: playerLineup })
+    dispatch({ type: ADD_PLAYERLINEUP, payload: [playerLineup, changePlayer] })
   }
 }
 

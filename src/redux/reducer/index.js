@@ -6,6 +6,7 @@ const inicialState = {
   numberUsed: [],
   substitutes: [],
   playersLineup:[],
+  statechangePlayer:false
   // loading: true,
   // detailId: []
 };
@@ -34,9 +35,11 @@ const rootReducer = (state = inicialState, action) => {
           }
 
           case ADD_PLAYERLINEUP:
+
             return {
                 ...state,
-                playersLineup: action.payload
+                playersLineup: action.payload[0],
+                statechangePlayer: action.payload[1]
             }
       
 

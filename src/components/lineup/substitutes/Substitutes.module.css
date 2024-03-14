@@ -2,3 +2,7 @@
     display: grid;
     grid-template-columns: 40px 170px 90px;
 }
+.substituteChange{
+    display: grid;
+    grid-template-columns: 40px 170px 90px;
+}

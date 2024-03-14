@@ -19,18 +19,18 @@
 }
 
 .b1{
-    background-color: lightskyblue ;
+    background-color: rgb(135,206,250,.7) ;
 }
 
 .b2{
-    /* background-color: lightyellow; */
+    background-color: rgb(248,215,218,.7);
     overflow-y: auto;
     padding-bottom: -16px;
 }
 
 .b3{
     grid-column: 1 / span 2;
-    height: 144px;
+    height: 160px;
     /* background-color: lightseagreen; */
 }
 
