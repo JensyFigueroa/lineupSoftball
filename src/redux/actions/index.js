@@ -4,6 +4,7 @@ export const GET_PLAYERS = 'GET_PLAYERS'
 export const ADD_SUBTITUTES = 'ADD_SUBTITUTES'
 export const UPDATE_ASSISTANCE = 'UPDATE_ASSISTANCE'
 export const ADD_PLAYERLINEUP = 'ADD_PLAYERLINEUP'
+export const ADD_SCORE = 'ADD_SCORE'
 
 export const getPlayers = () => {
   return async function (dispatch) {
@@ -36,6 +37,13 @@ export const updateAssistance = (assistance) => {
   // console.log(substitutes,'actions')
   return async function (dispatch) {
     dispatch({ type: UPDATE_ASSISTANCE, payload: assistance })
+  }
+}
+
+export const addScore = (score) => {
+  console.log(score,'actions')
+  return async function (dispatch) {
+    dispatch({ type: ADD_SCORE, payload: score })
   }
 }
 
