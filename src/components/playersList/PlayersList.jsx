@@ -4,7 +4,7 @@ import styles from "./PlayersList.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getPlayers } from "../../redux/actions";
 import AddPlayerForm from "../addPlayer/AddPlayerForm";
-import avatar from '../../assets/avatar.jpg'
+import avatar from '../../assets/avatar.png'
 import Cards from "../cards/Cards";
 
 const PlayersList = () => {

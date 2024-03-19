@@ -5,15 +5,10 @@
     width: 100%;
     position: absolute;
     flex: 1;
-    /* margin: 150px 0px;  */
-    background-image: url(../../assets/fondo.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-
 }   
 
 .container{
-    margin: 150px 0px; 
+    
 }
 
 .playersList{
