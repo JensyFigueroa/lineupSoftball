@@ -3,11 +3,11 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 100vh;
+  height: 120vh;
 }
 
 .container{
-  padding-top: 70px;
+  margin-top: 19px;
 }
 
 .lineup-section {

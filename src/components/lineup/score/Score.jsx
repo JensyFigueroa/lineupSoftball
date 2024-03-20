@@ -55,7 +55,7 @@ const Score = () => {
                 <input type="text"  onChange={(e) => handleRunsInningChange(e,i)}/>
               </td>
             ))}
-            <td>{totalRunsVisitantes}</td>
+            <td className={styles.totalRuns}>{totalRunsVisitantes}</td>
           </tr>
           <tr name="Home">
             <th scope="row" name="HomeClub">Home Club</th>
@@ -64,7 +64,7 @@ const Score = () => {
                 <input type="text" onChange={(e) => handleRunsInningChange(e,i)}/>
               </td>
             ))}
-            <td>{totalRunsHomeClub}</td>
+            <td className={styles.totalRuns}>{totalRunsHomeClub}</td>
           </tr>
         </tbody>
       </table>

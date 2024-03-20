@@ -69,7 +69,7 @@ const PlayersLineup = () => {
                 <tr key={player._id}>
                   <th scope="row"></th>
                   <td></td>
-                  <td style={{ height: "36px" }}></td>
+                  <td style={{ height: "32.8px" }}></td>
                   <td></td>
                 </tr>
               ))

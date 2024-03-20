@@ -6,19 +6,19 @@ const Card = ({ avatar, player }) => {
         <div className={styles.cardContainer}>
           <div className={`${styles.cardFace} ${styles.frontFace}`}>
             <img src={avatar} alt="" />
-            <h2>
+            <h4>
               {player.firstName} {player.lastName}
-            </h2>
-            <h3>AVG: {Math.round(player.avg)}</h3>
+            </h4>
+            <h5>AVG: {Math.round(player.avg)}</h5>
           </div>
 
           <div className={`${styles.cardFace} ${styles.backFace}`}>
             <div className={styles.containerAbout}>
               <h2>About me</h2>
-              <h3>
+              <h5>
                 {player.firstName} {player.lastName}
-              </h3>
-              <h4>BirthDate: {player.birthDate}</h4>
+              </h5>
+              <h6>BirthDate: {player.birthDate}</h6>
               <h3>{player.position}</h3>
               <h3>AVG: {Math.round(player.avg)}</h3>
             </div>

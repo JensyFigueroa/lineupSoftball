@@ -16,12 +16,12 @@ const PlayersList = () => {
   const allplayers = useSelector((state) => state.players);
 
   return (
-    <div className={styles.players}>
-      <div className={styles.container}>
-        <h2>Players List</h2>
-        <AddPlayerForm/>
+    <div className={styles.playersList}> 
+      
+        <h1>Players List</h1>
+        {/* <AddPlayerForm/>  */} {/* to place when manager login */}
         <Cards allplayers={allplayers} avatar={avatar}/>
-      </div>
+      
     </div>
   );
 };

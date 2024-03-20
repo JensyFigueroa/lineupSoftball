@@ -75,7 +75,7 @@ const Substitutes = () => {
           {substitutes.length === 0
             ? players.map((player) => (
                 <tr key={player._id}>
-                  <td style={{ height: "40px" }}></td>
+                  <td style={{ height: "32.8px" }}></td>
                 </tr>
               ))
             : substitutes.length > 0 &&

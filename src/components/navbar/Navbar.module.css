@@ -1,8 +1,9 @@
 .navBarGrid {
     display: grid;
     grid-template-columns: 30% 70%;
-    height: 7%;
+    height: 10%;
     justify-items: center;
+    margin-bottom: 10px;
   }
 
   .navBarGrid a {
@@ -17,7 +18,7 @@
   }
 
   .img{
-    max-width: 75%;
+    max-width: 50%;
     border-radius: 50px;
   } 
 

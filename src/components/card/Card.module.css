@@ -1,15 +1,15 @@
 .card{
-    width: 300px;
+    width: 250px;
     height: 350px;
-    perspective: 100px;
+    perspective: 1000px;
     cursor: pointer;
 }
 
 .card img {
-    width: 250px;
-    height: 250px;
+    width: 245px;
+    height: 245px;
     object-fit: cover;
-    border-radius: 10%;
+    border-radius: 10px;
 }
 
 .cardContainer {
@@ -31,7 +31,7 @@
     position: absolute;
     backface-visibility: hidden;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     flex-direction: column;
     border: 1px solid #ccc;
@@ -39,9 +39,6 @@
     background:  rgb(0, 157, 255, .5);
 }
 
-.frontFace{
-    transform: rotateY(0deg);
-}
 
 .containerAbout {
     display: flex;
@@ -53,9 +50,14 @@
     padding: 20px;
 }
 
+.frontFace{
+    transform: rotateY(0deg);
+}
+
 .backFace{
     display: flex;
     transform: rotateY(180deg);
+    background: rgb(255, 255, 255,.5);
 }
 
 

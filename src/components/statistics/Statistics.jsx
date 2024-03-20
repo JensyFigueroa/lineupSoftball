@@ -9,8 +9,6 @@ const Statistics = () => {
   const dispatch = useDispatch()
   const allplayers = useSelector((state) => state.players);
 
-  console.log(allplayers)
-
   useEffect(() => {
     dispatch(getPlayers());
   }, [dispatch])
@@ -24,8 +22,8 @@ const Statistics = () => {
   const handleShow = () => setShowModal(true);
 
   return (
-    <div className={styles.lineup}>
-      <h2>Statistics</h2>
+    <div className={styles.statitics}>
+      <h1>Statistics</h1>
       <div className={`${styles.playersList} table-responsive`}>
         {Object.values(allplayers).length > 0 ? (
           <table className="table">
@@ -56,15 +54,6 @@ const Statistics = () => {
                       {index + 1}
                     </th>
                     <td>{player.number}</td>
-
-                    {/* <td colSpan={2}>
-                    {player &&  <RegisterDataPlayer
-                        show={showModal}
-                        handleClose={handleClose}
-                         player={player}
-                      />}
-                     
-                    </td> */}
                     <td colSpan={2}>{player.firstName +" "+ player.lastName}</td>
                     <td>{player.vb}</td>
                     <td>{player.h}</td>
