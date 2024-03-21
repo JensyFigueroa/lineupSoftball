@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import styles from "./PlayersLineup.module.css"
 
 const PlayersLineup = () => {
+  const manager = useSelector (state => state.activeManager)
   const players = useSelector((state) => state.players);
   const playersLineup = useSelector((state) => state.playersLineup);
 
@@ -80,13 +81,19 @@ const PlayersLineup = () => {
                   <td>{player.number}</td>
 
                   <td>
-                    {player && (
+                    {manager === "" ? <span>{player.firstName} {player.lastName}</span>
+                                    : <RegisterDataPlayer
+                                    show={showModal}
+                                    handleClose={handleClose}
+                                    player={player}
+                                  />}
+                    {/* {player && (
                       <RegisterDataPlayer
                         show={showModal}
                         handleClose={handleClose}
                         player={player}
                       />
-                    )}
+                    )} */}
                   </td>
 
                   <td className={styles.playerLineup}>

@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Modal, Button, Form } from "react-bootstrap";
+import { useState } from "react";
+import { Modal, Button } from "react-bootstrap";
 import styles from "./Login.module.css";
 import { Link, NavLink } from "react-router-dom";
 
@@ -7,10 +7,13 @@ import { Link, NavLink } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
+import { activeManager } from "../../redux/actions";
+
 // import { loginUser } from "../../redux/actions/index.js";
 // import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
+  const dispatch = useDispatch()
   const navigate = useNavigate();
   const [showModalLogin, setShowModalLogin] = useState(false);
   const [showModalUser, setShowModalUser] = useState(false);
@@ -66,26 +69,30 @@ const Login = () => {
     password: "",
  
   }
-  const [form, setForm] = useState(objForm);
+  const [formLogin, setFormLogin] = useState(objForm);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-
-    console.log(name, value )
-
-    setForm({...form, [name]:value})
-
-
+    setFormLogin({...formLogin, [name]:value})
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(form);
-    // axios.post("https://lineupsoftball-backend-dev-htre.4.us-1.fl0.io/addplayers", form)
-    setShowModalUser(false)
-    // setForm(objForm)
-    // navigate('/players')
-    // console.log(form);
+    // console.log(formLogin);
+    // const dataLogin = await axios.post("https://lineupsoftball-backend-dev-htre.4.us-1.fl0.io/login/manager", formLogin)
+    try {
+      const dataLogin = await axios.post("http://localhost:3001/login/manager", formLogin)
+      if (dataLogin.status === 200){
+        const manager = dataLogin.data.firstName + ' ' + dataLogin.data.lastName 
+        dispatch(activeManager(manager))
+        setShowModalUser(false)
+        setFormLogin(objForm)
+      }
+    } catch (error) {
+      alert(error.response.data.message)
+    }
+    
+
   };
 
   return (

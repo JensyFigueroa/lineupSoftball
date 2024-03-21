@@ -5,6 +5,7 @@ export const ADD_SUBTITUTES = 'ADD_SUBTITUTES'
 export const UPDATE_ASSISTANCE = 'UPDATE_ASSISTANCE'
 export const ADD_PLAYERLINEUP = 'ADD_PLAYERLINEUP'
 export const ADD_SCORE = 'ADD_SCORE'
+export const ACTIVE_MANAGER = 'ACTIVE_MANAGER'
 
 export const getPlayers = () => {
   return async function (dispatch) {
@@ -41,11 +42,19 @@ export const updateAssistance = (assistance) => {
 }
 
 export const addScore = (score) => {
-  console.log(score,'actions')
+  // console.log(score,'actions')
   return async function (dispatch) {
     dispatch({ type: ADD_SCORE, payload: score })
   }
 }
+export const activeManager = (manager) => {
+  console.log(manager,'actions')
+  return async function (dispatch) {
+    dispatch({ type: ACTIVE_MANAGER, payload: manager })
+  }
+}
+
+
 
 /* 
 export const getGameName = (name) => {

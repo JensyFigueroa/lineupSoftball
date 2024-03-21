@@ -1,4 +1,4 @@
-import { ADD_SUBTITUTES, GET_PLAYERS, UPDATE_ASSISTANCE, ADD_PLAYERLINEUP, ADD_SCORE } from "../actions";
+import { ADD_SUBTITUTES, GET_PLAYERS, UPDATE_ASSISTANCE, ADD_PLAYERLINEUP, ADD_SCORE, ACTIVE_MANAGER, activeManager } from "../actions";
 
 const inicialState = {
   players: [],
@@ -7,7 +7,8 @@ const inicialState = {
   substitutes: [],
   playersLineup:[],
   statechangePlayer:false,
-  scoress:[]
+  scoress:[],
+  activeManager: ""
   // loading: true,
   // detailId: []
 };
@@ -47,6 +48,13 @@ const rootReducer = (state = inicialState, action) => {
             return {
                 ...state,
                 scores: action.payload,
+            }
+          
+            case ACTIVE_MANAGER:
+
+            return {
+                ...state,
+                activeManager: action.payload,
             }
       
 

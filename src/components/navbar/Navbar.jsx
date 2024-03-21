@@ -3,7 +3,12 @@ import styles from './Navbar.module.css'
 import logo from '../../assets/Logo.png'
 import Login from "../login/Login"
 
+import { useSelector } from 'react-redux'
+
 export default function Navbar() {
+
+  const manager = useSelector (state => state.activeManager)
+
   return (
     <div className={styles.navBarGrid}>
       
@@ -18,7 +23,9 @@ export default function Navbar() {
         {/* <NavLink to='/about' className={({ isActive }) => (isActive ? 'active' : 'link')}>About</NavLink> */}
       </div>
 
-      <div className={`${styles.containerLogin}`}><Login/></div> 
+      {manager === '' ? <div className={`${styles.containerLogin}`}><Login/></div> 
+                      : <div className={`${styles.containerLogin}`}><h5>Manager: {manager}</h5></div>}
+      
     </div>
   )
 }
