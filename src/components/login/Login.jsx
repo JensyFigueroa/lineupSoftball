@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
-import styles from "./AddPlayerForm.module.css";
-import { Link } from "react-router-dom";
+import styles from "./Login.module.css";
+import { Link, NavLink } from "react-router-dom";
 
 // import validate from "./validate";
 import axios from "axios";
@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 // import { loginUser } from "../../redux/actions/index.js";
 // import toast, { Toaster } from "react-hot-toast";
 
-const AddPlayerForm = () => {
+const Login = () => {
   const navigate = useNavigate();
   const [showModalLogin, setShowModalLogin] = useState(false);
   const [showModalUser, setShowModalUser] = useState(false);
@@ -62,65 +62,43 @@ const AddPlayerForm = () => {
   const numberUsed = useSelector(state => state.numberUsed)
 
   const objForm = {
-    number: '',
-    firstName: "",
-    lastName: "",
-    birthDate: "",
-    position: "",
-    vb: 0,
-    h: 0,
-    b2: 0,
-    b3: 0,
-    hr: 0,
-    bb: 0,
-    k: 0,
-    avg: 0
+    userName: "",
+    password: "",
+ 
   }
   const [form, setForm] = useState(objForm);
 
   const handleInputChange = (e) => {
-    const { name, value, type } = e.target;
+    const { name, value } = e.target;
 
-    // console.log(name, value, type )
-    let newValue;
+    console.log(name, value )
 
-    if (name === 'number' && numberUsed.includes(parseInt(value))) {
-      setErrors({error:'This number already exists, select another'})
-    }else{
-      setErrors({})
-      newValue = type === "number" ? parseInt(value) : value;
-    }
+    setForm({...form, [name]:value})
 
-    newValue = type === "number" ? parseInt(value) : value;
-
-    setForm({
-      ...form,
-      [name]: newValue
-    });
 
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(form);
-    axios.post("https://lineupsoftball-backend-dev-htre.4.us-1.fl0.io/addplayers", form)
+    // axios.post("https://lineupsoftball-backend-dev-htre.4.us-1.fl0.io/addplayers", form)
     setShowModalUser(false)
-    setForm(objForm)
-    navigate('/players')
+    // setForm(objForm)
+    // navigate('/players')
     // console.log(form);
   };
 
   return (
     <>
-      <Link
-        className={`dropdown-item ${styles.link}`}
+      <NavLink className={({ isActive }) => (isActive ? 'link' : 'activeLink')}
+        // className={`dropdown-item ${styles.linkLogin}`}
         to="#"
         onClick={() => {
           setShowModalUser(true), handleFormChange("formUser");
         }}
       >
-        Register Player
-      </Link>
+        <i className="fa-solid fa-circle-user" /> &nbsp;Login In
+      </NavLink>
 
       <Modal
         className={styles.wrapper}
@@ -129,7 +107,7 @@ const AddPlayerForm = () => {
         size="lg"
       >
         <Modal.Header className={styles.headerLogin}>
-          <Modal.Title className={styles.titleLogin}>Create Player</Modal.Title>
+          <Modal.Title className={styles.titleLogin}>Login Manager</Modal.Title>
           <Link
             className={styles.customCloseButton}
             onClick={() => setShowModalUser(false)}
@@ -139,36 +117,16 @@ const AddPlayerForm = () => {
         </Modal.Header>
 
         <Modal.Body style={{ background: "rgba(59, 59, 59,.2)" }}>
-          <form onSubmit={handleSubmit}>
-            <div className={styles.field}>
-              <input
-                name="number"
-                type="number"
-                min={0}
-                max={99}
-                value={form.number}
-                onChange={handleInputChange}
-                required
-              />
-              <label htmlFor="">No. Shirt</label>
-            </div>
-            {errors.error && (
-              <p
-                style={{ color: "red", fontStyle: "italic", fontSize: "18px" }}
-              >
-                {errors.error}
-              </p>
-            )}
+          <form onSubmit={handleSubmit}> 
 
             <div className={styles.field}>
               <input
-                name="firstName"
+                name="userName"
                 type="text"
-                value={form.firstName}
                 onChange={handleInputChange}
                 required
               />
-              <label htmlFor="">Firstname </label>
+              <label htmlFor="">UserName</label>
             </div>
             {/* {errors.firstName && (
               <p
@@ -180,13 +138,12 @@ const AddPlayerForm = () => {
 
             <div className={styles.field}>
               <input
-                name="lastName"
-                type="text"
-                value={form.lastName}
+                name="password"
+                type="password"
                 onChange={handleInputChange}
                 required
               />
-              <label htmlFor="">Lastname</label>
+              <label htmlFor="">Password</label>
             </div>
             {/* {errors.lastName && (
               <p
@@ -196,63 +153,13 @@ const AddPlayerForm = () => {
               </p>
             )} */}
 
-            <div className={styles.miniFieldGroup}>
-              <div className={styles.miniField}>
-                <label htmlFor="birthDate">Birthday</label>
-                <input
-                  name="birthDate"
-                  type="date"
-                  value={form.birthDate}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-              {/* {errors.lastName && (
-                <p
-                  style={{
-                    color: "red",
-                    fontStyle: "italic",
-                    fontSize: "18px",
-                  }}
-                >
-                  {errors.lastName}
-                </p>
-              )} */}
-
-              <div className={styles.miniField}>
-                <label htmlFor="">Position</label>
-                <select
-                  className={styles.select}
-                  name="position"
-                  value={form.position}
-                  onChange={handleInputChange}
-                >
-                  <option>Select options</option>
-                  <option>Infield</option>
-                  <option>Outfield</option>
-                  <option>Both</option>
-                </select>
-              </div>
-              {/* {errors.phoneNumber && (
-                <p
-                  style={{
-                    color: "red",
-                    fontStyle: "italic",
-                    fontSize: "18px",
-                  }}
-                >
-                  {errors.phoneNumber}
-                </p>
-              )} */}
-            </div>
-
             <div className={styles.field}>
               <Button
                 className={styles.btnLogin}
                 variant="primary"
                 type="submit"
               >
-                Register Player
+                 LogIn
               </Button>
             </div>
           </form>
@@ -262,4 +169,4 @@ const AddPlayerForm = () => {
   );
 };
 
-export default AddPlayerForm;
+export default Login;

@@ -1,15 +1,27 @@
 .navBarGrid {
     display: grid;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 15% 70% 15%;
     height: 10%;
     justify-items: center;
     margin-bottom: 10px;
   }
 
-  .navBarGrid a {
+  .logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .img{
+    width: 30%;
+    border-radius: 50px;
+  } 
+
+  /* .navBarGrid a {
     width: 30%;
     text-align: center;
-  }
+    
+  } */
 
   .gridItemMenu{
     width: 70%;
@@ -17,12 +29,13 @@
     margin: auto;
   }
 
-  .img{
-    max-width: 50%;
-    border-radius: 50px;
-  } 
+  .containerLogin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+  }
 
-   
   @media (min-width: 320px) and (max-width: 768px) {
     .navBarGrid {
       grid-template-columns: auto;

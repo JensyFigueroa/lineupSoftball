@@ -1,30 +1,39 @@
 .home{
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
+    width: 50%;
+    margin: 0 auto 0  auto;
 }  
 
-.home h1 {
+.home h3 {
     color: antiquewhite;
     font-family: "Tourney", sans-serif;
-    background-color: rgb(0,147,237,.9);
+    /* background-color: rgb(0,147,237,.9); */
     border-radius: 10px;
+    height: 15%;
+}
+.home h2 {
+    color: antiquewhite;
 }
 
 .home img{
-    margin: auto ;
-    width: 50%;
-    border-radius: 12px;
+    object-fit: cover;
+    height: 400px; 
+
 }
 
+/* .active{
+    background-color: red;
+} */
 @media (min-width: 320px) and (max-width: 768px) {
+    .home{
+        width: 100%;
+    }
     .home img{
-        margin: auto ;
-        width: 70%;
-        border-radius: 12px;
+       height: 200px;
     }
 }
-/* 
-@media (min-width: 768px) and (max-width: 1200px) {
 
-} */
+@media (min-width: 768px) and (max-width: 1200px) {
+    .home{
+        width: 100%;
+    }
+}

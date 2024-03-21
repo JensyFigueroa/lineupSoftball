@@ -1,51 +1,53 @@
-.playersBox{
-    width: 100%;
-    position: absolute;
-    flex: 1;
-    margin: 150px auto;  
-    text-align: center;   
+.typeAccount {
+    display: flex;
+    flex-direction: column;
+
 }
 
-/* css de pi */
-.containerForm {
-    width: 50%;
-    height: 380px; 
-    background-color: rgba(0, 200, 255, 0.498);
-    border-radius: 20px;
-    margin-left: auto;
-    margin-right: auto;
+.wrapper {
+    /* width: 380px; */
+    /* background-color: #fff; */
+    border-radius: 15px;
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, .1);
 }
 
-.label{
-    color: #FDFDD5;
-    font-size: 22px;
+.headerLogin {
+    font-size: 35px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 100px;
+    user-select: none;
+    background: linear-gradient(to right, #1CB5E0, #000046);
 }
 
-.select{
-    width: 280px;
-    height: 55px;
+.customCloseButton {
+    text-decoration: none;
+    color: white;
+    height: px;
+}
+
+.customCloseButton:hover {
+    text-decoration: none;
+    color: #1CB5E0;
+}
+
+.titleLogin {
+    color: #fff;
+}
+
+.wrapper form {
+    padding: 10px 30px 50px 30px;
 }
 
 .field {
-    margin: 0 30px;
-    /* background-color: aqua; */
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-.field label {
+    position: relative;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 8px;
-    margin-left: 15px;
+    height: 50px;
+    margin-top: 20px;
 }
 
-.birthDate input{
-    width: 0%;
+.field input {
+    width: 100%;
     height: 100%;
     outline: none;
     font-size: 17px;
@@ -55,106 +57,245 @@
     transition: all 0.3s ease;
 }
 
-.field input {
-    border-radius: 10px;
-    border-style: solid;
-    border-width: 1px;
-    box-shadow: none;
-    font-weight: 300;
-    padding: 12px;
-}
-
-.field textarea {
-    border-radius: 10px;
-    border-style: solid;
-    border-width: 1px;
-    box-shadow: none;
-    font-weight: 300;
-    padding: 12px;
-}
-
-
-.btnChecklist {
-    width: 100%;
-    border-radius: 20px;
-    border-style: solid;
-    border-width: 1px;
-    box-shadow: none;
-    color: #000;
-    background: #fff;
-    display: flex;
-    font-weight: 300;
-    justify-content: flex-start;
-    padding: 12px;
-}
-
-
-.btn {
-    width: 200px;
-    height: 50px;
-    margin-left: 30px;
-    border-radius: 10px;
-    background-color: rgb(16, 0, 192);
+.link{
+    width: 100px;
     color: white;
-    font-style: italic;
-    font-size: 25px;
-}
-
-.btn:hover {
-    color: #ff3333;
-    background-color: rgb(16, 0, 192);
+    font-size: 15px;
+    background-color: #000046;
     border-radius: 10px;
-    box-shadow: 5px 5px 5px #ff3333;
-    font-size: 90%;
+    
 }
 
-
-/********************* CheckBox *********************/
-
-.multipleSelection {
-    width: 300px;
-}
-
-.selectBox {
-    position: relative;
-}
-
-.selectBox select {
+.miniFieldGroup{
     width: 100%;
-    font-weight: bold;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 5px;
 }
 
-.checkBoxes{
-    background: #fff;
-    border: 0.5px solid #fff;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,.2);
+.miniField {
+    width: 50%;
+    height: 80px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    max-height: 150px;
-    overflow-x: scroll;
-    padding: 20px 15px;
+}
+
+.miniField label {
+  margin-left: 20px;
+}
+
+.miniField input{
+    width: 100%;
+    height: 100%;
+    outline: none;
+    font-size: 17px;
+    padding-left: 20px;
+    border: 1px solid lightgray;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.miniField select{
+    width: 100%;
+    height: 100%;
+    outline: none;
+    font-size: 17px;
+    padding-left: 20px;
+    border: 1px solid lightgray;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.eye{
     position: absolute;
-    width: 45%;
-    z-index: 10;
+    top: 15px;
+    transform: translateX(-35px);
+    cursor: pointer;
+}
+
+.btnLogin {
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    margin-top: -10px;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    background: linear-gradient(to right, #1CB5E0, #000046);
+    outline: none;
+    border: 1px solid lightgray;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+
+.btnLogin:hover {
+    background: #1CB5E0;
+    color: #000046;
+}
+
+.field input:focus,
+.field input:valid {
+    border-color: #4158d0;
+}
+
+.field label {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    color: #999999;
+    font-weight: 400;
+    font-size: 17px;
+    pointer-events: none;
+    transform: translateY(-50%);
+    transition: all 0.3s ease;
+}
+
+.field input:focus~label,
+.field input:valid~label {
+    top: 0;
+    font-size: 16px;
+    color: white;
+    background: rgba(59, 59, 59);;
+    transform: translateY(-50%);
+    border-radius: 8px 8px;
+    padding: 0px 10px;
 }
 
 
-.checkBoxes label {
-    display: block;
-
+/* #########COMPANY######## */
+.boxCompany {
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.checkBoxes input {
-    background-color: #ff3333;
-
-}
-
-.checkBoxes label:hover {
-    background-color: rgb(16, 0, 192,.5);
-}
-
-
-.footer{
+.fieldC {
     position: relative;
+    width: 50%;
+    height: 50px;
+    margin-top: 20px;
+    padding: 5px;
+}
+
+.fieldC input {
+    width: 100%;
+    height: 100%;
+    outline: none;
+    font-size: 17px;
+    padding-left: 20px;
+    border: 1px solid lightgray;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.fieldC input:focus,
+.fieldC input:valid {
+    border-color: #4158d0;
+}
+
+.fieldC label {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    color: #999999;
+    font-weight: 400;
+    font-size: 17px;
+    pointer-events: none;
+    transform: translateY(-50%);
+    transition: all 0.3s ease;
+}
+
+.fieldC input:focus~label,
+.fieldC input:valid~label {
+    top: 0;
+    font-size: 16px;
+    color: #4158d0;
+    background: #fff;
+    transform: translateY(-50%);
+}
+
+/* #########END COMPANY######## */
+
+
+
+.btnGoogle {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin-top: 20px;
+    padding: 5px;
+    border-radius: 25px;
+}
+
+.icoGoogle {
+    font-size: 30px;
+}
+
+form .content {
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+form .content .checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+form .content input {
+    width: 15px;
+    height: 15px;
+    background-color: red;
+}
+
+form .content label {
+    color: #262626;
+    user-select: none;
+    padding: 5px;
+}
+
+.passLink {
+    color: blue;
+}
+
+.passLink:hover {
+    color: blue
+}
+
+form .field input[type="submit"] {
+    color: #fff;
+    border: none;
+    padding-left: 0;
+    margin-top: -10px;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    background: linear-gradient(to right, #1CB5E0, #000046);
+    transition: all 0.3s ease;
+}
+
+form .field input[type="submit"]:active {
+    transform: scale(0.9s);
+}
+
+form .signUpLink {
+    color: #262626;
+    margin-top: 20px;
+    text-align: center;
+}
+
+form .passLink a,
+form .signUpLink a {
+    color: #4158d0;
+    text-decoration: none;
+}
+
+form .passLink a:hover,
+form .signUpLink a:hover {
+    text-decoration: underline;
 }

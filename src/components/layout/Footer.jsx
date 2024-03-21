@@ -1,9 +1,10 @@
 import styles from "./Footer.module.css";
+import signJF from "../../assets/signJF.png"
 
 const Footer = () => {
   return (
     <div className={styles.footer}>
-      <p>Designed and developed by Jensy Figueroa</p>
+      <p>&copy; Designed and developed by <img src={signJF}/> Jensy Figueroa</p>
     </div>
   );
 };
