@@ -6,7 +6,6 @@ import { Link, NavLink } from "react-router-dom";
 // import validate from "./validate";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from 'react-router-dom';
 import { activeManager } from "../../redux/actions";
 
 // import { loginUser } from "../../redux/actions/index.js";
@@ -14,7 +13,7 @@ import { activeManager } from "../../redux/actions";
 
 const Login = () => {
   const dispatch = useDispatch()
-  const navigate = useNavigate();
+
   const [showModalLogin, setShowModalLogin] = useState(false);
   const [showModalUser, setShowModalUser] = useState(false);
 
@@ -62,8 +61,6 @@ const Login = () => {
   //   setSshowPasswordConfirm(!showPasswordConfirm);
   // };
 
-  const numberUsed = useSelector(state => state.numberUsed)
-
   const objForm = {
     userName: "",
     password: "",
@@ -79,9 +76,9 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(formLogin);
-    // const dataLogin = await axios.post("https://lineupsoftball-backend-dev-htre.4.us-1.fl0.io/login/manager", formLogin)
     try {
-      const dataLogin = await axios.post("http://localhost:3001/login/manager", formLogin)
+      const dataLogin = await axios.post("https://lineupsoftball-backend-dev-htre.4.us-1.fl0.io/login/manager", formLogin)
+      // const dataLogin = await axios.post("http://localhost:3001/login/manager", formLogin)
       if (dataLogin.status === 200){
         const manager = dataLogin.data.firstName + ' ' + dataLogin.data.lastName 
         dispatch(activeManager(manager))
