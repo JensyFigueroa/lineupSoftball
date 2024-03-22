@@ -79,6 +79,7 @@ const Login = () => {
     try {
       const dataLogin = await axios.post("https://lineupsoftball-backend-dev-htre.4.us-1.fl0.io/login/manager", formLogin)
       // const dataLogin = await axios.post("http://localhost:3001/login/manager", formLogin)
+      // console.log(dataLogin)
       if (dataLogin.status === 200){
         const manager = dataLogin.data.firstName + ' ' + dataLogin.data.lastName 
         dispatch(activeManager(manager))

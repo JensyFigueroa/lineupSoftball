@@ -48,7 +48,7 @@ export const addScore = (score) => {
   }
 }
 export const activeManager = (manager) => {
-  console.log(manager,'actions')
+  // console.log(manager,'actions')
   return async function (dispatch) {
     dispatch({ type: ACTIVE_MANAGER, payload: manager })
   }
