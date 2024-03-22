@@ -24,6 +24,8 @@
   } */
 
   .gridItemMenu{
+    display: flex;
+    justify-content: center;
     width: 70%;
     text-align: center;
     margin: auto;
