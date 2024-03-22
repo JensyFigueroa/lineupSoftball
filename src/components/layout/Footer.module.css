@@ -9,7 +9,7 @@
     min-height: 60px;
     font-size: 18px;
     font-weight: 500;
-    position: fixed;
+    /* position: fixed; */
     bottom: 0;
     margin-top: 15px;
 }
