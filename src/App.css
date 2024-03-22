@@ -4,10 +4,12 @@
   background-position: center;
   background-repeat: no-repeat;
   height: 100vh;
+  /* overflow: hidden; */
 }
 
 .container{
   width: 100%;
+  min-height: 70vh;
   padding-top: 19px;
 }
   
@@ -15,6 +17,7 @@
   display: flex;
   justify-content: center;
 }
+
 .lineup {
   position: relative;
   flex: 1;
@@ -35,6 +38,11 @@ ul {
 }
 
 @media (min-width: 320px) and (max-width: 768px) {
+  .App{
+   
+    height: auto;
+
+  }
   .App h1 {
       font-size: 1.2em;
       line-height: 1.1;

@@ -15,14 +15,5 @@
 
 
 @media (min-width: 320px) and (max-width: 768px) {
-    .players{
-        font-size: 50%;
-    }
-    .players{
-        width: 80%;
-    }
 
-    .playersList{
-        width: 80%;
-    }
 }
