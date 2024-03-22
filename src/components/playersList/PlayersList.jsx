@@ -21,7 +21,6 @@ const PlayersList = () => {
         <h1>Players List</h1>
         {/* <AddPlayerForm/>  */} {/* to place when manager login */}
         <Cards allplayers={allplayers} avatar={avatar}/>
-      
     </div>
   );
 };

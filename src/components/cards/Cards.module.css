@@ -3,4 +3,10 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: 8px;
+    margin-bottom: 20px;
+    width: 80%;
 }
+  .btnActive {
+    color: white;
+    background-color: rgb(8,34,142);
+  }

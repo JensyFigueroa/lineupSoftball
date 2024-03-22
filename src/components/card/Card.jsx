@@ -1,14 +1,13 @@
 import styles from "./Card.module.css";
 const Card = ({ avatar, player }) => {
   return (
-    <>
       <div className={styles.card}>
         <div className={styles.cardContainer}>
           <div className={`${styles.cardFace} ${styles.frontFace}`}>
             <img src={avatar} alt="" />
-            <h4>
+            <h5>
               {player.firstName} {player.lastName}
-            </h4>
+            </h5>
             <h5>AVG: {Math.round(player.avg)}</h5>
           </div>
 
@@ -25,7 +24,6 @@ const Card = ({ avatar, player }) => {
           </div>
         </div>
       </div>
-    </>
   );
 };
 

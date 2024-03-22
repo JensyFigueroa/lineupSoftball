@@ -1,15 +1,16 @@
 .card{
-    width: 250px;
-    height: 350px;
+    width: 200px;
+    height: 315px;
     perspective: 1000px;
     cursor: pointer;
 }
 
 .card img {
-    width: 245px;
+    width: 196px;
     height: 245px;
     object-fit: cover;
     border-radius: 10px;
+    margin-bottom: 10px;
 }
 
 .cardContainer {
@@ -31,7 +32,7 @@
     position: absolute;
     backface-visibility: hidden;
     display: flex;
-    /* justify-content: center; */
+    justify-content: center;
     align-items: center;
     flex-direction: column;
     border: 1px solid #ccc;
@@ -47,7 +48,11 @@
     flex-direction: column;
     gap: 10px;
     margin: 20px 0 0 0;
-    padding: 20px;
+    padding: 10px;
+}
+
+.containerAbout h2 {
+   color :rgb(8,34,142)
 }
 
 .frontFace{
