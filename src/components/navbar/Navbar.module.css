@@ -42,7 +42,7 @@
   @media (min-width: 320px) and (max-width: 768px) {
     .navBarGrid {
       grid-template-columns: auto;
-      grid-template-rows: 70% 30%;
+      gap: 5px;
       height: 20%;
       align-items: center;
     }

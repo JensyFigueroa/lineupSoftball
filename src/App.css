@@ -9,7 +9,7 @@
 
 .container{
   width: 100%;
-  min-height: 70vh;
+  min-height: 100vh;
   padding-top: 19px;
 }
   
@@ -49,10 +49,6 @@ ul {
       text-align: center;
   }
 
-  .container{
-    max-width: 700px;
-    margin-top: 30px;
-  }
 
 }
 
