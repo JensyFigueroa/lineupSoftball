@@ -13,8 +13,6 @@ const Home = () => {
   }, [dispatch]);
   return (
     <div className={styles.home}>
-     {/* <h1>🏆We are the champions🏆</h1>
-      <img src={photoChampions} alt="" /> */}
 
       <div id="carouselExampleDark" className="carousel carousel-dark slide">
         <div className="carousel-indicators">
