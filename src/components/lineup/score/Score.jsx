@@ -7,8 +7,8 @@ const Score = () => {
   const dispatch = useDispatch()
   const scores = useSelector((state) => state.scores);
 
-  const [visitorRunsInning, setVisitorRunsInning] = useState(new Array(9).fill(''))
-  const [homeClubRunsInning, setHomeClubRunsInning] = useState(new Array(9).fill(''))
+  const [visitorRunsInning, setVisitorRunsInning] = useState(new Array(9).fill(0))
+  const [homeClubRunsInning, setHomeClubRunsInning] = useState(new Array(9).fill(0))
 
   const handleRunsInningChange = (e, i) => {
     const {value} = e.target
@@ -17,6 +17,7 @@ const Score = () => {
     if (dugOut === 'Visitor' && value !== '') {
       const newRuns = [...visitorRunsInning];
       newRuns[i] = parseInt(value)
+      console.log(newRuns,'if')
       setVisitorRunsInning(newRuns)
     }
     if (dugOut === 'HomeClub' && value !== '') {
@@ -28,6 +29,8 @@ const Score = () => {
 
   const totalRunsVisitantes = visitorRunsInning.reduce((total, runs) => total + runs, 0)
   const totalRunsHomeClub = homeClubRunsInning.reduce((total, runs) => total + runs, 0)
+
+  console.log(totalRunsHomeClub)
 
   return (
     <>
