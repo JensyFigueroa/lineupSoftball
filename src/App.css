@@ -39,9 +39,7 @@ ul {
 
 @media (min-width: 320px) and (max-width: 768px) {
   .App{
-   
     height: auto;
-
   }
   .App h1 {
       font-size: 1.2em;
@@ -53,6 +51,8 @@ ul {
 }
 
 @media (min-width: 768px) and (max-width: 1200px) {
-
+  .App{
+    height: auto;
+  }
 
 }
