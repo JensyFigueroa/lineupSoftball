@@ -12,7 +12,11 @@ export default function Navbar() {
   return (
     <div className={styles.navBarGrid}>
       
-        <Link to='/' className={styles.logo}><img src={logo} alt=""  className={styles.img}/></Link> 
+      <div className={styles.logo}>
+        <Link to='/' className={styles.logoLink}>
+          <img src={logo} alt=""  className={styles.img}/>
+        </Link> 
+      </div>
 
       <div className={styles.gridItemMenu}>
         <NavLink to='/home' className={({ isActive }) => (isActive ? 'activeLink' : 'link')}>Home</NavLink>
