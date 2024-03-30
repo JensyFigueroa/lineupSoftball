@@ -11,7 +11,7 @@ export const ACTIVE_MANAGER = 'ACTIVE_MANAGER'
 export const getPlayers = () => {
   return async function (dispatch) {
     // const apiData = await axios.get('http://localhost:3001/players')
-    const apiData = await axios.get('https://lineupsoftball-bbdores-dev-ekpa.1.us-1.fl0.io/players')
+    const apiData = await axios.get('https://lineupsoftball-bbdores.onrender.com/players')
     // console.log(apiData.data,'actions')
     // const players = apiData.data
     const players = apiData.data.map((player) => ({
