@@ -77,7 +77,7 @@ const Login = () => {
     e.preventDefault();
     // console.log(formLogin);
     try {
-      const dataLogin = await axios.post("https://lineupsoftball-backend-dev-htre.3.us-1.fl0.io/login/manager", formLogin)
+      const dataLogin = await axios.post("https://lineupsoftball-bbdores-dev-ekpa.1.us-1.fl0.io/login/manager", formLogin)
       // const dataLogin = await axios.post("http://localhost:3001/login/manager", formLogin)
       // console.log(dataLogin)
       if (dataLogin.status === 200){
