@@ -14,7 +14,7 @@ const PlayersLineup = () => {
 
   const handleClose = () => setShowModal(false);
 
-  const positions = ["P", "1B", "2B", "SS", "SF", "3B", "RF", "CF", "LF", "BA"];
+  const positions = ["P", "C", "1B", "2B", "SS", "SF", "3B", "RF", "CF", "LF", "BA"];
 
   const dispatch = useDispatch();
 

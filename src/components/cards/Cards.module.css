@@ -1,11 +1,29 @@
-.cards{
+.containerCards {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.boxCards{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 8px;
-    margin-bottom: 20px;
-   
+    width: 100%;
+    height: 93%;
 }
+
+.navPagination{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 7%;
+}
+
   .btnActive {
     color: white;
     background-color: rgb(8,34,142);

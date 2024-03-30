@@ -3,7 +3,7 @@ import Card from "../card/Card";
 import styles from "./Cards.module.css";
 
 const Cards = ({ allplayers, avatar }) => {
-  const cardsXpage = 10;
+  const cardsXpage = 8;
   const totalPages = Math.ceil(allplayers.length / cardsXpage);
 
   let pageNum = [];
@@ -60,9 +60,9 @@ const Cards = ({ allplayers, avatar }) => {
   };
 
   return (
-    <>
+    <div className={styles.containerCards}>
       {Object.values(allplayers).length > 0 ? (
-        <div className={styles.cards}>
+        <div className={styles.boxCards}>
           {allplayers &&
             numCardsPlayerXpage.map((player, index) => (
               <Card key={index} player={player} avatar={avatar} />
@@ -71,9 +71,8 @@ const Cards = ({ allplayers, avatar }) => {
       ) : (
         <h2>No players</h2>
       )}
-
       {/* ****************** Paginacion ****************** */}
-      <nav aria-label="Page navigation example">
+      <nav aria-label={`Page navigation example ${styles.navPagination}`}>
         <ul className="pagination">
           <li className="page-item" onClick={prevHandler}>
             <a className="page-link" href="#" aria-label="Previous">
@@ -109,7 +108,7 @@ const Cards = ({ allplayers, avatar }) => {
           )}
         </ul>
       </nav>
-    </>
+    </div>
   );
 };
 

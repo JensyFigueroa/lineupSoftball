@@ -19,7 +19,7 @@ const PlayersList = () => {
     <div className={styles.playersList}> 
       
         <h1>Players List</h1>
-        <AddPlayerForm/>  {/* to place when manager login */}
+        {/* <AddPlayerForm/>   */}{/* to place when manager login */}
         <Cards allplayers={allplayers} avatar={avatar}/>
     </div>
   );

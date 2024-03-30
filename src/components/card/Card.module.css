@@ -1,13 +1,13 @@
 .card{
-    width: 200px;
-    height: 315px;
+    width: 18%;
+    height: 47%;
     perspective: 1000px;
     cursor: pointer;
 }
 
 .card img {
-    width: 196px;
-    height: 245px;
+    width: 83%;
+    height: 73%;
     object-fit: cover;
     border-radius: 10px;
     margin-bottom: 10px;
@@ -68,17 +68,20 @@
 @media (min-width: 320px) and (max-width: 768px) {
 
     .card{
-    width:  160px;
-    height: 350px;
+        width: calc(18% + 12%);
+        height: calc(47% - 20%);
     
-}
+    }
+    
+    .card img {
+        width: calc(83% - 12%) ;
+        height: calc(73% - 12%);
+       
+    }
 
-.card img {
-    width: 135px;
-    height: 245px;
-    object-fit: cover;
-    border-radius: 10px;
-}
+    .cardFace h5{
+        font-size: 12px;
+    }
 }
 
 

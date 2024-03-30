@@ -103,7 +103,7 @@ const AddPlayerForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(form);
-    axios.post("https://lineupsoftball-backend-dev-htre.4.us-1.fl0.io/addplayers", form)
+    axios.post("https://lineupsoftball-backend-dev-htre.3.us-1.fl0.io/addplayers", form)
     setShowModalUser(false)
     setForm(objForm)
     navigate('/players')

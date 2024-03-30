@@ -1,36 +1,41 @@
 import { useState } from "react";
 import styles from "./Score.module.css";
 import { useDispatch ,useSelector } from "react-redux";
-import { addScore } from "../../../redux/actions";
+import {addScoreHomeClub, addScoreVisitor } from "../../../redux/actions";
+import { persistor } from "../../../redux/store";
 
 const Score = () => {
   const dispatch = useDispatch()
-  const scores = useSelector((state) => state.scores);
+  const scoresVisitor = useSelector((state) => state.scoresVisitor);
+  const scoresHomeClub = useSelector((state) => state.scoresHomeClub);
 
-  const [visitorRunsInning, setVisitorRunsInning] = useState(new Array(9).fill(0))
-  const [homeClubRunsInning, setHomeClubRunsInning] = useState(new Array(9).fill(0))
+  // const [visitorRunsInning, setVisitorRunsInning] = useState(new Array(9).fill(0))
+  // const [homeClubRunsInning, setHomeClubRunsInning] = useState(new Array(9).fill(0))
 
   const handleRunsInningChange = (e, i) => {
     const {value} = e.target
     const dugOut = e.target.parentNode.parentNode.querySelector('th').getAttribute('name')
 
     if (dugOut === 'Visitor' && value !== '') {
-      const newRuns = [...visitorRunsInning];
+      const newRuns = [...scoresVisitor];
       newRuns[i] = parseInt(value)
-      console.log(newRuns,'if')
-      setVisitorRunsInning(newRuns)
+      // console.log(newRuns,'')
+      // setVisitorRunsInning(newRuns)
+      dispatch(addScoreVisitor(newRuns))
     }
     if (dugOut === 'HomeClub' && value !== '') {
-      const newRuns = [...homeClubRunsInning];
+      const newRuns = [...scoresHomeClub];
       newRuns[i] = parseInt(value)
-      setHomeClubRunsInning(newRuns)
+      // setHomeClubRunsInning(newRuns)
+      dispatch(addScoreHomeClub(newRuns))
     }
   }
 
-  const totalRunsVisitantes = visitorRunsInning.reduce((total, runs) => total + runs, 0)
-  const totalRunsHomeClub = homeClubRunsInning.reduce((total, runs) => total + runs, 0)
+  console.log(scoresHomeClub,scoresVisitor)
 
-  console.log(totalRunsHomeClub)
+  const totalRunsVisitantes = scoresVisitor.reduce((total, runs) => total + runs, 0)
+  const totalRunsHomeClub = scoresHomeClub.reduce((total, runs) => total + runs, 0)
+
 
   return (
     <>
@@ -53,24 +58,26 @@ const Score = () => {
         <tbody>
           <tr>
             <th scope="row" name="Visitor">Visitor</th>
-            {visitorRunsInning.map((runs, i) => (
+            {scoresVisitor.map((runs, i) => (
               <td key={i}>
-                <input type="text"  onChange={(e) => handleRunsInningChange(e,i)}/>
+                <input type="text" value={runs === null ? '' : runs} onChange={(e) => handleRunsInningChange(e,i)}/>
               </td>
             ))}
             <td className={styles.totalRuns}>{totalRunsVisitantes}</td>
           </tr>
           <tr name="Home">
             <th scope="row" name="HomeClub">Home Club</th>
-            {homeClubRunsInning.map((runs, i) => (
+            {scoresHomeClub.map((runs, i) => (
               <td key={i}>
-                <input type="text" onChange={(e) => handleRunsInningChange(e,i)}/>
+                <input type="text" value={runs === null ? '' : runs} onChange={(e) => handleRunsInningChange(e,i)}/>
               </td>
             ))}
             <td className={styles.totalRuns}>{totalRunsHomeClub}</td>
           </tr>
         </tbody>
       </table>
+
+      <button onClick={() => persistor.purge()}>Clean Lineup</button>
     </>
   );
 };

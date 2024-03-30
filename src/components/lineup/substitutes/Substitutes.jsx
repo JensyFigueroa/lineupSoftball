@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import Roster from "../../roster/Roster";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -18,7 +17,7 @@ const Substitutes = () => {
     const checkedChangePlayer = playersLineup.filter(
       (player) => player.stateChange === true
     );
-    //Checking if there are 10 players in the 10 positions
+    //Checking if there are 11 players in the 11 positions
     const maxPlayers = playersLineup.length;
 
     if (checkedChangePlayer.length && op === "changePlayer") {
@@ -45,7 +44,7 @@ const Substitutes = () => {
     }
 
     if (player && op === "addPlayer") {
-      if (maxPlayers === 10) {
+      if (maxPlayers === 11) {
         alert("Maximum of 10 players in the lineup");
       } else {
         player.stateChange = false;
@@ -64,7 +63,7 @@ const Substitutes = () => {
     <>
       <table className="table">
         <thead>
-          <tr className="table-danger">
+          <tr className="table-danger" >
             <th scope="col">
               Substitutes
               <Roster />
