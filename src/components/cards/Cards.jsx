@@ -61,6 +61,7 @@ const Cards = ({ allplayers, avatar }) => {
 
   return (
     <div className={styles.containerCards}>
+      
       {Object.values(allplayers).length > 0 ? (
         <div className={styles.boxCards}>
           {allplayers &&
@@ -72,7 +73,7 @@ const Cards = ({ allplayers, avatar }) => {
         <h2>No players</h2>
       )}
       {/* ****************** Paginacion ****************** */}
-      <nav aria-label={`Page navigation example ${styles.navPagination}`}>
+      <nav aria-label="Page navigation example" className={styles.navPagination}>
         <ul className="pagination">
           <li className="page-item" onClick={prevHandler}>
             <a className="page-link" href="#" aria-label="Previous">
@@ -83,7 +84,7 @@ const Cards = ({ allplayers, avatar }) => {
           {pageNum.map((num, i) => (
             <li key={i} className="page-item">
               <a
-                className={`${currentPage === i && styles.btnActive} page-link`}
+                className={`page-link ${currentPage === i && styles.btnActive}`}
                 href="#"
                 onClick={() => handlerPage(num)}
               >

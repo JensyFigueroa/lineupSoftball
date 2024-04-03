@@ -18,7 +18,7 @@ const PlayersList = () => {
   return (
     <div className={styles.playersList}> 
       
-        <h1>Players List</h1>
+        <h2>Players List</h2>
         {/* <AddPlayerForm/>   */}{/* to place when manager login */}
         <Cards allplayers={allplayers} avatar={avatar}/>
     </div>

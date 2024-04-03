@@ -42,14 +42,6 @@ ul {
 }
 
 @media (min-width: 320px) and (max-width: 768px)  {
-  .App{
-    /* height: auto; */
-  }
-  .App h1 {
-      font-size: 1.2em;
-      line-height: 1.1;
-      text-align: center;
-  }
 
 
 }
