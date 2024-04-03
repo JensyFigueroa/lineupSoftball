@@ -27,6 +27,10 @@
   align-items: center;
 }
 
+.navPagination ul {
+  margin-bottom: 0;
+}
+
   .btnActive {
     color: white;
     background-color: rgb(8,34,142);

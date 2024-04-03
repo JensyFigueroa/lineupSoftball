@@ -27,7 +27,7 @@ const Statistics = () => {
       <div className={`${styles.playersList} table-responsive`}>
         {Object.values(allplayers).length > 0 ? (
           <table className="table">
-            <thead className="table table-info">
+            <thead className="table table-info sticky-top">
               <tr>
                 <th scope="col" className="table-info">
                   Items

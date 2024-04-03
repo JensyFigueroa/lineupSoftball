@@ -1,7 +1,10 @@
 .statitics{
+    width: 90%;
+    height: 75vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 0 auto;
 }  
 
 .statitics h1 {
@@ -13,11 +16,21 @@
 
 .playersList{
     width: 100%;
+    height: 86%;
+    font-size: clamp(12px, 3vw, 1rem);
+}
+
+thead {
+    position: sticky;
+}
+
+tbody {
+    overflow-y: auto;
 }
 
 
-@media (min-width: 320px) and (max-width: 768px) {
+/* @media (min-width: 320px) and (max-width: 768px) {
     .statitics{
         font-size: 50%;
     }
-}
+} */
