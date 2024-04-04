@@ -4,5 +4,6 @@
 }
 .substituteChange{
     display: grid;
-    grid-template-columns: 40px 170px 90px;
+    grid-template-columns: 10% 60% 30%;
+    align-items: center;
 }

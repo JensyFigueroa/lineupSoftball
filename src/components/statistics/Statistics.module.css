@@ -1,6 +1,6 @@
 .statitics{
     width: 90%;
-    height: 75vh;
+    
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,7 +17,7 @@
 .playersList{
     width: 100%;
     height: 86%;
-    font-size: clamp(12px, 3vw, 1rem);
+    font-size: clamp(10px, 2vw, 16px);
 }
 
 thead {

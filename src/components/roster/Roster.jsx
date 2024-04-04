@@ -91,7 +91,7 @@ const Roster = () => {
         onClick={() => {
           setShowModalUser(true), handleFormChange("formUser");
         }}
-      >
+      >Substitutes
         <i className="fa-solid fa-user-plus" />
       </Link>
 

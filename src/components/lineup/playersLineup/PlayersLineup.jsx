@@ -7,7 +7,8 @@ import styles from "./PlayersLineup.module.css"
 
 const PlayersLineup = () => {
   const manager = useSelector (state => state.activeManager)
-  const players = useSelector((state) => state.players);
+  // const players = useSelector((state) => state.players);
+  const maxPlayerLineup = new Array(11).fill('')
   const playersLineup = useSelector((state) => state.playersLineup);
 
   const [showModal, setShowModal] = useState(false);
@@ -38,6 +39,8 @@ const PlayersLineup = () => {
   };
 
   const changePlayer = (player,i) =>{
+
+    console.log(player)
     
     const updatePlayersLineup =  playersLineup.map((changePlayer) => {
       if (changePlayer._id === player._id) {
@@ -49,28 +52,30 @@ const PlayersLineup = () => {
 
     const statechangePlayer = player.stateChange/*  !== undefined ? false : !player.stateChange */
 
+    // console.log(statechangePlayer,'chancePlayer')
+
     dispatch(addPlayerLineup(updatePlayersLineup, statechangePlayer))
   }
 
 
   return (
     <>
-      <table className="table table-bordered">
-        <thead className="table-primary">
+      <table className={`table table-bordered ${styles.tableLineUp}`}>
+        <thead className="table-primary sticky-top">
           <tr>
             <th scope="col">#</th>
             <th scope="col">No.</th>
             <th scope="col">Player</th>
-            <th scope="col" style={{width:'30%'}}>Position</th>
+            <th scope="col" className={styles.cellPosition}>Position</th>
           </tr>
         </thead>
         <tbody>
           {playersLineup.length === 0
-            ? players.map((player) => (
+            ? maxPlayerLineup.map((player) => (
                 <tr key={player._id}>
                   <th scope="row"></th>
                   <td></td>
-                  <td style={{ height: "32.8px" }}></td>
+                  <td className={styles.cellsLineUp}></td>
                   <td></td>
                 </tr>
               ))
@@ -78,33 +83,27 @@ const PlayersLineup = () => {
               playersLineup.map((player, i) => (
                 <tr key={player._id}>
                   <th scope="row">{i + 1}</th>
-                  <td>{player.number}</td>
+                  <td className={styles.cellsLineUp}>{player.number}</td>
 
-                  <td>
+                  <td className={styles.cellsLineUp}>
                     {manager === "" ? <span>{player.firstName} {player.lastName}</span>
                                     : <RegisterDataPlayer
                                     show={showModal}
                                     handleClose={handleClose}
                                     player={player}
                                   />}
-                    {/* {player && (
-                      <RegisterDataPlayer
-                        show={showModal}
-                        handleClose={handleClose}
-                        player={player}
-                      />
-                    )} */}
                   </td>
 
-                  <td className={styles.playerLineup}>
+                  <td className={styles.cellPosition}>
                     <select
                       id={player._id}
                       value={player.position}
                       onChange={handleChangePlayer}
                       style={{ textAlign: "center" }}
+                      className={styles.selectPosition}
                     >
                       <option key="default" value="">
-                        Select Position
+                        Position
                       </option>
                       {positions.map((position, i) => (
                         <option
@@ -113,6 +112,11 @@ const PlayersLineup = () => {
                             (p) =>
                               p.position === position && p._id !== player._id
                           )}
+
+                          className={ playersLineup.some(
+                            (p) =>
+                              p.position === position && p._id !== player._id
+                          ) ? styles.trueDisable : styles.falseDisable }
                         >
                           {position}
                         </option>

@@ -31,7 +31,7 @@ const Score = () => {
     }
   }
 
-  console.log(scoresHomeClub,scoresVisitor)
+  // console.log(scoresHomeClub,scoresVisitor)
 
   const totalRunsVisitantes = scoresVisitor.reduce((total, runs) => total + runs, 0)
   const totalRunsHomeClub = scoresHomeClub.reduce((total, runs) => total + runs, 0)
@@ -39,7 +39,7 @@ const Score = () => {
 
   return (
     <>
-      <table className={`${styles.score} table table-bordered`}>
+      <table className={`table table-bordered ${styles.score}`}>
         <thead className="table-primary">
           <tr>
             <th scope="col"></th>

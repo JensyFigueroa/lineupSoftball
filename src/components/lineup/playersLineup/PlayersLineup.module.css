@@ -1,12 +1,39 @@
+.tableLineUp{
+    width: 100%;
+}
 .playerLineup{
     width: 100%;
     display: grid;
-    grid-template-columns: 130px 30px;
-    justify-content: center;
-    gap:20px
+    grid-template-columns: 77% 11px;
+    /* justify-content: center; */
+    gap: 6px
 }
 
 .playerLineup a {
     color: black;
+}
+
+.cellsLineUp{
+    height: 32px;
+}
+
+.cellPosition{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.selectPosition{
+    background-color: white;
+    color: blue;
+}
+
+.trueDisable{
+    color: red;
+    background-color: rgb(128, 128, 128,.2);
+}
+
+.falseDisable{
+    color: green;
 }
     

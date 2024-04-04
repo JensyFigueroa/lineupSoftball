@@ -6,6 +6,7 @@ import styles from "./Substitutes.module.css";
 
 const Substitutes = () => {
   const players = useSelector((state) => state.players);
+  const maxPlayerLineup = new Array(11).fill('')
   const substitutes = useSelector((state) => state.substitutes);
   const playersLineup = useSelector((state) => state.playersLineup);
   const statechangePlayer = useSelector((state) => state.statechangePlayer);
@@ -45,7 +46,7 @@ const Substitutes = () => {
 
     if (player && op === "addPlayer") {
       if (maxPlayers === 11) {
-        alert("Maximum of 10 players in the lineup");
+        alert("Maximum of 11 players in the lineup");
       } else {
         player.stateChange = false;
         player.orderAtBat = playersLineup.length + 1;
@@ -62,17 +63,17 @@ const Substitutes = () => {
   return (
     <>
       <table className="table">
-        <thead>
+        <thead className="sticky-top">
           <tr className="table-danger" >
             <th scope="col">
-              Substitutes
+              
               <Roster />
             </th>
           </tr>
         </thead>
         <tbody>
           {substitutes.length === 0
-            ? players.map((player) => (
+            ? maxPlayerLineup.map((player) => (
                 <tr key={player._id}>
                   <td style={{ height: "32.8px" }}></td>
                 </tr>
