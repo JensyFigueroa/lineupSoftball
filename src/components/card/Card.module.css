@@ -1,6 +1,6 @@
 .card{
-    width: 31%;
-    height: 20vh;
+    width: 40%;
+    height: 22vh;
     perspective: 1000px;
     cursor: pointer;
 }
@@ -15,7 +15,7 @@
 
 .cardFace h5{
     margin-bottom: 0;
-    font-size: clamp(12px, 2vw, 15px);
+    font-size: clamp(13px, 2vw, 15px);
 }
 
 .cardContainer {
@@ -69,6 +69,13 @@
     display: flex;
     transform: rotateY(180deg);
     background: rgb(255, 255, 255,.5);
+}
+
+@media (min-width: 576px) { 
+    .card{
+        width: 21%;
+            height: 50%;
+        }
 }
 
 @media (min-width: 768px) {
