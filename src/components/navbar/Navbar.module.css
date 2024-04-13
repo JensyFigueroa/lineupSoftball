@@ -20,7 +20,7 @@
   }
 
   .img{
-    width: 13%;
+    width: 15%;
     border-radius: 50px;
   } 
 
@@ -44,7 +44,9 @@
 
 
   @media (min-width: 576px) { 
-    grid-template-columns: 15% 65% 20%;
+    .gridItemMenu{
+      display: inline-block;
+    }
   }
 
   @media (min-width: 320px) and (max-width: 768px) {
