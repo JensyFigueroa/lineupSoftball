@@ -1,12 +1,10 @@
 .containerCards {
   width: 90%;
-  height: 95%;
+  height: 100%;
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: 90% 10%;
   margin: 0 auto;
-
-  
 }
 
  .boxCards{
@@ -34,4 +32,12 @@
   .btnActive {
     color: white;
     background-color: rgb(8,34,142);
+  }
+
+
+  @media (min-size: 768px) {
+    .containerCards{
+      height: 100%;
+      justify-items: center;
+    }
   }
