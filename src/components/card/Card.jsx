@@ -13,13 +13,14 @@ const Card = ({ avatar, player }) => {
 
           <div className={`${styles.cardFace} ${styles.backFace}`}>
             <div className={styles.containerAbout}>
-              <h2>About me</h2>
-              <h5>
+              <h4>About me</h4>
+              <h6>
                 {player.firstName} {player.lastName}
-              </h5>
-              <h6>BirthDate: {player.birthDate}</h6>
-              <h3>{player.position}</h3>
-              <h3>AVG: {Math.round(player.avg)}</h3>
+              </h6>
+              <h5>BirthDate:</h5>
+              <span>{player.birthDate}</span>
+              <h6>{player.position}</h6>
+              <h4>AVG: {Math.round(player.avg)}</h4>
             </div>
           </div>
         </div>

@@ -23,7 +23,7 @@ const Statistics = () => {
 
   return (
     <div className={styles.statitics}>
-      <h1>Statistics</h1>
+      <h3 className="subtitles3">Statistics</h3>
       <div className={`${styles.playersList} table-responsive`}>
         {Object.values(allplayers).length > 0 ? (
           <table className="table">

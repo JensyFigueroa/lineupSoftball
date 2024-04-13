@@ -14,7 +14,7 @@ const Lineup = () => {
 
   return (
     <div className={styles.lineup}>
-      <h1>Lineup</h1>
+      <h3 className="subtitles3">Lineup</h3>
       <div className={styles.gridLineup}>
         <div className={`${styles.box} ${styles.b1}`}>
           <PlayersLineup/>

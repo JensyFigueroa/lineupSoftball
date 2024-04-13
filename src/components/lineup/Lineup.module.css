@@ -8,15 +8,6 @@
     
 }
 
-.lineup h1 {
-    color: antiquewhite;
-    font-size: clamp(30px, 2vw, 35px);
-    font-family: "Tourney", sans-serif;
-    background-color: rgb(0,147,237,.9);
-    border-radius: 10px;
-    height: 15%;
-}
-
 .gridLineup{
     display: grid;
     grid-template-columns: 70% auto ;
