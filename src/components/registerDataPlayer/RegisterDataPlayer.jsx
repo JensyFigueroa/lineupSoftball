@@ -2,13 +2,18 @@ import { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import styles from "./RegisterDataPlayer.module.css";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import axios from "axios";
+import { addPlayerLineup, updatePlayerLineup } from "../../redux/actions";
 
 // import { loginUser } from "../../redux/actions/index.js";
 // import toast, { Toaster } from "react-hot-toast";
 
 const RegisterDataPlayer = ({ show, handleClose, player }) => {
+  const playersLineup = useSelector((state) => state.playersLineup);
+  const dispatch = useDispatch();
+
   const [showModalUser, setShowModalUser] = useState(false);
   // const dispatch = useDispatch();
   // const userName = useSelector((state) => state.currentUserNameLoggedIn);
@@ -27,15 +32,32 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
   });
 
   const updateData = {
-      vb: player.vb + dataGamePlayer.vb,
-      h: player.h + dataGamePlayer.h,
-      b2: player.b2 + dataGamePlayer.b2,
-      b3: player.b3 + dataGamePlayer.b3,
-      hr: player.hr + dataGamePlayer.hr,
-      bb: player.bb + dataGamePlayer.bb,
-      k: player.k + dataGamePlayer.k,
-      avg: dataGamePlayer.bb === 1 ? player.avg : player.vb + dataGamePlayer.vb > 0 ? ((player.h + dataGamePlayer.h + player.b2 + dataGamePlayer.b2 + player.b3 + dataGamePlayer.b3 + player.hr + dataGamePlayer.hr) / (player.vb + dataGamePlayer.vb) /* - (player.bb + dataGamePlayer.bb) */) * 1000 : 0
+    vb: player.vb + dataGamePlayer.vb,
+    h: player.h + dataGamePlayer.h,
+    b2: player.b2 + dataGamePlayer.b2,
+    b3: player.b3 + dataGamePlayer.b3,
+    hr: player.hr + dataGamePlayer.hr,
+    bb: player.bb + dataGamePlayer.bb,
+    k: player.k + dataGamePlayer.k,
+    avg:
+      dataGamePlayer.bb === 1
+        ? player.avg
+        : player.vb + dataGamePlayer.vb > 0
+        ? ((player.h +
+            dataGamePlayer.h +
+            player.b2 +
+            dataGamePlayer.b2 +
+            player.b3 +
+            dataGamePlayer.b3 +
+            player.hr +
+            dataGamePlayer.hr) /
+            (player.vb +
+              dataGamePlayer.vb)) /* - (player.bb + dataGamePlayer.bb) */ *
+          1000
+        : 0,
   };
+
+  // let playersLineup = useSelector((state) => state.playersLineup);
 
   const handleDataGamePlayer = (e) => {
     const { id, name, checked } = e.currentTarget;
@@ -44,6 +66,7 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
 
     if (name === "_id") {
       setDataGamePlayer({ ...dataGamePlayer, [name]: id });
+    
     } else {
       const updatedDataGamePlayer = {
         ...dataGamePlayer,
@@ -58,20 +81,54 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
 
       // Establece el valor del radio button seleccionado
       updatedDataGamePlayer[name] = checked ? 1 : 0;
-
+      
       // Actualiza el estado
       setDataGamePlayer(updatedDataGamePlayer);
-      setDataGamePlayer({...updatedDataGamePlayer, vb:1})
+      setDataGamePlayer({ ...updatedDataGamePlayer, vb: 1 });
     }
-
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(dataGamePlayer);
-    axios.put(`https://lineupsoftball-backend-dev-htre.3.us-1.fl0.io/players/${player._id}`, updateData)
+    // axios.put(`https://lineupsoftball-backend-dev-htre.3.us-1.fl0.io/players/${player._id}`, updateData)
     // axios.put(`http://localhost:3001/players/${player._id}`, updateData)
-    // console.log(updateData)
+    // console.log(updateData);
+  
+    if (dataGamePlayer.h === 1 || dataGamePlayer.b2 === 1 || dataGamePlayer.b3 === 1 || dataGamePlayer.hr === 1 || dataGamePlayer.bb === 1) {
+     const newPlayerLineup = playersLineup.map((player2) => {  
+       if (player._id === player2._id) {       
+           return {
+            ...player2, 
+            atBats : player2.atBats === undefined ? 1 : player2.atBats + 1,
+            timelyAtBats : player2.timelyAtBats === undefined ? 1 : player2.timelyAtBats + 1
+          };
+       }else{
+        return player2
+       }
+      })
+      
+      dispatch(updatePlayerLineup(newPlayerLineup))
+    }
+
+    if (dataGamePlayer.k === 1 || dataGamePlayer.out === 1){
+      const newPlayerLineup = playersLineup.map((player2) => {  
+        if (player._id === player2._id) {   
+          return {
+            ...player2,
+            atBats : player2.atBats === undefined ? 1 : player2.atBats + 1,
+            timelyAtBats : player2.timelyAtBats === undefined ? 0 : player2.timelyAtBats
+          };
+        }else{
+          return player2
+        }
+     } )
+    dispatch(updatePlayerLineup(newPlayerLineup))
+   }
+
+
+     console.log('After',playersLineup)
+
     setDataGamePlayer({
       _id: "",
       vb: 0,
@@ -82,7 +139,7 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
       bb: 0,
       k: 0,
       avg: 0,
-    })
+    });
     setShowModalUser(false);
   };
   return (
@@ -99,7 +156,7 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
           // setUpdateData(player)
         }}
       >
-        {player.firstName + " " + player.lastName}
+        {player.firstName + " " + player.lastName} {player.atBats && `(${player.atBats}- ${player.timelyAtBats})`}
       </Link>
 
       <Modal

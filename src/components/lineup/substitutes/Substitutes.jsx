@@ -66,15 +66,14 @@ const Substitutes = () => {
         <thead className="sticky-top">
           <tr className="table-danger" >
             <th scope="col">
-              
               <Roster />
             </th>
           </tr>
         </thead>
         <tbody>
           {substitutes.length === 0
-            ? maxPlayerLineup.map((player) => (
-                <tr key={player._id}>
+            ? maxPlayerLineup.map((player,i) => (
+                <tr key={i}>
                   <td style={{ height: "32.8px" }}></td>
                 </tr>
               ))

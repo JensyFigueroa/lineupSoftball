@@ -71,8 +71,8 @@ const PlayersLineup = () => {
         </thead>
         <tbody>
           {playersLineup.length === 0
-            ? maxPlayerLineup.map((player) => (
-                <tr key={player._id}>
+            ? maxPlayerLineup.map((player,i) => (
+                <tr key={i}>
                   <th scope="row"></th>
                   <td></td>
                   <td className={styles.cellsLineUp}></td>
@@ -86,12 +86,15 @@ const PlayersLineup = () => {
                   <td className={styles.cellsLineUp}>{player.number}</td>
 
                   <td className={styles.cellsLineUp}>
-                    {manager === "" ? <span>{player.firstName} {player.lastName}</span>
-                                    : <RegisterDataPlayer
+                    {manager === "" ? <span>{player.firstName} {player.lastName} </span>
+                                    : <>
+                                    <RegisterDataPlayer
                                     show={showModal}
                                     handleClose={handleClose}
                                     player={player}
-                                  />}
+                                  />
+                                    </>}
+
                   </td>
 
                   <td className={styles.cellPosition}>

@@ -6,6 +6,7 @@ import {
   ACTIVE_MANAGER,
   ADD_SCORE_HOME,
   ADD_SCORE_VISITOR,
+  UPDATE_PLAYERLINEUP,
 } from "../actions";
 
 const inicialState = {
@@ -49,6 +50,14 @@ const rootReducer = (state = inicialState, action) => {
         ...state,
         playersLineup: action.payload[0],
         statechangePlayer: action.payload[1],
+      };
+
+    case UPDATE_PLAYERLINEUP:
+    
+      console.log(action.payload,'reducer')
+      return {
+        ...state,
+        playersLineup: action.payload,
       };
 
     case ADD_SCORE_VISITOR:

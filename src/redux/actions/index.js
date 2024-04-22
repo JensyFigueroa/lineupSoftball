@@ -7,6 +7,7 @@ export const ADD_PLAYERLINEUP = 'ADD_PLAYERLINEUP'
 export const ADD_SCORE_VISITOR = 'ADD_SCORE_VISITOR'
 export const ADD_SCORE_HOME = 'ADD_SCORE_HOME'
 export const ACTIVE_MANAGER = 'ACTIVE_MANAGER'
+export const UPDATE_PLAYERLINEUP = 'UPDATE_PLAYERLINEUP'
 
 export const getPlayers = () => {
   return async function (dispatch) {
@@ -32,6 +33,12 @@ export const addPlayerLineup = (playerLineup, changePlayer) => {
   // console.log(changePlayer,'actions')
   return async function (dispatch) {
     dispatch({ type: ADD_PLAYERLINEUP, payload: [playerLineup, changePlayer] })
+  }
+}
+export const updatePlayerLineup = (playerLineup) => {
+  // console.log(changePlayer,'actions')
+  return async function (dispatch) {
+    dispatch({ type: UPDATE_PLAYERLINEUP, payload: playerLineup })
   }
 }
 
