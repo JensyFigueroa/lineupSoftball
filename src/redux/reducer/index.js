@@ -7,6 +7,8 @@ import {
   ADD_SCORE_HOME,
   ADD_SCORE_VISITOR,
   UPDATE_PLAYERLINEUP,
+  TOTAL_OUT,
+  LAST_OUT
 } from "../actions";
 
 const inicialState = {
@@ -16,6 +18,8 @@ const inicialState = {
   substitutes: [],
   playersLineup: [],
   statechangePlayer: false,
+  totalOuts: 1,
+  lastOut:'',
   scoresVisitor: new Array(9).fill(''),
   scoresHomeClub: new Array(9).fill(''),
   activeManager: "",
@@ -53,12 +57,21 @@ const rootReducer = (state = inicialState, action) => {
       };
 
     case UPDATE_PLAYERLINEUP:
-    
-      console.log(action.payload,'reducer')
       return {
         ...state,
         playersLineup: action.payload,
       };
+
+    case TOTAL_OUT:
+      return{
+        ...state,
+        totalOuts: action.payload
+      }
+    case LAST_OUT:
+      return{
+        ...state,
+        lastOut: action.payload
+      }
 
     case ADD_SCORE_VISITOR:
       return {

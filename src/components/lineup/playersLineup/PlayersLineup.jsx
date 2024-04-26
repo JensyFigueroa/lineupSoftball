@@ -81,7 +81,7 @@ const PlayersLineup = () => {
               ))
             : playersLineup.length > 0 &&
               playersLineup.map((player, i) => (
-                <tr key={player._id}>
+                <tr key={player._id} className={player.lastOut && 'table-danger'}>
                   <th scope="row">{i + 1}</th>
                   <td className={styles.cellsLineUp}>{player.number}</td>
 

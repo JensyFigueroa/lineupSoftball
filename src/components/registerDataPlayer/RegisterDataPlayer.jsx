@@ -5,13 +5,15 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import axios from "axios";
-import { addPlayerLineup, updatePlayerLineup } from "../../redux/actions";
+import { addOut, lastOutId, updatePlayersLineup } from "../../redux/actions";
 
 // import { loginUser } from "../../redux/actions/index.js";
 // import toast, { Toaster } from "react-hot-toast";
 
 const RegisterDataPlayer = ({ show, handleClose, player }) => {
   const playersLineup = useSelector((state) => state.playersLineup);
+  const totalOuts = useSelector((state) => state.totalOuts);
+  const lastOut = useSelector((state) => state.lastOut);
   const dispatch = useDispatch();
 
   const [showModalUser, setShowModalUser] = useState(false);
@@ -97,7 +99,7 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
   
     if (dataGamePlayer.h === 1 || dataGamePlayer.b2 === 1 || dataGamePlayer.b3 === 1 || dataGamePlayer.hr === 1 || dataGamePlayer.bb === 1) {
      const newPlayerLineup = playersLineup.map((player2) => {  
-       if (player._id === player2._id) {       
+       if (player._id === player2._id) {    
            return {
             ...player2, 
             atBats : player2.atBats === undefined ? 1 : player2.atBats + 1,
@@ -108,27 +110,51 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
        }
       })
       
-      dispatch(updatePlayerLineup(newPlayerLineup))
+      dispatch(updatePlayersLineup(newPlayerLineup))
     }
 
     if (dataGamePlayer.k === 1 || dataGamePlayer.out === 1){
       const newPlayerLineup = playersLineup.map((player2) => {  
-        if (player._id === player2._id) {   
-          return {
-            ...player2,
-            atBats : player2.atBats === undefined ? 1 : player2.atBats + 1,
-            timelyAtBats : player2.timelyAtBats === undefined ? 0 : player2.timelyAtBats
-          };
+        if (player._id === player2._id) {  
+
+          if(totalOuts < 3){
+            dispatch(addOut(totalOuts + 1))
+            return {
+              ...player2,
+              atBats : player2.atBats === undefined ? 1 : player2.atBats + 1,
+              timelyAtBats : player2.timelyAtBats === undefined ? 0 : player2.timelyAtBats,
+            };
+           
+             
+          }else{
+            dispatch(addOut(totalOuts + 1))
+            //Clean lastOut
+            const newPlayerLineup = playersLineup.map((player2) => {
+              if (player2._id === lastOut) {  
+                delete player2.lastOut
+              }
+            })
+            dispatch(updatePlayersLineup(newPlayerLineup))
+            dispatch(lastOutId(player2._id))
+            dispatch(addOut(1))
+            
+            return {
+              ...player2,
+              atBats : player2.atBats === undefined ? 1 : player2.atBats + 1,
+              timelyAtBats : player2.timelyAtBats === undefined ? 0 : player2.timelyAtBats,
+              lastOut: true
+            };
+          }
+         
         }else{
           return player2
         }
      } )
-    dispatch(updatePlayerLineup(newPlayerLineup))
-   }
-
-
-     console.log('After',playersLineup)
-
+    dispatch(updatePlayersLineup(newPlayerLineup))
+  }
+  
+  console.log(playersLineup)
+ 
     setDataGamePlayer({
       _id: "",
       vb: 0,

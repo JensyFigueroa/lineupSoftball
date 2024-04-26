@@ -60,7 +60,8 @@ const Score = () => {
             <th scope="row" name="Visitor">Visitor</th>
             {scoresVisitor.map((runs, i) => (
               <td key={i}>
-                <input type="text" value={runs === null ? '' : runs} onChange={(e) => handleRunsInningChange(e,i)}/>
+                <input type="number" value={runs === null ? 0 : runs} onChange={(e) => handleRunsInningChange(e,i)} min={0}
+                max={99}/>
               </td>
             ))}
             <td className={styles.totalRuns}>{totalRunsVisitantes}</td>
@@ -69,7 +70,8 @@ const Score = () => {
             <th scope="row" name="HomeClub">Home Club</th>
             {scoresHomeClub.map((runs, i) => (
               <td key={i}>
-                <input type="text" value={runs === null ? '' : runs} onChange={(e) => handleRunsInningChange(e,i)}/>
+                <input type="number" value={runs === null ? '' : runs} onChange={(e) => handleRunsInningChange(e,i)} min={0}
+                max={99}/>
               </td>
             ))}
             <td className={styles.totalRuns}>{totalRunsHomeClub}</td>
