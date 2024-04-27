@@ -93,10 +93,6 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(dataGamePlayer);
-    // axios.put(`https://lineupsoftball-backend-dev-htre.3.us-1.fl0.io/players/${player._id}`, updateData)
-    // axios.put(`http://localhost:3001/players/${player._id}`, updateData)
-    // console.log(updateData);
-  
     if (dataGamePlayer.h === 1 || dataGamePlayer.b2 === 1 || dataGamePlayer.b3 === 1 || dataGamePlayer.hr === 1 || dataGamePlayer.bb === 1) {
      const newPlayerLineup = playersLineup.map((player2) => {  
        if (player._id === player2._id) {    
@@ -153,7 +149,11 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
     dispatch(updatePlayersLineup(newPlayerLineup))
   }
   
-  console.log(playersLineup)
+  //update AVG in dataBase MongoDB
+  axios.put(`https://lineupsoftball-bbdores.onrender.com/players/${player._id}`, updateData)
+    // axios.put(`http://localhost:3001/players/${player._id}`, updateData)
+    // console.log(updateData);
+  
  
     setDataGamePlayer({
       _id: "",

@@ -4,10 +4,12 @@ import styles from "./Statistics.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getPlayers } from "../../redux/actions";
+import axios from "axios";
 
 const Statistics = () => {
   const dispatch = useDispatch()
   const allplayers = useSelector((state) => state.players);
+  const activeManager = useSelector((state) => state.activeManager);
 
   useEffect(() => {
     dispatch(getPlayers());
@@ -20,6 +22,39 @@ const Statistics = () => {
   const handleClose = () => setShowModal(false);
 
   const handleShow = () => setShowModal(true);
+
+  const cleanedAVG = async () => {
+
+    const lotSize = 6;
+
+    for (let i = 0; i < allplayers.length; i+= lotSize) {
+      const lot = allplayers.slice(i, i + lotSize);
+      console.log(lot)
+      
+      await Promise.all(lot.map(async player => {
+        const cleanAVGPlayer = {
+          ...player,
+          vb: 0,
+          h: 0,
+          b2: 0,
+          b3: 0,
+          hr: 0,
+          bb: 0,
+          k: 0,
+          avg: 0
+        }
+
+        try {
+          // axios.put(`http://localhost:3001/cleanavgplayer/${player._id}`, cleanAVGPlayer)
+        axios.put(`https://lineupsoftball-bbdores.onrender.com/cleanavgplayer/${player._id}`, cleanAVGPlayer)
+        } catch (error) {
+          console.error('Error sending data for player with ID', error)
+        }
+      }))
+    }
+
+
+  }
 
   return (
     <div className={styles.statitics}>
@@ -71,6 +106,10 @@ const Statistics = () => {
           <h2>No players</h2>
         )}
       </div>
+      {
+        activeManager && <button type="submit" onClick={cleanedAVG}>Clean AVG</button>
+      }
+      
     </div>
   );
 };
