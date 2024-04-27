@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import styles from "./RegisterDataPlayer.module.css";
 import { Link } from "react-router-dom";
@@ -15,6 +15,10 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
   const totalOuts = useSelector((state) => state.totalOuts);
   const lastOut = useSelector((state) => state.lastOut);
   const dispatch = useDispatch();
+
+  const verifyOuts = () =>{
+    return totalOuts
+  }
 
   const [showModalUser, setShowModalUser] = useState(false);
   // const dispatch = useDispatch();
@@ -41,8 +45,7 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
     hr: player.hr + dataGamePlayer.hr,
     bb: player.bb + dataGamePlayer.bb,
     k: player.k + dataGamePlayer.k,
-    avg:
-      dataGamePlayer.bb === 1
+    avg: dataGamePlayer.bb === 1
         ? player.avg
         : player.vb + dataGamePlayer.vb > 0
         ? ((player.h +
@@ -68,7 +71,6 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
 
     if (name === "_id") {
       setDataGamePlayer({ ...dataGamePlayer, [name]: id });
-    
     } else {
       const updatedDataGamePlayer = {
         ...dataGamePlayer,
@@ -83,7 +85,7 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
 
       // Establece el valor del radio button seleccionado
       updatedDataGamePlayer[name] = checked ? 1 : 0;
-      
+
       // Actualiza el estado
       setDataGamePlayer(updatedDataGamePlayer);
       setDataGamePlayer({ ...updatedDataGamePlayer, vb: 1 });
@@ -93,68 +95,153 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(dataGamePlayer);
-    if (dataGamePlayer.h === 1 || dataGamePlayer.b2 === 1 || dataGamePlayer.b3 === 1 || dataGamePlayer.hr === 1 || dataGamePlayer.bb === 1) {
-     const newPlayerLineup = playersLineup.map((player2) => {  
-       if (player._id === player2._id) {    
-           return {
-            ...player2, 
-            atBats : player2.atBats === undefined ? 1 : player2.atBats + 1,
-            timelyAtBats : player2.timelyAtBats === undefined ? 1 : player2.timelyAtBats + 1
+    if (
+      dataGamePlayer.h === 1 ||
+      dataGamePlayer.b2 === 1 ||
+      dataGamePlayer.b3 === 1 ||
+      dataGamePlayer.hr === 1 ||
+      dataGamePlayer.bb === 1
+    ) {
+      const newPlayerLineup = playersLineup.map((player2) => {
+        if (player._id === player2._id) {
+          return {
+            ...player2,
+            atBats: player2.atBats === undefined ? 1 : player2.atBats + 1,
+            timelyAtBats:
+              player2.timelyAtBats === undefined ? 1 : player2.timelyAtBats + 1,
           };
-       }else{
-        return player2
-       }
-      })
-      
-      dispatch(updatePlayersLineup(newPlayerLineup))
+        } else {
+          return player2;
+        }
+      });
+
+      dispatch(updatePlayersLineup(newPlayerLineup));
     }
 
-    if (dataGamePlayer.k === 1 || dataGamePlayer.out === 1){
-      const newPlayerLineup = playersLineup.map((player2) => {  
-        if (player._id === player2._id) {  
-
-          if(totalOuts < 3){
-            dispatch(addOut(totalOuts + 1))
+    if (dataGamePlayer.k === 1 || dataGamePlayer.out === 1) {
+      dispatch(addOut(1))
+      let outs = totalOuts + 1
+      const newPlayerLineup = playersLineup.map((player2) => {
+        if (player._id === player2._id) {
+          if (outs < 3) {
+            dispatch(addOut(totalOuts + 1));
             return {
               ...player2,
-              atBats : player2.atBats === undefined ? 1 : player2.atBats + 1,
-              timelyAtBats : player2.timelyAtBats === undefined ? 0 : player2.timelyAtBats,
+              atBats: player2.atBats === undefined ? 1 : player2.atBats + 1,
+              timelyAtBats:player2.timelyAtBats === undefined ? 0 : player2.timelyAtBats,
             };
-           
-             
-          }else{
-            dispatch(addOut(totalOuts + 1))
+          } else {
+            dispatch(addOut(totalOuts + 1));
             //Clean lastOut
             const newPlayerLineup = playersLineup.map((player2) => {
-              if (player2._id === lastOut) {  
-                delete player2.lastOut
+              if (player2._id === lastOut) {
+                delete player2.lastOut;
               }
-            })
-            dispatch(updatePlayersLineup(newPlayerLineup))
-            dispatch(lastOutId(player2._id))
-            dispatch(addOut(1))
-            
+            });
+            dispatch(updatePlayersLineup(newPlayerLineup));
+            dispatch(lastOutId(player2._id));
+            dispatch(addOut(0));
+
             return {
               ...player2,
-              atBats : player2.atBats === undefined ? 1 : player2.atBats + 1,
-              timelyAtBats : player2.timelyAtBats === undefined ? 0 : player2.timelyAtBats,
-              lastOut: true
+              atBats: player2.atBats === undefined ? 1 : player2.atBats + 1,
+              timelyAtBats:
+                player2.timelyAtBats === undefined ? 0 : player2.timelyAtBats,
+              lastOut: true,
             };
           }
-         
-        }else{
-          return player2
+        } else {
+          return player2;
         }
-     } )
-    dispatch(updatePlayersLineup(newPlayerLineup))
-  }
-  
-  //update AVG in dataBase MongoDB
-  axios.put(`https://lineupsoftball-bbdores.onrender.com/players/${player._id}`, updateData)
+      });
+      
+      dispatch(updatePlayersLineup(newPlayerLineup));
+    }
+
+    if (dataGamePlayer.doubleOut === 1 ) {
+      dispatch(addOut(2))
+      let outs = totalOuts + 2
+      const newPlayerLineup = playersLineup.map((player2) => {
+        if (player._id === player2._id) {
+          if (outs < 3) {
+            dispatch(addOut(totalOuts + 2));
+            return {
+              ...player2,
+              atBats: player2.atBats === undefined ? 1 : player2.atBats + 1,
+              timelyAtBats:player2.timelyAtBats === undefined ? 0 : player2.timelyAtBats,
+            };
+          } else {
+            dispatch(addOut(totalOuts + 2));
+            //Clean lastOut
+            const newPlayerLineup = playersLineup.map((player2) => {
+              if (player2._id === lastOut) {
+                delete player2.lastOut;
+              }
+            });
+            dispatch(updatePlayersLineup(newPlayerLineup));
+            dispatch(lastOutId(player2._id));
+            dispatch(addOut(0));
+            return {
+              ...player2,
+              atBats: player2.atBats === undefined ? 1 : player2.atBats + 1,
+              timelyAtBats:
+                player2.timelyAtBats === undefined ? 0 : player2.timelyAtBats,
+              lastOut: true,
+            };
+          }
+        } else {
+          return player2;
+        }
+      });
+      dispatch(updatePlayersLineup(newPlayerLineup));
+    }
+
+    if (dataGamePlayer.tripleOut === 1 ) {
+      dispatch(addOut(3))
+      let outs = totalOuts + 3
+      const newPlayerLineup = playersLineup.map((player2) => {
+        if (player._id === player2._id) {
+          if (outs < 3) {
+            dispatch(addOut(totalOuts + 3));
+            return {
+              ...player2,
+              atBats: player2.atBats === undefined ? 1 : player2.atBats + 1,
+              timelyAtBats:player2.timelyAtBats === undefined ? 0 : player2.timelyAtBats,
+            };
+          } else {
+            dispatch(addOut(totalOuts + 3));
+            //Clean lastOut
+            const newPlayerLineup = playersLineup.map((player2) => {
+              if (player2._id === lastOut) {
+                delete player2.lastOut;
+              }
+            });
+            dispatch(updatePlayersLineup(newPlayerLineup));
+            dispatch(lastOutId(player2._id));
+            dispatch(addOut(0));
+            return {
+              ...player2,
+              atBats: player2.atBats === undefined ? 1 : player2.atBats + 1,
+              timelyAtBats:
+                player2.timelyAtBats === undefined ? 0 : player2.timelyAtBats,
+              lastOut: true,
+            };
+          }
+        } else {
+          return player2;
+        }
+      });
+      dispatch(updatePlayersLineup(newPlayerLineup));
+    }
+
+    //update AVG in dataBase MongoDB
+    axios.put(
+      `https://lineupsoftball-bbdores.onrender.com/players/${player._id}`,
+      updateData
+    );
     // axios.put(`http://localhost:3001/players/${player._id}`, updateData)
     // console.log(updateData);
-  
- 
+
     setDataGamePlayer({
       _id: "",
       vb: 0,
@@ -182,7 +269,8 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
           // setUpdateData(player)
         }}
       >
-        {player.firstName + " " + player.lastName} {player.atBats && `(${player.atBats}- ${player.timelyAtBats})`}
+        {player.firstName + " " + player.lastName}{" "}
+        {player.atBats && `(${player.atBats}- ${player.timelyAtBats})`}
       </Link>
 
       <Modal
@@ -257,15 +345,19 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
                   onChange={handleDataGamePlayer}
                 />
               </label>
+              
+            </div>
+            <hr />
+            <div className={styles.field}>
               <label>
-                K:
-                <input
-                  type="radio"
-                  name="k"
-                  value={dataGamePlayer.k}
-                  checked={dataGamePlayer.k === 1}
-                  onChange={handleDataGamePlayer}
-                />
+                  K:
+                  <input
+                    type="radio"
+                    name="k"
+                    value={dataGamePlayer.k}
+                    checked={dataGamePlayer.k === 1}
+                    onChange={handleDataGamePlayer}
+                  />
               </label>
               <label>
                 Out:
@@ -274,6 +366,26 @@ const RegisterDataPlayer = ({ show, handleClose, player }) => {
                   name="out"
                   value={dataGamePlayer.out}
                   checked={dataGamePlayer.out === 1}
+                  onChange={handleDataGamePlayer}
+                />
+              </label>
+              <label>
+                Double Out:
+                <input
+                  type="radio"
+                  name="doubleOut"
+                  value={dataGamePlayer.doubleOut}
+                  checked={dataGamePlayer.doubleOut === 1}
+                  onChange={handleDataGamePlayer}
+                />
+              </label>
+              <label>
+                Triple Out:
+                <input
+                  type="radio"
+                  name="tripleOut"
+                  value={dataGamePlayer.tripleOut}
+                  checked={dataGamePlayer.tripleOut === 1}
                   onChange={handleDataGamePlayer}
                 />
               </label>

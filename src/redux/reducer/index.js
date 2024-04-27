@@ -18,7 +18,7 @@ const inicialState = {
   substitutes: [],
   playersLineup: [],
   statechangePlayer: false,
-  totalOuts: 1,
+  totalOuts: 0,
   lastOut:'',
   scoresVisitor: new Array(9).fill(''),
   scoresHomeClub: new Array(9).fill(''),
